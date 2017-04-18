@@ -1,3 +1,0 @@
-###################
-Perpustakaan SMK Telkom Malang
-###################
