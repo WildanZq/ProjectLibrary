@@ -43,15 +43,15 @@
                     </form>
                     <div class="search-book">
                         <form action="">
-                            <label>Sort By:</label>
-                            <select>
-                                <option value="deadline">Deadline</option>
-                                <option value="nama">Nama</option>
-                                <option value="kelas">Kelas</option>
-                                <option value="judul">Judul Buku</option>
+                            <label>Search By:</label>
+                            <select onchange="searchOption()" class="selectS">
+                                <option value="Barcode">Barcode</option>
+                                <option value="Nama">Nama</option>
+                                <option value="Kelas">Kelas</option>
+                                <option value="Judul">Judul Buku</option>
                             </select>
                             <div class="s-wrapper">
-                                <input type="text" placeholder="Barcode"><i class="s-icon fa fa-search" aria-hidden="true"></i>
+                                <input class="searchT" type="text" placeholder="Barcode"><i class="s-icon fa fa-search" aria-hidden="true"></i>
                             </div>
                         </form>
                     </div>
@@ -151,5 +151,6 @@
             </div>
         </div>
         <script src="assets/script/jquery.min.js"></script>
+        <script src="assets/script/change_option.js"></script>
     </body>
 </html>
