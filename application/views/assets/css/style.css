@@ -1,0 +1,254 @@
+@font-face {
+    font-family: "open";
+    src: url(../fonts/OpenSans-Regular.ttf);
+}
+@font-face {
+    font-family: "roboto";
+    src: url(../fonts/Roboto-Regular.ttf);
+}
+* {
+    transition: .5s;
+    font-family: roboto;
+    font-size: 33px;
+}
+body {
+    margin: 0;
+}
+form * {
+    font-size: 17px;
+    padding: 5px;
+    transition: 0s;
+}
+input {
+    border-radius: 2px;
+    border: thin solid #808080;
+    box-shadow: none;
+    outline: none;
+    margin: 0 5px;
+    padding: 10px;
+}
+input:focus, textarea:focus, select:focus {
+    outline: 1px solid #f51818;
+}
+input:active, textarea:active, select:active {
+    outline: none;
+}
+input[type=submit] {
+    cursor: pointer;
+    color: white;
+    background: #f22323;
+    transition: .5s;
+    padding: 10px 0;
+}
+input[type=submit]:hover {
+    background: #ff0000;
+}
+.img-parent {
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #d3d3d3;
+}
+.hidden {
+    display: none;
+}
+.header {
+    top: 0;
+    z-index: 50;
+    position: fixed;
+    width: 100%;
+    height: 80px;
+    background: #d31111;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    box-shadow: 0 0 10px black;
+}
+.header * {
+    color: white;
+}
+.header .logo {
+    cursor: pointer;
+    z-index: 51;
+    position: fixed;
+    top: 0;
+    left: 2em;
+    height: 120px;
+    -webkit-filter: drop-shadow(-1px 1px 3px black);
+    filter: drop-shadow(-1px 1px 3px black);
+}
+.header .pp {
+    margin-right: 7px;
+    height: 35px;
+    border-radius: 50px;
+}
+.header i {
+    cursor: pointer;
+    font-size: 1.2em;
+    margin-right: 1.5em;
+    margin-left: 1em;
+}
+.header span {
+    text-transform: capitalize;
+    cursor: pointer;
+    font-size: .6em;
+    position: relative;
+    padding-bottom: 2px;
+    color: rgba(255, 255, 255, 0.9);
+}
+.header span:after {
+    content: "";
+    border-bottom: 2px solid white;
+    width: 0;
+    position: absolute;
+    right: 0;
+    left: 0;
+    margin: auto;
+    bottom: 0;
+    transition: .5s;
+}
+.header span:hover:after {
+    width: 100%;
+}
+.header span:hover {
+    color: white;
+}
+.popup {
+    position: absolute;
+    z-index: 60;
+    height: 100%;
+}
+.login-wrapper {
+    transform: scale(0);
+    width: 100%;
+    height: 100vh;
+    top: 0vh;
+    display: flex;
+    opacity: 0;
+}
+.sidebar-wrapper {
+    transform: translateX(100%);
+}
+.dark {
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0, 0, 0, .2);
+    transition: .7s;
+}
+.dark-login {
+    position: absolute;
+    top: 0;
+}
+.dark-nav {
+    transform: translateX(80%);
+}
+.login * {
+    color: black;
+}
+.login form {
+    height: calc(100% - 50px);
+    width: 80%;
+    padding: 0;
+    margin: auto;
+    display: flex;
+    flex-direction: column;
+}
+.login h1 {
+    font-size: .8em;
+    margin: 0;
+    margin-top: 5px;
+    text-align: center;
+}
+.login i {
+    margin: 0;
+    padding: 10px 0;
+}
+.login input {
+    margin-top: 5px;
+}
+.login-wrapper .login {
+    position: relative;
+    border-radius: 5px;
+    overflow: hidden;
+    margin: auto;
+    background: white;
+    width: 80%;
+    max-width: 400px;
+    height: 70%;
+    max-height: 290px;
+    z-index: 99;
+}
+.login-tab {
+    cursor: pointer;
+    height: 50px;
+    width: 100%;
+    background: #d31111;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.login-tab:hover {
+    background: #fc2323;
+}
+.login-tab .s2 {
+    display: none;
+}
+.login-tab:hover span:after {
+    width: 100%;
+}
+.login-tab:hover span {
+    color: white;
+}
+.login-tab * {
+    color: white;
+}
+.login-tab i {
+    transition: 1.3s;
+    margin: 0;
+    padding: 0;
+    margin: 0 10px;
+    font-size: .7em;
+}
+.login .form-wrapper {
+    transition: 1.3s;
+    height: 100%;
+}
+.sidebar-wrapper .sidebar {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 80vw;
+    max-width: 400px;
+    height: 100vh;
+    background: black;
+}
+.sidebar-wrapper .sidebar .close-nav {
+    float: right;
+    margin-top: 15px;
+    margin-right: 1.2em;
+    font-size: 1.4em;
+}
+.wrapper {
+    padding-top: 50px;
+    width: 90%;
+    max-width: 1100px;
+    margin: auto;
+}
+@media only screen and (max-width: 768px) {
+    .header i {
+        margin-right: .5em;
+        margin-left: .3em;
+    }
+    .header .logo {
+        left: .5em;
+    }
+    .sidebar-wrapper .sidebar .close-nav {
+        margin-right: .3em;
+    }
+}
+@media only screen and (max-width: 768px) and (orientation: portrait) {
+    .login-wrapper .login {
+        height: 70%;
+    }
+}

@@ -1,0 +1,84 @@
+.red i {
+    color: #ff1818;
+}
+.green i {
+    color: #10d310;
+}
+.blue i {
+    color: blue;
+}
+.h-wrapper td i {
+    font-size: .5em;
+    transform: translateY(-3px);
+}
+.wrapper {
+    margin-top: 80px;
+    margin-bottom: 20px;
+    display: flex;
+    position: relative;
+}
+.wrapper .pp {
+    height: 250px;
+    max-width: 250px;
+}
+.p-desc {
+    margin-left: 20px;
+    display: flex;
+    flex-direction: column;
+}
+.p-desc h1 {
+    text-transform: capitalize;
+}
+.p-desc h1:nth-child(4) {
+    margin-top: 5px;
+    font-size: .7em;
+    color: #272727;
+}
+.p-desc span {
+    color: #363636;
+    font-size: .6em;
+    margin: 0;
+    margin-left: 15px;
+}
+.p-desc span:nth-child(2) {
+    margin-top: -15px;
+}
+.poin-wrapper {
+    position: absolute;
+    right: 0;
+    padding: 10px 20px;
+    border-left: 4px solid #de2f2f;
+    background: white;
+    border-radius: 5px;
+}
+.poin-wrapper h1 {
+    margin: 0;
+    margin-bottom: -7px;
+    padding-bottom: 3px;
+    font-size: .8em;
+    border-bottom: 1px solid red;
+}
+.poin-wrapper span {
+    font-size: .7em;
+    color: #d6af2f;
+}
+@media only screen and (max-width: 768px) {
+    .wrapper {
+        flex-direction: column;
+    }
+    .p-desc {
+        margin: 0;
+    }
+}
+@media only screen and (max-width: 768px) and (orientation: portrait) {
+    .wrapper .pp {
+        max-width: 100%;
+        height: 50vh;
+    }
+    .poin-wrapper {
+        position: static;
+        margin: auto;
+        margin-top: 10px;
+        border-right: 4px solid #de2f2f;
+    }
+}

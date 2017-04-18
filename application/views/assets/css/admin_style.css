@@ -1,0 +1,154 @@
+input {
+    padding: 10px;
+}
+.h-wrapper td i {
+    font-size: .5em;
+    transform: translateY(-3px);
+}
+.h-wrapper .gold i {
+    color: gold;
+    font-size: .9em;
+    transform: translateY(-1px);
+}
+.red i {
+    color: #ff1818;
+}
+.green i {
+    color: #10d310;
+}
+.blue i {
+    color: blue;
+}
+.container {
+    width: 100%;
+    display: flex;
+}
+.nav {
+    background: #3b3b3b;
+    width: 100%;
+    max-width: 200px;
+    height: 100vh;
+    text-align: center;
+    display: flex;
+    position: fixed;
+    flex-direction: column;
+}
+.nav * {
+    cursor: pointer;
+    font-size: .8em;
+}
+.nav img {
+    display: block;
+    width: 70%;
+    margin: auto;
+    margin-bottom: 10px;
+    margin-top: 20px;
+}
+.nav a {
+    color: #ebebeb;
+    padding: 3px;
+    margin-top: 4px;
+    font-weight: bold;
+    text-decoration: none;
+    color: #ebebeb;
+    font-size: .8em;
+    transition: 0s;
+}
+.nav .active, .nav a:hover {
+    color:#272727;
+    background-color: white;
+}
+.nav h1 {
+    color: #bcbcbc;
+}
+.logout {
+    background-color: #242424;
+    margin: 0;
+    margin-top: auto;
+    margin-bottom: 10px;
+}
+.wrapper {
+    margin-left: 200px;
+    max-width: calc(100% - 200px);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 7vh;
+    padding: 0;
+}
+.wrapper form {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    margin: auto;
+    margin-top: 10px;
+}
+.wrapper input[type=number] {
+    width: 50px;
+}
+.wrapper input[type=submit] {
+    margin-left: 15px;
+    padding: 0 10px;
+}
+.wrapper .kelas {
+    margin: 0 15px;
+    padding: 0;
+    display: flex;
+}
+.wrapper > form {
+    padding-bottom: 10px;
+    border-bottom: thin solid #a0a0a0;
+}
+.h-wrapper, .h-wrapper table {
+    max-width: 1000px;
+    margin: 0;
+}
+.h-wrapper {
+    margin-top: 30px;
+}
+.h-wrapper .return {
+    transform: translateY(1px);
+    cursor: pointer;
+    font-size: 1.2em;
+    color: royalblue;
+}
+.h-wrapper th {
+    font-size: .7em;
+}
+.h-wrapper td {
+    font-size: .6em;
+}
+.form-wrapper {
+    margin: auto;
+    width: 90%;
+    overflow: hidden;
+    overflow-x: auto;
+}
+.search-book form {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+}
+.search-book select {
+    padding: 0;
+    margin-right: 15px;
+}
+.s-wrapper {
+    padding: 0;
+    position: relative;
+    width: 30vw;
+}
+.s-wrapper input {
+    padding-right: 32px;
+    width: calc(100% - 41px);
+}
+.s-icon {
+    border-left: thin solid #bfbfbf;
+    position: absolute;
+    top: 7px;
+    right: 0;
+    padding-left: 7px;
+    cursor: pointer;
+}
