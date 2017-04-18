@@ -81,8 +81,8 @@
 
             </div>
         </div>
-        <script src="assets/cript/jquery.min.js"></script>
-        <script src="assets/cript/header.js"></script>
-        <script src="assets/cript/navbar.js"></script>
+        <script src="assets/script/jquery.min.js"></script>
+        <script src="assets/script/header.js"></script>
+        <script src="assets/script/navbar.js"></script>
     </body>
 </html>

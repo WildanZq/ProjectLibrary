@@ -7,7 +7,7 @@
         <link rel="stylesheet" href="assets/css/font-awesome.css">
         <link rel="stylesheet" href="assets/css/style.css">
         <link rel="stylesheet" href="assets/css/table.css">
-        <link rel="stylesheet" href="assets/dashboard_style.css">
+        <link rel="stylesheet" href="assets/css/dashboard_style.css">
     </head>
     <body>
         <div class="header">

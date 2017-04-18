@@ -6,7 +6,7 @@
         <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0">
         <link rel="stylesheet" href="assets/css/font-awesome.css">
         <link rel="stylesheet" href="assets/css/style.css">
-        <link rel="stylesheet" href="assets/admin_login_style.css">
+        <link rel="stylesheet" href="assets/css/admin_login_style.css">
     </head>
     <body>
         <div class="bg"></div>
