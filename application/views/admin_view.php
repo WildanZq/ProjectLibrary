@@ -10,21 +10,33 @@
         <link rel="stylesheet" href="../assets/css/admin_style.css">
     </head>
     <body>
+        <div class="popup set-popup">
+            <div class="dark" onclick="closeSet()"></div>
+            <div class="set-form">
+                <form action="">
+                    <h1><i class="fa fa-wrench" aria-hidden="true"></i> Harga Denda</h1>
+                    <div class="i-wrapper"><label>Terlambat:</label><input type="number" placeholder="Terlambat" min="1"></div>
+                    <div class="i-wrapper"><label>Hilang:</label><input type="number" placeholder="Hilang" min="1"></div>
+                    <input type="submit">
+                </form>
+            </div>
+        </div>
         <div class="container">
             <div class="nav">
                 <img src="../assets/images/logo.png" onclick="location.href='../';">
                 <a class="active">Peminjaman</a>
                 <a href="point">Points Exchange</a>
-                <a>Buku</a>
-                <a>Organisasi</a>
-                <a>Event</a>
-                <a>Statistik</a>
+                <a href="buku">Buku</a>
+                <a href="event">Event</a>
+                <a href="organisasi">Organisasi</a>
+                <a href="laporan">Laporan</a>
                 <div class="logout">
                     <h1><i class="fa fa-sign-out" aria-hidden="true"></i> Logout</h1>
                 </div>
             </div>
             <div class="wrapper">
                 <div class="form-wrapper">
+                    <div class="set-wrapper"><span><i class="fa fa-cog" aria-hidden="true"></i>Setting</span></div>
                     <form action="">
                         <input type="text" placeholder="Nama">
                         <div class="kelas">
@@ -72,7 +84,7 @@
                             <td>9481/141/134</td>
                             <td>Judul Buku</td>
                             <td class="red"><i class="fa fa-circle" aria-hidden="true"></i> 5000</td>
-                            <td><i class="fa fa-check-square return" aria-hidden="true"></i></td>
+                            <td><i class="fa fa-check-square return" aria-hidden="true"></i><i class="fa fa-window-close lost" aria-hidden="true"></i></td>
                         </tr>
                         <tr>
                             <td>Nama Lengkap</td>
@@ -152,5 +164,6 @@
         </div>
         <script src="../assets/script/jquery.min.js"></script>
         <script src="../assets/script/change_option.js"></script>
+        <script src="../assets/script/admin_setting.js"></script>
     </body>
 </html>

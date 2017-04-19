@@ -4,6 +4,47 @@ input {
 input[type=date] {
     padding: 5px;
 }
+.set-form {
+    animation: scalein .5s ease;
+    position: relative;
+    border-radius: 5px;
+    overflow: hidden;
+    margin: auto;
+    background: white;
+    width: 80%;
+    max-width: 400px;
+    z-index: 99;
+    padding-bottom: 20px;
+}
+.set-form form {
+    padding: 20px;
+    width: calc(100% - 40px);
+    height: 100%;
+    display: flex;
+    align-items: stretch;
+    flex-direction: column;
+}
+.set-form form h1 {
+    text-align: center;
+    font-size: .8em;
+}
+.i-wrapper {
+    display: flex;
+    justify-content: space-around;
+}
+.i-wrapper label {
+    width: 25%;
+}
+.i-wrapper input{
+    width: 75%;
+}
+.set-form input {
+    text-align: center;
+    margin: 2px;
+}
+.set-form input[type=submit] {
+    margin-top: 10px;
+}
 .h-wrapper td i {
     font-size: .5em;
     transform: translateY(-3px);
@@ -118,6 +159,13 @@ input[type=date] {
     font-size: 1.2em;
     color: royalblue;
 }
+.h-wrapper .lost {
+  transform: translateY(1px);
+  cursor: pointer;
+  font-size: 1.2em;
+  color: #941818;
+  margin-left: 10px;
+}
 .h-wrapper th {
     font-size: .7em;
 }
@@ -129,6 +177,28 @@ input[type=date] {
     width: 90%;
     overflow: hidden;
     overflow-x: auto;
+}
+.set-wrapper {
+    overflow: hidden;
+    float: right;
+    background: white;
+    cursor: pointer;
+}
+.set-wrapper i {
+    margin-right: 5px;
+    font-size: 1.5em;
+}
+.set-wrapper:hover i {
+    transform: rotate(-180deg);
+}
+.set-wrapper span {
+    font-size: .6em;
+    display: flex;
+    align-items: center;
+    transform: translateX(65px);
+}
+.set-wrapper:hover span {
+    transform: translateX(0);
 }
 .search-book form {
     display: flex;
