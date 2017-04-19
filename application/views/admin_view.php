@@ -2,19 +2,19 @@
 <html>
     <head>
         <title>Perpustakaan SMK Telkom Malang</title>
-        <link rel="icon" type="image/png" href="assets/images/logo.png"/>
+        <link rel="icon" type="image/png" href="../assets/images/logo.png"/>
         <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0">
-        <link rel="stylesheet" href="assets/css/font-awesome.css">
-        <link rel="stylesheet" href="assets/css/style.css">
-        <link rel="stylesheet" href="assets/css/table.css">
-        <link rel="stylesheet" href="assets/css/admin_style.css">
+        <link rel="stylesheet" href="../assets/css/font-awesome.css">
+        <link rel="stylesheet" href="../assets/css/style.css">
+        <link rel="stylesheet" href="../assets/css/table.css">
+        <link rel="stylesheet" href="../assets/css/admin_style.css">
     </head>
     <body>
         <div class="container">
             <div class="nav">
-                <img src="assets/images/logo.png" onclick="location.href='../';">
+                <img src="../assets/images/logo.png" onclick="location.href='../';">
                 <a class="active">Peminjaman</a>
-                <a href="point.php">Point</a>
+                <a href="point">Points Exchange</a>
                 <a>Buku</a>
                 <a>Organisasi</a>
                 <a>Event</a>
@@ -150,7 +150,7 @@
                 </div>
             </div>
         </div>
-        <script src="assets/script/jquery.min.js"></script>
-        <script src="assets/script/change_option.js"></script>
+        <script src="../assets/script/jquery.min.js"></script>
+        <script src="../assets/script/change_option.js"></script>
     </body>
 </html>

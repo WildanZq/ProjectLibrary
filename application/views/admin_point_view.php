@@ -2,19 +2,19 @@
 <html>
     <head>
         <title>Perpustakaan SMK Telkom Malang</title>
-        <link rel="icon" type="image/png" href="assets/images/logo.png"/>
+        <link rel="icon" type="image/png" href="../assets/images/logo.png"/>
         <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0">
-        <link rel="stylesheet" href="assets/css/font-awesome.css">
-        <link rel="stylesheet" href="assets/css/style.css">
-        <link rel="stylesheet" href="assets/css/table.css">
-        <link rel="stylesheet" href="assets/css/admin_style.css">
+        <link rel="stylesheet" href="../assets/css/font-awesome.css">
+        <link rel="stylesheet" href="../assets/css/style.css">
+        <link rel="stylesheet" href="../assets/css/table.css">
+        <link rel="stylesheet" href="../assets/css/admin_style.css">
     </head>
     <body>
         <div class="container">
             <div class="nav">
-                <img src="assets/images/logo.png" onclick="location.href='../';">
-                <a href="./">Peminjaman</a>
-                <a class="active">Point</a>
+                <img src="../assets/images/logo.png" onclick="location.href='../';">
+                <a href="peminjaman">Peminjaman</a>
+                <a class="active">Points Exchange</a>
                 <a>Buku</a>
                 <a>Organisasi</a>
                 <a>Event</a>
@@ -45,15 +45,11 @@
                     </form>
                     <div class="search-book">
                         <form action="">
-                            <label>Sort By:</label>
-                            <select>
-                                <option value="taggal">Tanggal</option>
-                                <option value="nama">Nama</option>
-                                <option value="kelas">Kelas</option>
-                                <option value="tipe">Tipe</option>
-                            </select>
-                            <div class="s-wrapper">
-                                <input type="text" placeholder="Tanggal"><i class="s-icon fa fa-search" aria-hidden="true"></i>
+                            <label>Search From:</label>
+                            <input type="date">
+                            <label>To:</label>
+                            <div class="s-wrapper" style="width: auto">
+                                <input type="date"><i class="s-icon fa fa-search" aria-hidden="true" style="top: 5px"></i>
                             </div>
                         </form>
                     </div>
@@ -141,6 +137,6 @@
                 </div>
             </div>
         </div>
-        <script src="assets/script/jquery.min.js"></script>
+        <script src="../assets/script/jquery.min.js"></script>
     </body>
 </html>

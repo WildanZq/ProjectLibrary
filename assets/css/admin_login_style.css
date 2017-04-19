@@ -18,6 +18,8 @@ body {
     filter: blur(2px);
 }
 form {
+    width: calc(90% - 40px);
+    max-width: 500px;
     border-radius: 10px;
     border: 5px solid rgba(255, 255, 255, 0.6);
     z-index: 2;
@@ -55,7 +57,7 @@ form img {
     }
     form {
         flex-direction: column;
-        padding: 30px;
+        padding: 30px 10px;
     }
     form img {
         width: auto;
@@ -64,6 +66,8 @@ form img {
     .i-wrapper {
         padding: 0;
         margin-top: -20px;
+        width: 90%;
+        max-width: 400px;
     }
     .i-wrapper h1 {
         text-align: center;
