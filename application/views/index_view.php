@@ -14,7 +14,7 @@
             <span class="show-login">Login</span>
             <i class="fa fa-bars" aria-hidden="true"></i>
             <div class="popup login-wrapper">
-                <div class="dark dark-login closelogin"></div>
+                <div class="dark dark-login" onclick="logInClose()"></div>
                 <div class="login">
                     <div class="form-wrapper">
                         <form action="" class="form-login">
