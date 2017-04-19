@@ -79,21 +79,30 @@ function logInClose() {
 }
 $(".fa-bars").on('click', function() {
     $(".sidebar-wrapper").css({
-        "transform":"translateX(0)",
-        "transition":"1s"
+        "display":"block"
     });
-    $(".sidebar-wrapper .dark-nav").css({
-        "transform":"translateX(0)",
-        "transition":".7s"
+    $(".dark").css({
+        "animation":"fadein .5s"
     });
-});
-$(".closenav").on('click', function() {
-    $(".sidebar-wrapper").css({
-        "transform":"translateX(100%)",
-        "transition":"1.1s"
+    $(".sidebar-wrapper .sidebar").css({
+        "animation":"slidein .5s ease-out"
     });
-    $(".sidebar-wrapper .dark-nav").css({
-        "transform":"translateX(80%)",
-        "transition":"1.1s"
+    $(document).keyup(function(e) {
+        if (e.keyCode == 27) {
+            closeNav();
+        }
     });
 });
+function closeNav() {
+    $(".dark").css({
+        "animation":"fadeout .5s"
+    });
+    $(".sidebar-wrapper .sidebar").css({
+        "animation":"slideout .5s ease-in"
+    });
+    setTimeout(function() {
+        $(".sidebar-wrapper").css({
+            "display":"none"
+        });
+    },480);
+}

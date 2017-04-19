@@ -35,9 +35,9 @@
                 </div>
             </div>
             <div class="popup sidebar-wrapper">
-                <div class="dark dark-nav closenav"></div>
+                <div onclick="closeNav()" class="dark dark-nav"></div>
                 <div class="sidebar">
-                    <i class="fa fa-times closenav close-nav" aria-hidden="true"></i>
+                    <i onclick="closeNav()" class="fa fa-times close-nav" aria-hidden="true"></i>
                 </div>
             </div>
         </div>
