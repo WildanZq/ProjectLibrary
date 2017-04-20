@@ -152,19 +152,13 @@ input[type=date] {
 }
 .h-wrapper {
     margin-top: 30px;
+    position: relative;
 }
 .h-wrapper .return {
     transform: translateY(1px);
     cursor: pointer;
     font-size: 1.2em;
     color: royalblue;
-}
-.h-wrapper .lost {
-  transform: translateY(1px);
-  cursor: pointer;
-  font-size: 1.2em;
-  color: #941818;
-  margin-left: 10px;
 }
 .h-wrapper th {
     font-size: .7em;

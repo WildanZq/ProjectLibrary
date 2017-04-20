@@ -63,12 +63,13 @@
                                 <option value="Judul">Judul Buku</option>
                             </select>
                             <div class="s-wrapper">
-                                <input class="searchT" type="text" placeholder="Barcode"><i class="s-icon fa fa-search" aria-hidden="true"></i>
+                                <input class="searchT" type="text" placeholder="Barcode" oninput="loadin()"><i class="s-icon fa fa-search" aria-hidden="true"></i>
                             </div>
                         </form>
                     </div>
                 </div>
                 <div class="h-wrapper">
+                    <div class="load-wrapper"><i class="fa fa-circle-o-notch"></i></div>
                     <table>
                         <tr>
                             <th>Nama</th>
@@ -84,7 +85,7 @@
                             <td>9481/141/134</td>
                             <td>Judul Buku</td>
                             <td class="red"><i class="fa fa-circle" aria-hidden="true"></i> 5000</td>
-                            <td><i class="fa fa-check-square return" aria-hidden="true"></i><i class="fa fa-window-close lost" aria-hidden="true"></i></td>
+                            <td><i class="fa fa-check-square return" aria-hidden="true"></i></td>
                         </tr>
                         <tr>
                             <td>Nama Lengkap</td>
@@ -163,6 +164,7 @@
             </div>
         </div>
         <script src="../assets/script/jquery.min.js"></script>
+        <script src="../assets/script/loading.js"></script>
         <script src="../assets/script/change_option.js"></script>
         <script src="../assets/script/admin_setting.js"></script>
     </body>

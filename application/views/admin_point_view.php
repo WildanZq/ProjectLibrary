@@ -57,15 +57,16 @@
                     <div class="search-book">
                         <form action="">
                             <label>Search From:</label>
-                            <input type="date">
+                            <input type="date" oninput="loadin()" onreset="loadout()">
                             <label>To:</label>
                             <div class="s-wrapper" style="width: auto">
-                                <input type="date"><i class="s-icon fa fa-search" aria-hidden="true" style="top: 5px"></i>
+                                <input type="date" oninput="loadin()" onreset="loadout()"><i class="s-icon fa fa-search" aria-hidden="true" style="top: 5px"></i>
                             </div>
                         </form>
                     </div>
                 </div>
                 <div class="h-wrapper">
+                    <div class="load-wrapper"><i class="fa fa-circle-o-notch"></i></div>
                     <table>
                         <tr>
                             <th>Tanggal</th>
@@ -149,6 +150,7 @@
             </div>
         </div>
         <script src="../assets/script/jquery.min.js"></script>
+        <script src="../assets/script/loading.js"></script>
         <script src="../assets/script/admin_setting.js"></script>
     </body>
 </html>
