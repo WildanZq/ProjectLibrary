@@ -19,8 +19,8 @@
                     <div class="form-wrapper">
                         <form action="" class="form-login">
                             <h1><i class="fa fa-sign-in" aria-hidden="true"></i> Login</h1>
-                            <input type="text" placeholder="Username">
-                            <input type="password" placeholder="Password">
+                            <input type="text" placeholder="Username" required>
+                            <input type="password" placeholder="Password" required>
                             <input type="submit">
                         </form>
                         <div class="login-tab">
@@ -30,6 +30,30 @@
                         </div>
                         <form action="">
                             <h1><i class="fa fa-user-plus" aria-hidden="true"></i> Signup</h1>
+                            <div class="signup-wrapper">
+                                <div>
+                                    <input type="text" placeholder="Username">
+                                    <input type="password" placeholder="Password">
+                                    <input type="email" placeholder="Email">
+                                </div>
+                                <div>
+                                    <input type="text" placeholder="NIS">
+                                    <input type="text" placeholder="Nama Lengkap">
+                                    <div class="kelas">
+                                        <input type="number" placeholder="Angkatan" min="1">
+                                        <select>
+                                            <option value="x rpl ">X RPL</option>
+                                            <option value="x tkj ">X TKJ</option>
+                                            <option value="xi rpl ">XI RPL</option>
+                                            <option value="xi tkj ">XI TKJ</option>
+                                            <option value="xII rpl ">XII RPL</option>
+                                            <option value="xII tkj ">XII TKJ</option>
+                                        </select>
+                                        <input type="number" placeholder="1" min="1">
+                                  </div>
+                                </div>
+                            </div>
+                            <input type="submit">
                         </form>
                     </div>
                 </div>
@@ -78,7 +102,9 @@
                 </form>
             </div>
             <div class="book-list">
+              <div class="">
 
+              </div>
             </div>
         </div>
         <script src="assets/script/jquery.min.js"></script>

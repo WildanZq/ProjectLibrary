@@ -139,8 +139,6 @@ input[type=date] {
 }
 .wrapper .kelas {
     margin: 0 15px;
-    padding: 0;
-    display: flex;
 }
 .wrapper > form {
     padding-bottom: 10px;

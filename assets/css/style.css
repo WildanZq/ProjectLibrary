@@ -53,15 +53,19 @@ input:focus, textarea:focus, select:focus {
 input:active, textarea:active, select:active {
     outline: none;
 }
-input[type=submit] {
+input[type=submit], button {
+    padding: 13px 0;
     cursor: pointer;
     color: white;
     background: #f22323;
     transition: .5s;
-    padding: 10px 0;
 }
 input[type=submit]:hover {
     background: #ff0000;
+}
+.kelas {
+    padding: 0;
+    display: flex;
 }
 .load-wrapper {
     z-index: 30;
@@ -188,6 +192,11 @@ input[type=submit]:hover {
     margin: auto;
     display: flex;
     flex-direction: column;
+    overflow: hidden;
+    overflow-y: auto;
+}
+.login form:last-child {
+    padding-bottom: 30px;
 }
 .login h1 {
     font-size: .8em;
@@ -214,6 +223,34 @@ input[type=submit]:hover {
     height: 70%;
     max-height: 290px;
     z-index: 99;
+}
+.signup-wrapper {
+    display: flex;
+}
+.signup-wrapper div {
+    padding: 0;
+}
+.signup-wrapper div:first-child {
+    width: 65%;
+}
+.signup-wrapper div input {
+    margin-top: 5px;
+    width: calc(100% - 30px);
+}
+.signup-wrapper .kelas input {
+    margin: 0;
+}
+.kelas {
+    margin: 5px;
+    margin-right: 2px;
+    margin-bottom: 0;
+    justify-content: space-between;
+}
+.kelas input[type=number]:last-child {
+    width: 50px;
+}
+.kelas input[type=number]:first-child {
+    width: 90px;
 }
 .login-tab {
     cursor: pointer;
@@ -295,5 +332,11 @@ input[type=submit]:hover {
 @media only screen and (max-width: 768px) and (orientation: portrait) {
     .login-wrapper .login {
         height: 70%;
+    }
+    .signup-wrapper {
+        flex-direction: column;
+    }
+    .signup-wrapper div:first-child {
+        width: 100%;
     }
 }
