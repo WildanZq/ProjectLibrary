@@ -23,8 +23,8 @@ function tab1() {
 $(".login-tab").on('click', function() {
     if (tab == 0) {
         $(".login-wrapper .login").css({
-            "max-width":"500px",
-            "max-height":"600px"
+            "max-width":"650px",
+            "max-height":"360px"
         });
         $(".form-wrapper").css({
             "transform":"translateY(calc(-100% + 50px))"
