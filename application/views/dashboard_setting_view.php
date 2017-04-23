@@ -31,7 +31,7 @@
         </div>
         <form action="">
         <div class="wrapper">
-            <div class="img-parent pp"><img src="../assets/images/blank.jpg" class="img"><label for="gbrE" class="label-file"><i class="fa fa-upload" aria-hidden="true"></i> Pilih gambar</label></div>
+            <div class="img-parent pp"><label for="gbrE" class="label-file"><i class="fa fa-upload" aria-hidden="true"></i> Pilih gambar</label><img src="../assets/images/blank.jpg" class="img"></div>
             <input id="gbrE" type="file" onchange="readURL(this,0)" class="hidden">
             <div class="p-desc desc-form">
                 <div class="input-wrapper">

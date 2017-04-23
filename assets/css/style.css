@@ -64,6 +64,7 @@ input[type=submit]:hover {
     background: #ff0000;
 }
 .label-file {
+    text-align: center;
     padding: 0;
     transition: .5s;
     font-size: 1.5em;
@@ -79,6 +80,9 @@ input[type=submit]:hover {
     display: flex;
     justify-content: center;
     align-items: center;
+}
+.label-file * {
+    width: auto;
 }
 .label-file:hover {
     opacity: 1;
