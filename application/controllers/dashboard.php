@@ -12,5 +12,9 @@ class dashboard extends CI_Controller{
   {
     $this->load->view('dashboard_view');
   }
+    
+  function setting() {
+    $this->load->view('dashboard_setting_view');
+  }
 
 }

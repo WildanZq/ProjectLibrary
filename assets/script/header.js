@@ -16,7 +16,7 @@ $(document).ready(function(){
 //            spanAfter.innerHTML = spanAfter.innerHTML.replace(spanAfter.innerHTML.substr(20, 19), "border-color: white");
         } else {
             $('.header').css({
-                "background-color": "#d31111","box-shadow": "0 0 10px black"
+                "background-color": "#d2232a","box-shadow": "0 0 10px black"
             });
 //            $('.header *').css({
 //                "color": "black"

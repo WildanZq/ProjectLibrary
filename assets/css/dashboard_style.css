@@ -1,3 +1,39 @@
+form .img-parent, form .img {
+    padding: 0;
+}
+form * {
+    font-size: 18px;
+    width: calc(100% - 20px);
+}
+form input {
+    margin-top: 5px;
+}
+form input[type=submit] {
+    width: calc(100% - 20px);
+    margin-top: 10px;
+    position: absolute;
+    right: 0;
+    bottom: 20px;
+}
+form .wrapper {
+    width: 90%;
+    max-width: 950px;
+}
+.input-wrapper {
+    position: relative;
+    display: flex;
+}
+.kelas {
+    margin-right: 5px;
+    width: 100%;
+}
+.kelas input {
+    margin: 0;
+    width: 70px;
+}
+.kelas select {
+    width: 120px;
+}
 .red i {
     color: #ff1818;
 }
@@ -25,6 +61,9 @@
     margin-left: 20px;
     display: flex;
     flex-direction: column;
+}
+.desc-form {
+    flex-direction: row;
 }
 .p-desc h1 {
     text-transform: capitalize;
@@ -66,6 +105,12 @@
     .wrapper {
         flex-direction: column;
     }
+    form .wrapper {
+        align-items: center;
+    }
+    .input-wrapper {
+        height: 230px;
+    }
     .p-desc {
         margin: 0;
     }
@@ -80,5 +125,13 @@
         margin: auto;
         margin-top: 10px;
         border-right: 4px solid #de2f2f;
+    }
+    .input-wrapper {
+        flex-direction: column;
+        height: 385px;
+    }
+    form input[type=submit] {
+        width: calc(100% - 30px);
+        right: 10px;
     }
 }

@@ -1,8 +1,15 @@
+function showP() {
+    $(".dropdown-wrapper").css({height: "119px"});
+}
+function closeP() {
+    $(".dropdown-wrapper").css({height: "0"});
+}
 var tab = 0;
 function tab1() {
     $(".login-wrapper .login").css({
         "max-width":"400px",
-        "max-height":"290px"
+        "max-height":"290px",
+        "overflow-y":"hidden"
     });
     $(".form-wrapper").css({
         "transform":"translateY(0)"
@@ -26,6 +33,9 @@ $(".login-tab").on('click', function() {
             "max-width":"650px",
             "max-height":"360px"
         });
+        if($(window).width() <= 768) {
+            $(".login-wrapper .login").css({"overflow-y":"auto"});
+        }
         $(".form-wrapper").css({
             "transform":"translateY(calc(-100% + 50px))"
         });

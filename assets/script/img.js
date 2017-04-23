@@ -41,7 +41,7 @@ function resizeImg() {
                 img[i].style.width = "100%";
                 img[i].style.height = "auto";
             }
-        } else {
+        } else if(heightP == widthP) {
             if(height > width) {
                 img[i].style.width = "100%";
                 img[i].style.height = "auto";
@@ -53,10 +53,10 @@ function resizeImg() {
     }
 }
 $(window).on("load", function() {
-    resizeImg();
+    try {resizeImg();} catch(e) {}
     $(window).resize(function() {
         setTimeout(function() {
-            resizeImg();
+            try {resizeImg();} catch(e) {}
         }, 100);
     });
 });

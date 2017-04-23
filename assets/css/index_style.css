@@ -45,14 +45,13 @@
     height: 100%;
 }
 .top .bg {
+    filter: brightness(95%) blur(2px);
+    background: url(../images/bg.jpeg) center;
+    background-size: cover;
     position: absolute;
     top: 0;
     width: 100%;
     height: 100vh;
-    background: url(../images/bg.jpeg) center;
-    background-size: cover;
-    filter: brightness(95%) blur(2px);
-    z-index: -1;
 }
 .top .wrapper {
     max-width: 850px;
@@ -162,5 +161,8 @@
     .s-wrapper {
         margin-top: 5px;
         width: 100%;
+    }
+    .s-wrapper input {
+        margin: 0;
     }
 }

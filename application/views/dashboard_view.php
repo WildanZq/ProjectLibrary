@@ -12,8 +12,15 @@
     <body>
         <div class="header">
             <img class="logo" src="assets/images/logo-s.png" onclick="location.href='../';">
-            <img src="assets/images/blank.jpg" class="pp">
-            <span>Wildan Ziaulhaq</span>
+            <div class="img-parent" style="background:none;overflow:visible">
+                <img src="assets/images/blank.jpg" class="pp">
+                <div class="dropdown-wrapper" onmouseleave="closeP()" onmouseover="showP()">
+                    <a href="dashboard"><span>Dashboard</span></a>
+                    <a href="dashboard/setting"><span>Setting</span></a>
+                    <a href="dashboard/logout"><span>Logout</span></a>
+                </div>
+                <span onclick="showP()" onmouseleave="closeP()">Wildan Z</span>
+            </div>
             <i class="fa fa-bars" aria-hidden="true"></i>
             <div class="popup sidebar-wrapper">
                 <div onclick="closeNav()" class="dark dark-nav"></div>
@@ -28,6 +35,7 @@
                 <h1>wildan ziaulhaq</h1>
                 <span><i class="fa fa-id-card-o" aria-hidden="true"></i> 9174981686</span>
                 <span><i class="fa fa-users" aria-hidden="true"></i> Angkatan 24</span>
+                <span><i class="fa fa-home" aria-hidden="true"></i> XI RPL 2</span>
                 <span><i class="fa fa-envelope-o" aria-hidden="true"></i> wildan2wildan@gmail.com</span>
             </div>
             <div class="poin-wrapper">
