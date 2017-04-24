@@ -4,6 +4,10 @@ input {
 input[type=date] {
     padding: 5px;
 }
+.form-wrapper #cke_konten {
+    width: 95%;
+    margin: 5px 0;
+}
 .set-form {
     animation: scalein .5s ease;
     position: relative;

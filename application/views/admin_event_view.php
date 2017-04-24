@@ -25,7 +25,7 @@
             </div>
             <div class="wrapper">
                 <div class="form-wrapper">
-                    <form action="" style="flex-direction:column">
+                    <form action="" style="flex-direction:column" enctype="multipart/form-data">
                         <div class="img-wrapper">
                             <img class="img" src="../assets/images/blank.png" style="height:auto;width:100%">
                             <label for="gbrE" class="label-file"><i class="fa fa-upload" aria-hidden="true"></i> Pilih gambar</label>
@@ -38,6 +38,7 @@
                             <label>Sampai:</label>
                             <input type="date">
                         </div>
+                        <textarea name="konten" class="ckeditor" required></textarea>
                         <div>
                             <label>Pemenang:</label>
                             <select>
@@ -116,6 +117,7 @@
             </div>
         </div>
         <script src="../assets/script/jquery.min.js"></script>
+        <script src="../assets/ckeditor/ckeditor.js"></script>
         <script src="../assets/script/loading.js"></script>
         <script src="../assets/script/img_input.js"></script>
     </body>
