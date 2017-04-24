@@ -4,6 +4,23 @@ input {
 input[type=date] {
     padding: 5px;
 }
+.print {
+    font-size: .5em;
+    position:absolute;
+    right:35px;
+    top:10px;
+    cursor:pointer;
+    border-radius: 3px;
+    padding: 5px;
+    background: #ebebeb;
+    border: thin solid lightgrey;
+}
+.print:hover {
+    background: #e3e3e3;
+}
+.print i {
+    font-size: 1.2em;
+}
 .form-wrapper #cke_konten {
     width: 95%;
     margin: 5px 0;
@@ -124,8 +141,19 @@ input[type=date] {
     flex-direction: column;
     align-items: center;
     margin-top: 7vh;
-    padding: 0;
+    padding: 0 20px;
     padding-bottom: 7vh;
+}
+.wrapper h1 {
+    margin: 0;
+    text-align: center;
+}
+.wrapper h2 {
+    text-align: center;
+    margin: 0;
+    margin-top: 10px;
+    font-size: .6em;
+    font-weight: normal;
 }
 .wrapper form {
     width: 100%;
@@ -151,7 +179,7 @@ input[type=date] {
     border-bottom: thin solid #a0a0a0;
 }
 .h-wrapper, .h-wrapper table {
-    max-width: 1000px;
+    max-width: 990px;
     margin: 0;
 }
 .h-wrapper {

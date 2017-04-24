@@ -8,6 +8,7 @@
         <link rel="stylesheet" href="../assets/css/style.css">
         <link rel="stylesheet" href="../assets/css/table.css">
         <link rel="stylesheet" href="../assets/css/admin_style.css">
+        <link rel="stylesheet" href="../assets/css/print.css">
     </head>
     <body>
         <div class="popup set-popup">
@@ -33,12 +34,148 @@
                     <h1><i class="fa fa-sign-out" aria-hidden="true"></i> Logout</h1>
                 </div>
             </div>
-            <div class="wrapper">
-                
+            <span class="print"><i class="fa fa-print" aria-hidden="true"></i> Print</span>
+            <div class="wrapper" id="print">
+                <h1>2017</h1>
+                <canvas id="all" height="70px"></canvas>
+                <canvas id="denda" height="70px"></canvas>
+                <h2>Peminjaman</h2>
+                <canvas id="pinjam" height="70px"></canvas>
+                <h2>Pengembalian</h2>
+                <canvas id="kembali" height="70px"></canvas>
             </div>
         </div>
         <script src="../assets/script/jquery.min.js"></script>
         <script src="../assets/script/loading.js"></script>
-        <script src="../assets/script/admin_setting.js"></script>
+        <script src="../assets/script/Chart.js"></script>
+        <script>
+            $(".print").on('click',function(){
+                window.print();
+            });
+        </script>
+        <script>
+            var all = document.getElementById("all");
+            var aChart = new Chart(all, {
+                type: 'line',
+                data: {
+                    labels: ["Januari", "Februari", "Maret", "April", "Mei", "Juni", "Juli", "Agustus", "September", "Oktober", "November", "Desember"],
+                    datasets: [{
+                        label: 'Peminjaman',
+                        data: [5, 11, 8, 10, 7, 12],
+                        backgroundColor: 'rgba(54, 162, 235, 0.2)',
+                        borderColor: 'rgba(54, 162, 235, 1)',
+                        borderWidth: 2
+                    },{
+                        label: 'Pengembalian',
+                        data: [7, 9, 10, 13, 12, 9],
+                        backgroundColor: 'rgba(255, 99, 132, 0.2)',
+                        borderColor: 'rgba(255,99,132,1)',
+                        borderWidth: 2
+                    }]
+                },
+                options: {
+                    scales: {
+                        yAxes: [{
+                            ticks: {
+                                beginAtZero:true
+                            }
+                        }]
+                    }
+                }
+            });
+            var denda = document.getElementById("denda");
+            var dChart = new Chart(denda, {
+                type: 'bar',
+                data: {
+                    labels: ["Januari", "Februari", "Maret", "April", "Mei", "Juni", "Juli", "Agustus", "September", "Oktober", "November", "Desember"],
+                    datasets: [{
+                        label: 'Denda (Rp)',
+                        data: [2000, 1000, 1500, 3000, 1500, 2500],
+                        backgroundColor: 'rgba(54, 235, 61, 0.2)',
+                        borderColor: 'rgb(54, 235, 61)',
+                        borderWidth: 2
+                    }]
+                },
+                options: {
+                    scales: {
+                        yAxes: [{
+                            ticks: {
+                                beginAtZero:true
+                            }
+                        }]
+                    }
+                }
+            });
+            var pinjam = document.getElementById("pinjam");
+            var pChart = new Chart(pinjam, {
+                type: 'bar',
+                data: {
+                    labels: ["Januari", "Februari", "Maret", "April", "Mei", "Juni", "Juli", "Agustus", "September", "Oktober", "November", "Desember"],
+                    datasets: [{
+                        label: 'X',
+                        data: [2, 1, 1, 3, 1, 2],
+                        backgroundColor: 'rgba(29, 41, 185, 0.2)',
+                        borderColor: 'rgb(29, 41, 185)',
+                        borderWidth: 2
+                    },{
+                        label: 'XI',
+                        data: [2, 1, 2, 3, 2, 3],
+                        backgroundColor: 'rgba(28, 190, 35, 0.2)',
+                        borderColor: 'rgb(28, 190, 35)',
+                        borderWidth: 2
+                    },{
+                        label: 'XII',
+                        data: [2, 1, 1, 3, 1, 2],
+                        backgroundColor: 'rgba(222, 77, 0, 0.2)',
+                        borderColor: 'rgb(222, 77, 0)',
+                        borderWidth: 2
+                    }]
+                },
+                options: {
+                    scales: {
+                        yAxes: [{
+                            ticks: {
+                                beginAtZero:true
+                            }
+                        }]
+                    }
+                }
+            });
+            var kembali = document.getElementById("kembali");
+            var kChart = new Chart(kembali, {
+                type: 'bar',
+                data: {
+                    labels: ["Januari", "Februari", "Maret", "April", "Mei", "Juni", "Juli", "Agustus", "September", "Oktober", "November", "Desember"],
+                    datasets: [{
+                        label: 'X',
+                        data: [2, 1, 1, 3, 1, 2],
+                        backgroundColor: 'rgba(29, 41, 185, 0.2)',
+                        borderColor: 'rgb(29, 41, 185)',
+                        borderWidth: 2
+                    },{
+                        label: 'XI',
+                        data: [2, 1, 2, 3, 2, 3],
+                        backgroundColor: 'rgba(28, 190, 35, 0.2)',
+                        borderColor: 'rgb(28, 190, 35)',
+                        borderWidth: 2
+                    },{
+                        label: 'XII',
+                        data: [2, 1, 1, 3, 1, 2],
+                        backgroundColor: 'rgba(222, 77, 0, 0.2)',
+                        borderColor: 'rgb(222, 77, 0)',
+                        borderWidth: 2
+                    }]
+                },
+                options: {
+                    scales: {
+                        yAxes: [{
+                            ticks: {
+                                beginAtZero:true
+                            }
+                        }]
+                    }
+                }
+            });
+        </script>
     </body>
 </html>
