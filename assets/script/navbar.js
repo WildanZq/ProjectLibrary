@@ -84,8 +84,8 @@ function logInClose() {
         $(".login-wrapper").css({
             "display":"none"
         });
+        tab1();
     },480);
-    tab1();
 }
 $(".fa-bars").on('click', function() {
     $(".sidebar-wrapper").css({
