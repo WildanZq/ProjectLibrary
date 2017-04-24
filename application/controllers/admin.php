@@ -24,5 +24,9 @@ class admin extends CI_Controller{
   function event() {
     $this->load->view('admin_event_view');
   }
+    
+  function laporan() {
+    $this->load->view('admin_laporan_view');
+  }
 
 }
