@@ -91,8 +91,8 @@
                     datasets: [{
                         label: 'Denda (Rp)',
                         data: [2000, 1000, 1500, 3000, 1500, 2500],
-                        backgroundColor: 'rgba(54, 235, 61, 0.2)',
-                        borderColor: 'rgb(54, 235, 61)',
+                        backgroundColor: 'rgba(5, 206, 232, 0.2)',
+                        borderColor: 'rgb(5, 206, 232)',
                         borderWidth: 2
                     }]
                 },
