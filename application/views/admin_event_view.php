@@ -75,42 +75,42 @@
                             <th>Sampai</th>
                             <th>Judul</th>
                             <th>Reward</th>
-                            <th>Edit</th>
+                            <th><i class="fa fa-pencil-square-o" aria-hidden="true"></i></th>
                         </tr>
                         <tr>
                             <td>20/03/2017</td>
                             <td>20/03/2017</td>
                             <td>Judul Event</td>
                             <td class="gold"><i class="fa fa-star" aria-hidden="true"></i> 1000</td>
-                            <td><i class="fa fa-pencil-square return" aria-hidden="true"></i></td>
+                            <td><span class="return" onclick="location.href='./edit_event';">Edit</span><span class="return">Hapus</span></td>
                         </tr>
                         <tr>
                             <td>20/03/2017</td>
                             <td>20/03/2017</td>
                             <td>Judul Event</td>
                             <td class="gold"><i class="fa fa-star" aria-hidden="true"></i> 1000</td>
-                            <td><i class="fa fa-pencil-square return" aria-hidden="true"></i></td>
+                            <td><span class="return" onclick="location.href='./edit_event';">Edit</span><span class="return">Hapus</span></td>
                         </tr>
                         <tr>
                             <td>20/03/2017</td>
                             <td>20/03/2017</td>
                             <td>Judul Event</td>
                             <td class="gold"><i class="fa fa-star" aria-hidden="true"></i> 1000</td>
-                            <td><i class="fa fa-pencil-square return" aria-hidden="true"></i></td>
+                            <td><span class="return" onclick="location.href='./edit_event';">Edit</span><span class="return">Hapus</span></td>
                         </tr>
                         <tr>
                             <td>20/03/2017</td>
                             <td>20/03/2017</td>
                             <td>Judul Event</td>
                             <td class="gold"><i class="fa fa-star" aria-hidden="true"></i> 1000</td>
-                            <td><i class="fa fa-pencil-square return" aria-hidden="true"></i></td>
+                            <td><span class="return" onclick="location.href='./edit_event';">Edit</span><span class="return">Hapus</span></td>
                         </tr>
                         <tr>
                             <td>20/03/2017</td>
                             <td>20/03/2017</td>
                             <td>Judul Event</td>
                             <td class="gold"><i class="fa fa-star" aria-hidden="true"></i> 1000</td>
-                            <td><i class="fa fa-pencil-square return" aria-hidden="true"></i></td>
+                            <td><span class="return" onclick="location.href='./edit_event';">Edit</span><span class="return">Hapus</span></td>
                         </tr>
                     </table>
                 </div>

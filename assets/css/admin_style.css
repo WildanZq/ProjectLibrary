@@ -189,8 +189,15 @@ input[type=date] {
 .h-wrapper .return {
     transform: translateY(1px);
     cursor: pointer;
-    font-size: 1.2em;
-    color: royalblue;
+    font-size: .7em;
+    background: #a70000;
+    color: white;
+    padding: 5px 10px;
+    border-radius: 3px;
+    margin-left: 5px;
+}
+.h-wrapper .return:first-child {
+    background: #3ed43e;
 }
 .h-wrapper th {
     font-size: .7em;

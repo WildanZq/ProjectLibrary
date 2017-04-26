@@ -85,7 +85,7 @@
                             <td>9481/141/134</td>
                             <td>Judul Buku</td>
                             <td class="red"><i class="fa fa-circle" aria-hidden="true"></i> 5000</td>
-                            <td><i class="fa fa-check-square return" aria-hidden="true"></i></td>
+                            <td><span class="return">Kembali</span><span class="return">Hilang</span></td>
                         </tr>
                         <tr>
                             <td>Nama Lengkap</td>
@@ -93,7 +93,7 @@
                             <td>9481/141/134</td>
                             <td>Judul Buku</td>
                             <td class="red"><i class="fa fa-circle" aria-hidden="true"></i> 5000</td>
-                            <td><i class="fa fa-check-square return" aria-hidden="true"></i></td>
+                            <td><span class="return">Kembali</span><span class="return">Hilang</span></td>
                         </tr>
                         <tr>
                             <td>Nama Lengkap</td>
@@ -101,7 +101,7 @@
                             <td>9481/141/134</td>
                             <td>Judul Buku</td>
                             <td class="red"><i class="fa fa-circle" aria-hidden="true"></i> 5000</td>
-                            <td><i class="fa fa-check-square return" aria-hidden="true"></i></td>
+                            <td><span class="return">Kembali</span><span class="return">Hilang</span></td>
                         </tr>
                         <tr>
                             <td>Nama Lengkap</td>
@@ -109,7 +109,7 @@
                             <td>9481/141/134</td>
                             <td>Judul Buku</td>
                             <td class="red"><i class="fa fa-circle" aria-hidden="true"></i> 5000</td>
-                            <td><i class="fa fa-check-square return" aria-hidden="true"></i></td>
+                            <td><span class="return">Kembali</span><span class="return">Hilang</span></td>
                         </tr>
                         <tr>
                             <td>Nama Lengkap</td>
@@ -117,7 +117,7 @@
                             <td>9481/141/134</td>
                             <td>Judul Buku</td>
                             <td class="red"><i class="fa fa-circle" aria-hidden="true"></i> 5000</td>
-                            <td><i class="fa fa-check-square return" aria-hidden="true"></i></td>
+                            <td><span class="return">Kembali</span><span class="return">Hilang</span></td>
                         </tr>
                         <tr>
                             <td>Nama Lengkap</td>
@@ -125,7 +125,7 @@
                             <td>9481/141/134</td>
                             <td>Judul Buku</td>
                             <td class="red"><i class="fa fa-circle" aria-hidden="true"></i> 5000</td>
-                            <td><i class="fa fa-check-square return" aria-hidden="true"></i></td>
+                            <td><span class="return">Kembali</span><span class="return">Hilang</span></td>
                         </tr>
                         <tr>
                             <td>Nama Lengkap</td>
@@ -133,7 +133,7 @@
                             <td>9481/141/134</td>
                             <td>Judul Buku</td>
                             <td class="green"><i class="fa fa-circle" aria-hidden="true"></i> 2 Hari</td>
-                            <td><i class="fa fa-check-square return" aria-hidden="true"></i></td>
+                            <td><span class="return">Kembali</span><span class="return">Hilang</span></td>
                         </tr>
                         <tr>
                             <td>Nama Lengkap</td>
@@ -141,7 +141,7 @@
                             <td>9481/141/134</td>
                             <td>Judul Buku</td>
                             <td class="green"><i class="fa fa-circle" aria-hidden="true"></i> 2 Hari</td>
-                            <td><i class="fa fa-check-square return" aria-hidden="true"></i></td>
+                            <td><span class="return">Kembali</span><span class="return">Hilang</span></td>
                         </tr>
                         <tr>
                             <td>Nama Lengkap</td>
@@ -149,7 +149,7 @@
                             <td>9481/141/134</td>
                             <td>Judul Buku</td>
                             <td class="green"><i class="fa fa-circle" aria-hidden="true"></i> 2 Hari</td>
-                            <td><i class="fa fa-check-square return" aria-hidden="true"></i></td>
+                            <td><span class="return">Kembali</span><span class="return">Hilang</span></td>
                         </tr>
                         <tr>
                             <td>Nama Lengkap</td>
@@ -157,7 +157,7 @@
                             <td>9481/141/134</td>
                             <td>Judul Buku</td>
                             <td class="green"><i class="fa fa-circle" aria-hidden="true"></i> 2 Hari</td>
-                            <td><i class="fa fa-check-square return" aria-hidden="true"></i></td>
+                            <td><span class="return">Kembali</span><span class="return">Hilang</span></td>
                         </tr>
                     </table>
                 </div>
