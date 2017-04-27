@@ -4,21 +4,25 @@ input {
 input[type=date] {
     padding: 5px;
 }
-.print {
-    font-size: .5em;
+.nav-laporan {
     position:absolute;
     right:35px;
     top:10px;
+}
+.nav-laporan * {
+    font-size: .5em;
+}
+.nav-item-laporan {
     cursor:pointer;
     border-radius: 3px;
     padding: 5px;
     background: #ebebeb;
     border: thin solid lightgrey;
 }
-.print:hover {
+.nav-item-laporan:hover {
     background: #e3e3e3;
 }
-.print i {
+.nav-item-laporan i {
     font-size: 1.2em;
 }
 .form-wrapper #cke_konten {
@@ -112,7 +116,7 @@ input[type=date] {
     border-bottom: thin solid #acacac;
 }
 .nav a {
-    color: #ebebeb;
+    color: #d1d1d1;
     padding: 3px;
     margin-top: 4px;
     font-weight: bold;
