@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: 04 Mei 2017 pada 09.21
+-- Generation Time: 04 Mei 2017 pada 11.13
 -- Versi Server: 10.1.21-MariaDB
 -- PHP Version: 7.1.1
 
@@ -27,8 +27,8 @@ SET time_zone = "+00:00";
 --
 
 CREATE TABLE `barcode` (
-  `id_barcode` int(11) NOT NULL,
-  `id_buku` int(11) DEFAULT NULL,
+  `id_barcode` int(128) NOT NULL,
+  `id_buku` int(128) DEFAULT NULL,
   `barcode` varchar(128) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -2702,13 +2702,13 @@ INSERT INTO `barcode` (`id_barcode`, `id_buku`, `barcode`) VALUES
 --
 
 CREATE TABLE `buku` (
-  `id_buku` int(11) NOT NULL,
+  `id_buku` int(128) NOT NULL,
   `register` varchar(128) DEFAULT NULL,
   `judul` text,
   `pengarang` text,
   `penerbit` text,
-  `tahun_terbit` varchar(16) DEFAULT NULL,
-  `jumlah` int(11) DEFAULT NULL
+  `tahun_terbit` varchar(32) DEFAULT NULL,
+  `jumlah` int(32) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
@@ -4204,26 +4204,38 @@ INSERT INTO `buku` (`id_buku`, `register`, `judul`, `pengarang`, `penerbit`, `ta
 --
 
 CREATE TABLE `peminjaman` (
-  `id_peminjaman` int(11) NOT NULL,
+  `id_peminjaman` int(128) NOT NULL,
   `tanggal` date NOT NULL,
-  `id_user` int(11) NOT NULL,
+  `id_siswa` int(128) NOT NULL,
   `barcode` varchar(128) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `user`
+-- Struktur dari tabel `setting`
 --
 
-CREATE TABLE `user` (
-  `id_user` int(11) NOT NULL,
+CREATE TABLE `setting` (
+  `terlambat` int(64) NOT NULL,
+  `hilang` int(64) NOT NULL,
+  `print` int(64) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Struktur dari tabel `siswa`
+--
+
+CREATE TABLE `siswa` (
+  `id_siswa` int(128) NOT NULL,
   `nama_lengkap` varchar(128) NOT NULL,
   `angkatan` int(128) NOT NULL,
   `jurusan` varchar(64) NOT NULL,
   `nomor_kelas` int(64) NOT NULL,
   `pengurus` int(1) NOT NULL DEFAULT '0'
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 ROW_FORMAT=COMPACT;
 
 --
 -- Indexes for dumped tables
@@ -4248,10 +4260,10 @@ ALTER TABLE `peminjaman`
   ADD PRIMARY KEY (`id_peminjaman`);
 
 --
--- Indexes for table `user`
+-- Indexes for table `siswa`
 --
-ALTER TABLE `user`
-  ADD PRIMARY KEY (`id_user`);
+ALTER TABLE `siswa`
+  ADD PRIMARY KEY (`id_siswa`);
 
 --
 -- AUTO_INCREMENT for dumped tables
@@ -4261,22 +4273,22 @@ ALTER TABLE `user`
 -- AUTO_INCREMENT for table `barcode`
 --
 ALTER TABLE `barcode`
-  MODIFY `id_barcode` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2657;
+  MODIFY `id_barcode` int(128) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2657;
 --
 -- AUTO_INCREMENT for table `buku`
 --
 ALTER TABLE `buku`
-  MODIFY `id_buku` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1478;
+  MODIFY `id_buku` int(128) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1478;
 --
 -- AUTO_INCREMENT for table `peminjaman`
 --
 ALTER TABLE `peminjaman`
-  MODIFY `id_peminjaman` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_peminjaman` int(128) NOT NULL AUTO_INCREMENT;
 --
--- AUTO_INCREMENT for table `user`
+-- AUTO_INCREMENT for table `siswa`
 --
-ALTER TABLE `user`
-  MODIFY `id_user` int(11) NOT NULL AUTO_INCREMENT;
+ALTER TABLE `siswa`
+  MODIFY `id_siswa` int(128) NOT NULL AUTO_INCREMENT;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
