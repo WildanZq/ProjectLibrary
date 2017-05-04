@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: 04 Mei 2017 pada 11.13
+-- Generation Time: 04 Mei 2017 pada 11.39
 -- Versi Server: 10.1.21-MariaDB
 -- PHP Version: 7.1.1
 
@@ -4207,7 +4207,8 @@ CREATE TABLE `peminjaman` (
   `id_peminjaman` int(128) NOT NULL,
   `tanggal` date NOT NULL,
   `id_siswa` int(128) NOT NULL,
-  `barcode` varchar(128) NOT NULL
+  `barcode` varchar(128) NOT NULL,
+  `kembali` int(1) NOT NULL DEFAULT '0'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -4234,6 +4235,7 @@ CREATE TABLE `siswa` (
   `angkatan` int(128) NOT NULL,
   `jurusan` varchar(64) NOT NULL,
   `nomor_kelas` int(64) NOT NULL,
+  `poin` int(64) NOT NULL DEFAULT '0',
   `pengurus` int(1) NOT NULL DEFAULT '0'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 ROW_FORMAT=COMPACT;
 
