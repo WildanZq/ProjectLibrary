@@ -126,8 +126,27 @@
           function cariBuku(){
             if(kategori != "" && judul != ""){
               console.log("Searching for %s with Category %s",judul,kategori);
+              var svrAjax = $.ajax({
+                url: "api/getBukuSimple",
+                method: "POST",
+                data:{
+                  kategori: kategori,
+                  judul: judul
+                }
+              });
+
+              svrAjax.done(function(response){
+                var jsonParsed = JSON.parse(response);
+                var dataString = "Found Book : ";
+                for(var f = 0 ; f < jsonParsed.length; f++){
+                  dataString = dataString + " " + jsonParsed[f].judul + ", ";
+                }
+                console.log(dataString);
+              });
             }
           }
+
+
         </script>
     </body>
 </html>
