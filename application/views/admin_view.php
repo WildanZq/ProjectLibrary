@@ -41,12 +41,12 @@
                         <input type="text" placeholder="Nama">
                         <div class="kelas">
                             <select>
-                                <option value="x rpl ">X RPL</option>
-                                <option value="x tkj ">X TKJ</option>
-                                <option value="xi rpl ">XI RPL</option>
-                                <option value="xi tkj ">XI TKJ</option>
-                                <option value="xII rpl ">XII RPL</option>
-                                <option value="xII tkj ">XII TKJ</option>
+                                <option value="x rpl">X RPL</option>
+                                <option value="x tkj">X TKJ</option>
+                                <option value="xi rpl">XI RPL</option>
+                                <option value="xi tkj">XI TKJ</option>
+                                <option value="xii rpl">XII RPL</option>
+                                <option value="xii tkj">XII TKJ</option>
                             </select>
                             <input type="number" placeholder="1" min="1">
                         </div>

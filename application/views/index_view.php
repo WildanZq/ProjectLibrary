@@ -83,7 +83,7 @@
         <div class="wrapper" style="height: 100vh" id="go">
             <div class="search-book">
                 <form action="">
-                    <select>
+                    <select class="kategori">
                         <option value="">-- Pilih Kategori --</option>
                         <option value="ilmu">Ilmu Komputer, Informasi, &amp; Karya Umum</option>
                         <option value="filsafat">Filsafat &amp; Psikologi</option>
@@ -97,7 +97,7 @@
                         <option value="sejarah">Sejarah &amp; Geografi</option>
                     </select>
                     <div class="s-wrapper">
-                        <input type="text" placeholder="Judul buku"><i class="s-icon fa fa-search" aria-hidden="true"></i>
+                        <input type="text" class="judul" placeholder="Judul buku"><i class="s-icon fa fa-search" aria-hidden="true"></i>
                     </div>
                 </form>
             </div>
@@ -110,5 +110,18 @@
         <script src="assets/script/jquery.min.js"></script>
         <script src="assets/script/header.js"></script>
         <script src="assets/script/navbar.js"></script>
+        <script>
+          var kategori = "";
+          $('.kategori').change(function(){
+            kategori = this.value;
+          });
+          $('.judul').on('input',function(e){
+            var titleTrim = this.value.trim();
+            //var kategori = $('.kategori').value;
+            if(kategori != "" || titleTrim != ""){
+              console.log("Searching for %s with category %s",titleTrim,kategori);
+            }
+          })
+        </script>
     </body>
 </html>
