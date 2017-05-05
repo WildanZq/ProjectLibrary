@@ -112,16 +112,22 @@
         <script src="assets/script/navbar.js"></script>
         <script>
           var kategori = "";
+          var judul = "";
           $('.kategori').change(function(){
             kategori = this.value;
+            cariBuku();
           });
+
           $('.judul').on('input',function(e){
-            var titleTrim = this.value.trim();
-            //var kategori = $('.kategori').value;
-            if(kategori != "" || titleTrim != ""){
-              console.log("Searching for %s with category %s",titleTrim,kategori);
-            }
+            judul = this.value.trim();
+            cariBuku();
           })
+
+          function cariBuku(){
+            if(kategori != "" && judul != ""){
+              console.log("Searching for %s with Category %s",judul,kategori);
+            }
+          }
         </script>
     </body>
 </html>
