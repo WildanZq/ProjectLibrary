@@ -1,47 +1,43 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
+
 class API extends CI_Controller{
 
   public function __construct()
   {
     parent::__construct();
     //Codeigniter : Write Less Do More
+    $this->load->model(Array(
+      'model_buku' => 'buku',
+      'model_error' => 'error'
+    ));
   }
 
   function index()
   {
-
+    echo("API Documentation under progress. Please Wait...");
   }
 
-  function getBuku(){
+  function getBukuFrontPage(){
     $kategori = $this->input->post('kategori');
     $judul = $this->input->post('judul');
 
     if($kategori == "" || $judul == ""){
-      $error = Array(
-        'errorCode' => 1,
-        'errorMessage' => "Field ada yang kosong!"
-      );
-      echo json_encode($error);
+      echo($this -> error -> returnError("EMPTY_FIELD",'Field ada yang belum terisi, mohon cek ulang!'));
       return;
     }
-    
-    $this->db->like('judul', $judul, 'both');
-    $result = $this->db->get('buku');
 
-    $mainData = Array();
+    $kelasBuku = $this -> buku -> getKelasBuku($kategori);
 
-    foreach($result -> result() as $row){
-      $data = Array(
-        'judul' => $row -> judul,
-        'jumlah' => $row -> jumlah
-      );
-      array_push($mainData,$data);
+    if($kelasBuku == '-1'){
+      echo($this -> error -> returnError("WRONG_CATEGORY",'Kategori yang dipilih tidak valid!'));
+      return;
+    }
 
-      }
-
-    echo json_encode($mainData);
+    //die($kelasBuku); //In case you didn't sure.
+    $dataFrontPage = $this -> buku -> getBukuFrontPage($judul,$kelasBuku);
+    echo json_encode($dataFrontPage);
 
   }
 
