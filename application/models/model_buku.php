@@ -9,12 +9,21 @@ class model_buku extends CI_Model{
     //Codeigniter : Write Less Do More
   }
 
-  public function getBukuFrontPage($judul, $kelasBuku){
+  public function getBukuFrontPage(){
+    $kategori = $this->input->post('kategori');
+    $judul = $this->input->post('judul');
+
+    $kelasBuku = $this -> getKelasBuku($kategori);
+
+    if($kelasBuku == '-1'){
+      echo($this -> error -> returnError("WRONG_CATEGORY",'Kategori yang dipilih tidak valid!'));
+      return;
+    }
 
         $mainData = Array();
 
         // If you think database is fun, think again.
-        
+
         $query = sprintf('SELECT * FROM `buku` WHERE judul LIKE "%%%1$s%%" AND register REGEXP "^%2$s.+$" OR judul LIKE "%%%1$s%%" AND register REGEXP "^REF\ %2$s.+$"',$judul,$kelasBuku);
         $result = $this->db->query($query);
 
@@ -27,7 +36,7 @@ class model_buku extends CI_Model{
           array_push($mainData,$data);
         }
 
-        return $mainData;
+        echo json_encode($mainData);
   }
 
   public function getKelasBuku($kategori){

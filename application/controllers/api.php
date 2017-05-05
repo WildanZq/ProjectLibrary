@@ -20,6 +20,7 @@ class API extends CI_Controller{
   }
 
   function getBukuFrontPage(){
+
     $kategori = $this->input->post('kategori');
     $judul = $this->input->post('judul');
 
@@ -28,17 +29,16 @@ class API extends CI_Controller{
       return;
     }
 
-    $kelasBuku = $this -> buku -> getKelasBuku($kategori);
-
-    if($kelasBuku == '-1'){
-      echo($this -> error -> returnError("WRONG_CATEGORY",'Kategori yang dipilih tidak valid!'));
-      return;
-    }
-
-    //die($kelasBuku); //In case you didn't sure.
-    $dataFrontPage = $this -> buku -> getBukuFrontPage($judul,$kelasBuku);
-    echo json_encode($dataFrontPage);
+    $this -> buku -> getBukuFrontPage();
 
   }
 
+  function getBukuByRegister(){
+    $register = $this->input->get_post('register');
+
+    if($register == ""){
+      echo($this -> error -> returnError("EMPTY_FIELD",'Field ada yang belum terisi, mohon cek ulang!'));
+      return;
+    }
+  }
 }
