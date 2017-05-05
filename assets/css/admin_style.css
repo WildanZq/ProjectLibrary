@@ -175,8 +175,11 @@ input[type=date] {
     margin-left: 15px;
     padding: 10px 10px;
 }
+.wrapper form > select {
+    margin: 0 5px;
+}
 .wrapper .kelas {
-    margin: 0 15px;
+    margin: 0 5px;
 }
 .wrapper > form {
     padding-bottom: 10px;

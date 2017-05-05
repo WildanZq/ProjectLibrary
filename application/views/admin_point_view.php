@@ -37,7 +37,6 @@
                 <div class="form-wrapper">
                     <div class="set-wrapper"><span><i class="fa fa-cog" aria-hidden="true"></i>Setting</span></div>
                     <form action="">
-                        <input type="text" placeholder="Nama">
                         <div class="kelas">
                             <select>
                                 <option value="x rpl ">X RPL</option>
@@ -49,6 +48,7 @@
                             </select>
                             <input type="number" placeholder="1" min="1">
                         </div>
+                        <input type="text" placeholder="Nama">
                         <select>
                             <option value="print">Print</option>
                         </select>
