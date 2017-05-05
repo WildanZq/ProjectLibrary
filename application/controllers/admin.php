@@ -6,6 +6,7 @@ class admin extends CI_Controller{
   public function __construct()
   {
     parent::__construct();
+    $this->load->model('m_admin');
   }
 
   function index()
@@ -14,7 +15,11 @@ class admin extends CI_Controller{
   }
 
   function peminjaman() {
-    $this->load->view('admin_view');
+      $data = [
+          'list_peminjaman' => $this->m_admin->GetPeminjaman(),
+          'terlambat'       => $this->m_admin->GetDataSetting()->terlambat
+      ];
+    $this->load->view('admin_view', $data);
   }
 
   function point() {
@@ -24,7 +29,7 @@ class admin extends CI_Controller{
   function event() {
     $this->load->view('admin_event_view');
   }
-    
+
   function laporan() {
     $this->load->view('admin_laporan_view');
   }
