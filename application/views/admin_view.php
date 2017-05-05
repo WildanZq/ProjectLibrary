@@ -101,38 +101,6 @@
                                 <td><span class="return">Kembali</span><span class="return">Hilang</span></td>
                             </tr>
                         <?php endforeach; ?>
-                        <tr>
-                            <td>Nama Lengkap</td>
-                            <td>XI RPL 2</td>
-                            <td>9481/141/134</td>
-                            <td>Judul Buku</td>
-                            <td class="green"><i class="fa fa-circle" aria-hidden="true"></i> 2 Hari</td>
-                            <td><span class="return">Kembali</span><span class="return">Hilang</span></td>
-                        </tr>
-                        <tr>
-                            <td>Nama Lengkap</td>
-                            <td>XI RPL 2</td>
-                            <td>9481/141/134</td>
-                            <td>Judul Buku</td>
-                            <td class="green"><i class="fa fa-circle" aria-hidden="true"></i> 2 Hari</td>
-                            <td><span class="return">Kembali</span><span class="return">Hilang</span></td>
-                        </tr>
-                        <tr>
-                            <td>Nama Lengkap</td>
-                            <td>XI RPL 2</td>
-                            <td>9481/141/134</td>
-                            <td>Judul Buku</td>
-                            <td class="green"><i class="fa fa-circle" aria-hidden="true"></i> 2 Hari</td>
-                            <td><span class="return">Kembali</span><span class="return">Hilang</span></td>
-                        </tr>
-                        <tr>
-                            <td>Nama Lengkap</td>
-                            <td>XI RPL 2</td>
-                            <td>9481/141/134</td>
-                            <td>Judul Buku</td>
-                            <td class="green"><i class="fa fa-circle" aria-hidden="true"></i> 2 Hari</td>
-                            <td><span class="return">Kembali</span><span class="return">Hilang</span></td>
-                        </tr>
                     </table>
                 </div>
             </div>
