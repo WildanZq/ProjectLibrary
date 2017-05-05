@@ -79,54 +79,28 @@
                             <th>Status</th>
                             <th><i class="fa fa-handshake-o" aria-hidden="true"></i></th>
                         </tr>
-                        <tr>
-                            <td>Nama Lengkap</td>
-                            <td>XI RPL 2</td>
-                            <td>9481/141/134</td>
-                            <td>Judul Buku</td>
-                            <td class="red"><i class="fa fa-circle" aria-hidden="true"></i> 5000</td>
-                            <td><span class="return">Kembali</span><span class="return">Hilang</span></td>
-                        </tr>
-                        <tr>
-                            <td>Nama Lengkap</td>
-                            <td>XI RPL 2</td>
-                            <td>9481/141/134</td>
-                            <td>Judul Buku</td>
-                            <td class="red"><i class="fa fa-circle" aria-hidden="true"></i> 5000</td>
-                            <td><span class="return">Kembali</span><span class="return">Hilang</span></td>
-                        </tr>
-                        <tr>
-                            <td>Nama Lengkap</td>
-                            <td>XI RPL 2</td>
-                            <td>9481/141/134</td>
-                            <td>Judul Buku</td>
-                            <td class="red"><i class="fa fa-circle" aria-hidden="true"></i> 5000</td>
-                            <td><span class="return">Kembali</span><span class="return">Hilang</span></td>
-                        </tr>
-                        <tr>
-                            <td>Nama Lengkap</td>
-                            <td>XI RPL 2</td>
-                            <td>9481/141/134</td>
-                            <td>Judul Buku</td>
-                            <td class="red"><i class="fa fa-circle" aria-hidden="true"></i> 5000</td>
-                            <td><span class="return">Kembali</span><span class="return">Hilang</span></td>
-                        </tr>
-                        <tr>
-                            <td>Nama Lengkap</td>
-                            <td>XI RPL 2</td>
-                            <td>9481/141/134</td>
-                            <td>Judul Buku</td>
-                            <td class="red"><i class="fa fa-circle" aria-hidden="true"></i> 5000</td>
-                            <td><span class="return">Kembali</span><span class="return">Hilang</span></td>
-                        </tr>
-                        <tr>
-                            <td>Nama Lengkap</td>
-                            <td>XI RPL 2</td>
-                            <td>9481/141/134</td>
-                            <td>Judul Buku</td>
-                            <td class="red"><i class="fa fa-circle" aria-hidden="true"></i> 5000</td>
-                            <td><span class="return">Kembali</span><span class="return">Hilang</span></td>
-                        </tr>
+                        <?php foreach ($list_peminjaman as $row):
+                            $kelas = "";
+                            $kembali = date_create($row->tanggal);
+                            date_add($kembali, date_interval_create_from_date_string('7 days'));
+                            $kembali = date_format($kembali, 'Y-m-d');
+                            $kembali = strtotime($kembali);
+                            $now = strtotime(date('Y-m-d'));
+                            $sisa = floor(($kembali - $now) / (60 * 60 * 24));
+                            $status = $now <= $kembali ? $sisa.' Hari' : $sisa * $terlambat;
+                            $class = $sisa * $terlambat != $status ? 'green' : 'red';
+                            if ((date('Y') - 1992) == $row->angkatan) {$kelas = "X $row->jurusan $row->nomor_kelas";}
+                            else if ((date('Y') - 1992) - 1 == $row->angkatan) {$kelas = "XI $row->jurusan $row->nomor_kelas";}
+                            else if ((date('Y') - 1992) - 2 == $row->angkatan) {$kelas = "XII $row->jurusan $row->nomor_kelas";} ?>
+                            <tr>
+                                <td><?php echo $row->nama_lengkap; ?></td>
+                                <td><?php echo $kelas; ?></td>
+                                <td><?php echo $row->barcode; ?></td>
+                                <td><?php echo $row->judul; ?></td>
+                                <td class="<?php echo $class; ?>"><i class="fa fa-circle" aria-hidden="true"></i> <?php echo $status; ?></td>
+                                <td><span class="return">Kembali</span><span class="return">Hilang</span></td>
+                            </tr>
+                        <?php endforeach; ?>
                         <tr>
                             <td>Nama Lengkap</td>
                             <td>XI RPL 2</td>
