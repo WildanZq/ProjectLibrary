@@ -102,8 +102,9 @@
                 </form>
             </div>
             <div class="book-list">
-              <div class="">
-
+              <div class="book-item">
+                <div><span>Judul Buku Panjang Sekali</span></div>
+                <div>7</div>
               </div>
             </div>
         </div>

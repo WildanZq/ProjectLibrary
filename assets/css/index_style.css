@@ -117,6 +117,53 @@
     justify-content: center;
     width: 100%;
 }
+.book-list {
+    margin-top: 20px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: flex-start;
+}
+.book-item {
+    border-radius: 10px;
+    padding-left: 5px;
+    box-shadow: 1px 1px 3px #777777;
+    height: 50px;
+    width: 270px;
+    background: #eeebeb;
+    overflow: hidden;
+    margin: 5px 55px;
+    position: relative;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+}
+.book-item:hover {
+    border-radius: 0;
+}
+.book-item * {
+    font-size: .65em;
+}
+.book-item span {
+    font-size: 1em;
+}
+.book-item div:first-child {
+    margin: 0;
+    padding: 7px;
+    overflow: hidden;
+    width: auto;
+}
+.book-item div:nth-child(2) {
+   position: absolute;
+   right: 0;
+   top: 0;
+   color: white;
+   background: #e61e1e;
+   height: 100%;
+   padding: 0 10px;
+   display: flex;
+   align-items: center;
+}
 .s-wrapper {
     padding: 0;
     position: relative;
