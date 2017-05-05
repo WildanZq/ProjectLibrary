@@ -19,7 +19,7 @@ class API extends CI_Controller{
     echo("API Documentation under progress. Please Wait...");
   }
 
-  function getBukuFrontPage(){
+  function getBukuSimple(){
 
     $kategori = $this->input->post('kategori');
     $judul = $this->input->post('judul');
@@ -29,16 +29,32 @@ class API extends CI_Controller{
       return;
     }
 
-    $this -> buku -> getBukuFrontPage();
+    $this -> buku -> getBukuSimple();
 
   }
 
   function getBukuByRegister(){
+
     $register = $this->input->get_post('register');
 
     if($register == ""){
       echo($this -> error -> returnError("EMPTY_FIELD",'Field ada yang belum terisi, mohon cek ulang!'));
       return;
     }
+
+    $this -> buku -> getBukuByRegister();
   }
+
+  function getBukuByBarcode(){
+
+    $barcode = $this->input->get_post('barcode');
+
+    if($barcode == ""){
+      echo($this -> error -> returnError("EMPTY_FIELD",'Field ada yang belum terisi, mohon cek ulang!'));
+      return;
+    }
+
+    $this -> buku -> getBukuByBarcode();
+  }
+
 }

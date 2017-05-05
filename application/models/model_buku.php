@@ -9,7 +9,7 @@ class model_buku extends CI_Model{
     //Codeigniter : Write Less Do More
   }
 
-  public function getBukuFrontPage(){
+  public function getBukuSimple(){
     $kategori = $this->input->post('kategori');
     $judul = $this->input->post('judul');
 
@@ -37,6 +37,37 @@ class model_buku extends CI_Model{
         }
 
         echo json_encode($mainData);
+  }
+
+  public function getBukuByRegister(){
+      $register = $this->input->get_post('register');
+
+      $query = $this -> db -> get_where('buku', Array(
+          'register' => $register
+      ));
+
+      if($result -> num_rows() < 0){
+        echo "{}";
+        return;
+      }
+
+      echo json_encode($query -> result()[0]);
+  }
+
+  public function getBukuByBarcode(){
+
+    $barcode = $this->input->get_post('barcode');
+
+    $query = sprintf('SELECT buku.* FROM `buku` NATURAL JOIN barcode WHERE barcode = "%s"',$barcode);
+    
+    $result = $this->db->query($query);
+
+    if($result -> num_rows() < 0){
+      echo "{}";
+      return;
+    }
+
+    echo json_encode($result -> result()[0]);
   }
 
   public function getKelasBuku($kategori){
