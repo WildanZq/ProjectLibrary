@@ -302,7 +302,7 @@ input[type=submit]:hover {
     width: 90px;
 }
 .pagination-wrapper {width: 100%;margin-top: 20px;margin-bottom: 20px;overflow: visible;transform: translateY(-2px);}
-.pagination {margin: auto;width: 90%;max-width: 240px;}
+.pagination {margin: auto;width: 90%;max-width: 235px;}
 .pagination .main {color: #6d6d6d;overflow: hidden;box-shadow: 0 0 8px #ebebeb;display: flex;justify-content: center;width: 100%;border: thin solid #bfbfbf;border-radius: 2px;}
 .pagination span {padding: 10px;cursor: pointer;border-right: thin solid #bfbfbf;width: 43px;font-size: .5em;}
 .pagination span:last-child {border-right: none;}
