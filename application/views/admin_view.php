@@ -136,7 +136,7 @@
                             $('#list').html(row);
                             loadout();
                             console.log("success = "+data);
-                        }, 1000);
+                        }, 500);
                     }).fail(function() {
                         console.log("error");
                     }).always(function() {
