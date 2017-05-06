@@ -16,7 +16,6 @@
                 <img src="assets/images/blank.jpg" class="pp">
                 <div class="dropdown-wrapper" onmouseleave="closeP()" onmouseover="showP()">
                     <a href="dashboard"><span>Dashboard</span></a>
-                    <a href="dashboard/setting"><span>Setting</span></a>
                     <a href="dashboard/logout"><span>Logout</span></a>
                 </div>
                 <span onclick="showP()" onmouseleave="closeP()">Wildan Z</span>
