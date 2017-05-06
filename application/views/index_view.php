@@ -122,6 +122,19 @@
                 <div class="av"><span>Available</span></div>
               </div>
             </div>
+            <div class="pagination-wrapper">
+              <div class="pagination">
+                <div class="main">
+                  <span><i class="fa fa-angle-double-left" aria-hidden="true"></i></span>
+                  <span class="active">1</span>
+                  <span>2</span>
+                  <span>3</span>
+                  <span>...</span>
+                  <span>37</span>
+                  <span><i class="fa fa-angle-double-right" aria-hidden="true"></i></span>
+                </div>
+              </div>
+            </div>
         </div>
         <script src="<?php echo base_url(); ?>assets/script/jquery.min.js"></script>
         <script src="<?php echo base_url(); ?>assets/script/loading.js"></script>
