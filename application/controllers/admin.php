@@ -61,9 +61,34 @@ class admin extends CI_Controller{
 
   function addPeminjaman() {
       if ($this->input->post('submit')) {
-          # code...
+          echo "oke";
       } else {
           # code...
+      }
+  }
+
+  function changeSetting() {
+      if ($this->input->post('saveSetting')) {
+          $terlambat = $this->input->post('terlambat');
+          $hilang = $this->input->post('hilang');
+          $print = $this->input->post('print');
+          $bool = false;
+          if (!empty($terlambat)) {
+              if ($this->m_admin->ChangeSetting(['terlambat' => $terlambat]) == true) $bool = true;
+              else $bool = false;
+          } else if (!empty($hilang)) {
+              if ($this->m_admin->ChangeSetting(['hilang' => $hilang]) == true) $bool = true;
+              else $bool = false;
+          } else if (!empty($print)) {
+              if ($this->m_admin->ChangeSetting(['print' => $print]) == true) $bool = true;
+              else $bool = false;
+          }
+          if ($bool == true)
+              redirect($this->input->post('from'));
+          else
+              echo "gagal";
+      } else {
+          redirect('404');
       }
   }
 

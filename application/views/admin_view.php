@@ -14,10 +14,15 @@
         <div class="popup set-popup">
             <div class="dark" onclick="closeSet()"></div>
             <div class="set-form">
-                <form action="">
+                <form action="<?php echo base_url('Admin/changeSetting'); ?>" method="post">
                     <h1><i class="fa fa-wrench" aria-hidden="true"></i> Harga Denda</h1>
-                    <div class="i-wrapper"><label>Terlambat:</label><input type="number" placeholder="Terlambat" min="1" id="terlambat"></div>
-                    <div class="i-wrapper"><label>Hilang:</label><input type="number" placeholder="Hilang" min="1" id="hilang"></div>
+                    <input type="hidden" name="from" value="<?php echo base_url('Admin/peminjaman'); ?>">
+                    <div class="i-wrapper"><label>Terlambat:</label>
+                        <input type="number" placeholder="Terlambat" min="1" id="terlambat" name="terlambat">
+                    </div>
+                    <div class="i-wrapper"><label>Hilang:</label>
+                        <input type="number" placeholder="Hilang" min="1" id="hilang" name="hilang">
+                    </div>
                     <input type="submit" name="saveSetting">
                 </form>
             </div>
@@ -38,7 +43,7 @@
             <div class="wrapper">
                 <div class="form-wrapper">
                     <div class="set-wrapper"><span><i class="fa fa-cog" aria-hidden="true"></i>Setting</span></div>
-                    <form action="<?php echo base_url(); ?>">
+                    <form action="<?php echo base_url('Admin/addPeminjaman'); ?>" method="post">
                         <div class="kelas">
                             <select id="kelas" name="kelas">
                                 <option value="x rpl">X RPL</option>
@@ -64,7 +69,8 @@
                                 <option value="Judul">Judul Buku</option>
                             </select>
                             <div class="s-wrapper">
-                                <input class="searchT" type="text" placeholder="Barcode" oninput="loadin()"><i class="s-icon fa fa-search" aria-hidden="true"></i>
+                                <input class="searchT" type="text" placeholder="Barcode" oninput="loadin()">
+                                <i class="s-icon fa fa-search" aria-hidden="true" onclick="cariPinjam()"></i>
                             </div>
                         </form>
                     </div>

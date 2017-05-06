@@ -33,6 +33,16 @@ class M_Admin extends CI_Model {
     {
         return $this->db->query("SELECT * FROM siswa WHERE $where")->result();
     }
+
+    public function ChangeSetting($field)
+    {
+        $this->db->update('setting', $field);
+        if ($this->db->affected_rows() > 0) {
+            return true;
+        } else {
+            return false;
+        }
+    }
 }
 /* End of file ${TM_FILENAME:${1/(.+)/lMAadmin.php/}} */
 /* Location: ./${TM_FILEPATH/.+((?:application).+)/M_Admin/:application/models/${1/(.+)/lMAadmin.php/}} */
