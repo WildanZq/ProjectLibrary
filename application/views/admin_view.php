@@ -2,13 +2,13 @@
 <html>
     <head>
         <title>Perpustakaan SMK Telkom Malang</title>
-        <link rel="icon" type="image/png" href="../assets/images/logo.png"/>
+        <link rel="icon" type="image/png" href="<?php echo base_url(); ?>assets/images/logo.png"/>
         <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0">
-        <link rel="stylesheet" href="../assets/css/font-awesome.css">
-        <link rel="stylesheet" href="../assets/css/style.css">
-        <link rel="stylesheet" href="../assets/css/table.css">
-        <link rel="stylesheet" href="../assets/css/admin_style.css">
-        <link rel="stylesheet" href="../assets/css/jquery-ui.min.css">
+        <link rel="stylesheet" href="<?php echo base_url(); ?>assets/css/font-awesome.css">
+        <link rel="stylesheet" href="<?php echo base_url(); ?>assets/css/style.css">
+        <link rel="stylesheet" href="<?php echo base_url(); ?>assets/css/table.css">
+        <link rel="stylesheet" href="<?php echo base_url(); ?>assets/css/admin_style.css">
+        <link rel="stylesheet" href="<?php echo base_url(); ?>assets/css/jquery-ui.min.css">
     </head>
     <body>
         <div class="popup set-popup">
@@ -24,13 +24,13 @@
         </div>
         <div class="container">
             <div class="nav">
-                <img src="../assets/images/logo.png" onclick="location.href='../';">
+                <img src="<?php echo base_url(); ?>assets/images/logo.png" onclick="location.href='<?php echo base_url(); ?>';">
                 <a class="active">Peminjaman</a>
-                <a href="point">Points Exchange</a>
-                <a href="buku">Buku</a>
-                <a href="event">Event</a>
-                <a href="organisasi">Organisasi</a>
-                <a href="laporan">Laporan</a>
+                <a href="<?php echo base_url(); ?>admin/point">Points Exchange</a>
+                <a href="<?php echo base_url(); ?>admin/buku">Buku</a>
+                <a href="<?php echo base_url(); ?>admin/event">Event</a>
+                <a href="<?php echo base_url(); ?>admin/organisasi">Organisasi</a>
+                <a href="<?php echo base_url(); ?>admin/laporan">Laporan</a>
                 <div class="logout">
                     <h1><i class="fa fa-sign-out" aria-hidden="true"></i> Logout</h1>
                 </div>
@@ -87,11 +87,11 @@
                 </div>
             </div>
         </div>
-        <script src="../assets/script/jquery.min.js"></script>
-        <script src="../assets/script/jquery-ui.min.js"></script>
-        <script src="../assets/script/loading.js"></script>
-        <script src="../assets/script/change_option.js"></script>
-        <script src="../assets/script/admin_setting.js"></script>
+        <script src="<?php echo base_url(); ?>assets/script/jquery.min.js"></script>
+        <script src="<?php echo base_url(); ?>assets/script/jquery-ui.min.js"></script>
+        <script src="<?php echo base_url(); ?>assets/script/loading.js"></script>
+        <script src="<?php echo base_url(); ?>assets/script/change_option.js"></script>
+        <script src="<?php echo base_url(); ?>assets/script/admin_setting.js"></script>
         <script type="text/javascript">
             // -------------------- menampilkan peminjaman --------------------
             var search = $('.searchT').val();
@@ -140,6 +140,8 @@
                             $('#list').html(row);
                             loadout();
                         }, 1000);
+                            console.log("success = "+data);
+                        }, 500);
                     }).fail(function() {
                         console.log("error");
                     });

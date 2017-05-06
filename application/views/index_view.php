@@ -2,15 +2,15 @@
 <html>
     <head>
         <title>Perpustakaan SMK Telkom Malang</title>
-        <link rel="icon" type="image/png" href="assets/images/logo.png"/>
+        <link rel="icon" type="image/png" href="<?php echo base_url(); ?>assets/images/logo.png"/>
         <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0">
-        <link rel="stylesheet" href="assets/css/font-awesome.css">
-        <link rel="stylesheet" href="assets/css/style.css">
-        <link rel="stylesheet" href="assets/css/index_style.css">
+        <link rel="stylesheet" href="<?php echo base_url(); ?>assets/css/font-awesome.css">
+        <link rel="stylesheet" href="<?php echo base_url(); ?>assets/css/style.css">
+        <link rel="stylesheet" href="<?php echo base_url(); ?>assets/css/index_style.css">
     </head>
     <body>
         <div class="header">
-            <img class="logo" src="assets/images/logo-s.png">
+            <img class="logo" src="<?php echo base_url(); ?>assets/images/logo-s.png">
             <span class="show-login">Login</span>
             <i class="fa fa-bars" aria-hidden="true"></i>
             <div class="popup login-wrapper">
@@ -68,11 +68,11 @@
         <div class="top">
             <div class="bg"></div>
             <div class="ts">
-                <img src="assets/images/ts.jpg">
-                <img src="assets/images/iso9001.png">
+                <img src="<?php echo base_url(); ?>assets/images/ts.jpg">
+                <img src="<?php echo base_url(); ?>assets/images/iso9001.png">
             </div>
             <div class="wrapper">
-                <img src="assets/images/logo.png">
+                <img src="<?php echo base_url(); ?>assets/images/logo.png">
                 <div class="title">
                     <h1>Perpustakaan SMK Telkom Malang</h1>
                     <p>Lorem Ipsum Dolor Sit Amet</p>
@@ -80,7 +80,7 @@
             </div>
             <a href="#go"><i class="fa fa-angle-down" aria-hidden="true"></i></a>
         </div>
-        <div class="wrapper" style="height: 100vh" id="go">
+        <div class="wrapper" id="go">
             <div class="search-book">
                 <form action="">
                     <select class="kategori">
@@ -97,7 +97,7 @@
                         <option value="sejarah">Sejarah &amp; Geografi</option>
                     </select>
                     <div class="s-wrapper">
-                        <input type="text" class="judul" placeholder="Judul buku"><i class="s-icon fa fa-search" aria-hidden="true"></i>
+                        <input type="text" class="judul" oninput="loadin()" placeholder="Judul buku"><i class="s-icon fa fa-search" aria-hidden="true"></i>
                     </div>
                 </form>
             </div>
@@ -105,6 +105,7 @@
               <div class="dark"></div>
             </div>
             <div class="book-list">
+              <div class="load-wrapper"><i class="fa fa-circle-o-notch"></i></div>
               <div class="book-item" onclick="showDetailBuku()" title="Click to view more">
                 <div><span class="judul">Judul Buku Sangat Panjang Sekali Judul Buku Sangat Panjang Sekali</span></div>
                 <div>7</div>
@@ -122,9 +123,10 @@
               </div>
             </div>
         </div>
-        <script src="assets/script/jquery.min.js"></script>
-        <script src="assets/script/header.js"></script>
-        <script src="assets/script/navbar.js"></script>
+        <script src="<?php echo base_url(); ?>assets/script/jquery.min.js"></script>
+        <script src="<?php echo base_url(); ?>assets/script/loading.js"></script>
+        <script src="<?php echo base_url(); ?>assets/script/header.js"></script>
+        <script src="<?php echo base_url(); ?>assets/script/navbar.js"></script>
         <script>
           var kategori = "";
           var judul = "";
