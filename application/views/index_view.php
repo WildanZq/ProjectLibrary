@@ -101,10 +101,24 @@
                     </div>
                 </form>
             </div>
+            <div class="popup">
+              <div class="dark"></div>
+            </div>
             <div class="book-list">
-              <div class="book-item">
-                <div><span>Judul Buku Panjang Sekali</span></div>
+              <div class="book-item" onclick="showDetailBuku()" title="Click to view more">
+                <div><span class="judul">Judul Buku Sangat Panjang Sekali Judul Buku Sangat Panjang Sekali</span></div>
                 <div>7</div>
+                <div class="av"><span>Available</span></div>
+              </div>
+              <div class="book-item" onclick="showDetailBuku()" title="Click to view more">
+                <div><span class="judul">Judul Buku Panjang Sekali</span></div>
+                <div>7</div>
+                <div class="av"><span>Available</span></div>
+              </div>
+              <div class="book-item" onclick="showDetailBuku()" title="Click to view more">
+                <div><span class="judul">Judul Buku Panjang Sekali</span></div>
+                <div>7</div>
+                <div class="av"><span>Available</span></div>
               </div>
             </div>
         </div>

@@ -116,42 +116,41 @@
     display: flex;
     justify-content: center;
     width: 100%;
+    padding-bottom: 10px;
 }
 .book-list {
-    margin-top: 20px;
+    margin-top: 10px;
+    padding-top: 10px;
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
     align-items: flex-start;
+    border-top: thin solid #c3c3c3;
 }
 .book-item {
-    border-radius: 10px;
-    padding-left: 5px;
     box-shadow: 1px 1px 3px #777777;
-    height: 50px;
-    width: 270px;
-    background: #eeebeb;
+    height: 35px;
+    width: 250px;
+    background: #f2f2f2;
     overflow: hidden;
-    margin: 5px 55px;
+    margin: 10px 15px;
     position: relative;
     cursor: pointer;
-    display: flex;
-    align-items: center;
-}
-.book-item:hover {
-    border-radius: 0;
 }
 .book-item * {
-    font-size: .65em;
+    font-size: .5em;
 }
-.book-item span {
+.book-item span, .book-item .judul {
     font-size: 1em;
 }
-.book-item div:first-child {
+.book-item .judul {
+  line-height: 2;
+}
+.book-item > div:first-child {
     margin: 0;
     padding: 7px;
+    padding-top: 0;
     overflow: hidden;
-    width: auto;
 }
 .book-item div:nth-child(2) {
    position: absolute;
@@ -159,10 +158,27 @@
    top: 0;
    color: white;
    background: #e61e1e;
+   border-left: 2px solid white;
    height: 100%;
    padding: 0 10px;
    display: flex;
    align-items: center;
+   z-index: 5;
+}
+.book-item .av {
+  overflow: hidden;
+  width: 0;
+  position: absolute;
+  padding-top: 7px;
+  text-align: center;
+  right: 0;
+  top: 0;
+  height: 100%;
+  color: white;
+  background: rgba(227, 9, 9, 0.83);
+}
+.book-item:hover .av {
+  width: 100%;
 }
 .s-wrapper {
     padding: 0;
@@ -211,5 +227,10 @@
     }
     .s-wrapper input {
         margin: 0;
+    }
+    .book-item {
+      margin: 10px 5px;
+      width: 100%;
+      max-width: 300px;
     }
 }
