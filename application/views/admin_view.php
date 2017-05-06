@@ -8,6 +8,7 @@
         <link rel="stylesheet" href="../assets/css/style.css">
         <link rel="stylesheet" href="../assets/css/table.css">
         <link rel="stylesheet" href="../assets/css/admin_style.css">
+        <link rel="stylesheet" href="../assets/css/jquery-ui.min.css">
     </head>
     <body>
         <div class="popup set-popup">
@@ -15,9 +16,9 @@
             <div class="set-form">
                 <form action="">
                     <h1><i class="fa fa-wrench" aria-hidden="true"></i> Harga Denda</h1>
-                    <div class="i-wrapper"><label>Terlambat:</label><input type="number" placeholder="Terlambat" min="1"></div>
-                    <div class="i-wrapper"><label>Hilang:</label><input type="number" placeholder="Hilang" min="1"></div>
-                    <input type="submit">
+                    <div class="i-wrapper"><label>Terlambat:</label><input type="number" placeholder="Terlambat" min="1" id="terlambat"></div>
+                    <div class="i-wrapper"><label>Hilang:</label><input type="number" placeholder="Hilang" min="1" id="hilang"></div>
+                    <input type="submit" onclick="saveSetting()">
                 </form>
             </div>
         </div>
@@ -39,7 +40,7 @@
                     <div class="set-wrapper"><span><i class="fa fa-cog" aria-hidden="true"></i>Setting</span></div>
                     <form action="">
                         <div class="kelas">
-                            <select>
+                            <select id="kelas">
                                 <option value="x rpl">X RPL</option>
                                 <option value="x tkj">X TKJ</option>
                                 <option value="xi rpl">XI RPL</option>
@@ -47,11 +48,11 @@
                                 <option value="xii rpl">XII RPL</option>
                                 <option value="xii tkj">XII TKJ</option>
                             </select>
-                            <input type="number" placeholder="1" min="1">
+                            <input type="number" placeholder="1" min="1" id="nkelas" value="">
                         </div>
-                        <input type="text" placeholder="Nama">
-                        <input type="text" placeholder="Barcode">
-                        <input type="submit">
+                        <input type="text" placeholder="Nama" id="nama">
+                        <input type="text" placeholder="Barcode" id="barcode">
+                        <input type="submit" onclick="submit()">
                     </form>
                     <div class="search-book">
                         <form action="">
@@ -87,12 +88,15 @@
             </div>
         </div>
         <script src="../assets/script/jquery.min.js"></script>
+        <script src="../assets/script/jquery-ui.min.js"></script>
         <script src="../assets/script/loading.js"></script>
         <script src="../assets/script/change_option.js"></script>
         <script src="../assets/script/admin_setting.js"></script>
         <script type="text/javascript">
+            // -------------------- menampilkan peminjaman --------------------
             var search = $('.searchT').val();
             var kategori = $('.selectS').val();
+            loadin();
             cariPinjam();
             $('.searchT').on('input', function(event) {
                 event.preventDefault();
@@ -135,12 +139,9 @@
                             }
                             $('#list').html(row);
                             loadout();
-                            console.log("success = "+data);
                         }, 1000);
                     }).fail(function() {
                         console.log("error");
-                    }).always(function() {
-                        console.log("complete");
                     });
                 } else {
                     alert('kategoridan input kosong');
@@ -161,6 +162,51 @@
                 var diffDays = Math.ceil(timeDiff / (1000 * 3600 * 24));
                 result = result != 0 ? ['red', result * denda] : ['green', diffDays+' Hari'];
                 return result;
+            }
+
+            // -------------------- tambah peminjaman --------------------
+            var kelas = $('#kelas');
+            var nkelas = $('#nkelas');
+            function getName() {
+                var availableName = [];
+                var kls = kelas.val();
+                var nkls = nkelas.val();
+                $.ajax({
+                    url: '../api/getSiswa',
+                    type: 'post',
+                    data: {data : [kls, nkls]}
+                })
+                .done(function(e) {
+                    var response = JSON.parse(e);
+                    for (var i = 0; i < response.length; i++) {
+                        availableName.push(response[i].nama_lengkap);
+                    }
+                    return availableName;
+                })
+                .fail(function() {
+                    console.log("error");
+                    availableName = "";
+                });
+                return availableName;
+            }
+            var availableName = getName();
+            kelas.change(function(event) {
+                availableName = getName();
+                autocomplete();
+            });
+            nkelas.on('input', function(event) {
+                availableName = getName();
+                autocomplete();
+            });
+            function autocomplete() {
+                $( "#nama" ).autocomplete({
+                    minLength:0,
+                    delay:0,
+    	            source: availableName,
+                    select: function(event, ui) {
+                        $('#nama').val(ui.item.nama);
+                    }
+                });
             }
         </script>
     </body>

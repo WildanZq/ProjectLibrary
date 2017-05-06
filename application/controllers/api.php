@@ -10,7 +10,8 @@ class API extends CI_Controller{
     //Codeigniter : Write Less Do More
     $this->load->model(Array(
       'model_buku' => 'buku',
-      'model_error' => 'error'
+      'model_error' => 'error',
+      'm_admin'     => 'm_admin'
     ));
   }
 
@@ -20,7 +21,7 @@ class API extends CI_Controller{
   }
 
   //TODO : Fix Escape String like Quotation Mark
-  
+
   function getBukuSimple(){
 
     $kategori = $this->input->post('kategori');
@@ -57,6 +58,23 @@ class API extends CI_Controller{
     }
 
     $this -> buku -> getBukuByBarcode();
+  }
+
+  function getSiswa() {
+      $where = 1;
+      $data = $this->input->post('data');
+      $kelas = rtrim(substr($data[0], 0, -3), " ");
+      $jurusan = rtrim(substr($data[0], -3), " ");
+      $angkatan = "";
+      if ($kelas == "x") $angkatan = date('Y') - 1992;
+      else if ($kelas == "xi") $angkatan = (date('Y') - 1992) - 1;
+      else if ($kelas == "xii") $angkatan = (date('Y') - 1992) - 2;
+      $where = "angkatan LIKE '$angkatan%' AND jurusan LIKE '$jurusan%'";
+      if ($data[1] != "") {
+          $where .= " AND nomor_kelas LIKE '$data[1]%'";
+      }
+      $siswa = $this->m_admin->GetSpecificSiswa($where);
+      echo json_encode($siswa);
   }
 
 }

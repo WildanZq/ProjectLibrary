@@ -16,7 +16,6 @@ class admin extends CI_Controller{
 
   function peminjaman() {
       $data = [
-          'list_peminjaman' => $this->m_admin->GetPeminjaman(1),
           'terlambat'       => $this->m_admin->GetDataSetting()->terlambat
       ];
     $this->load->view('admin_view', $data);

@@ -28,6 +28,11 @@ class M_Admin extends CI_Model {
             INNER JOIN barcode ON peminjaman.barcode = barcode.barcode INNER JOIN buku ON
             barcode.id_buku = buku.id_buku WHERE $where")->result();
     }
+
+    public function GetSpecificSiswa($where)
+    {
+        return $this->db->query("SELECT * FROM siswa WHERE $where")->result();
+    }
 }
 /* End of file ${TM_FILENAME:${1/(.+)/lMAadmin.php/}} */
 /* Location: ./${TM_FILEPATH/.+((?:application).+)/M_Admin/:application/models/${1/(.+)/lMAadmin.php/}} */
