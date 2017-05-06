@@ -15,8 +15,8 @@
             <div class="img-parent" style="background:none;overflow:visible">
                 <img src="<?php echo base_url(); ?>assets/images/blank.jpg" class="pp">
                 <div class="dropdown-wrapper" onmouseleave="closeP()" onmouseover="showP()">
-                    <a href="dashboard"><span>Dashboard</span></a>
-                    <a href="dashboard/logout"><span>Logout</span></a>
+                    <a href="<?php echo base_url(); ?>dashboard"><span>Dashboard</span></a>
+                    <a href="<?php echo base_url(); ?>dashboard/logout"><span>Logout</span></a>
                 </div>
                 <span onclick="showP()" onmouseleave="closeP()">Wildan Z</span>
             </div>

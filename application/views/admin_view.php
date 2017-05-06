@@ -25,11 +25,11 @@
             <div class="nav">
                 <img src="<?php echo base_url(); ?>assets/images/logo.png" onclick="location.href='<?php echo base_url(); ?>';">
                 <a class="active">Peminjaman</a>
-                <a href="point">Points Exchange</a>
-                <a href="buku">Buku</a>
-                <a href="event">Event</a>
-                <a href="organisasi">Organisasi</a>
-                <a href="laporan">Laporan</a>
+                <a href="<?php echo base_url(); ?>admin/point">Points Exchange</a>
+                <a href="<?php echo base_url(); ?>admin/buku">Buku</a>
+                <a href="<?php echo base_url(); ?>admin/event">Event</a>
+                <a href="<?php echo base_url(); ?>admin/organisasi">Organisasi</a>
+                <a href="<?php echo base_url(); ?>admin/laporan">Laporan</a>
                 <div class="logout">
                     <h1><i class="fa fa-sign-out" aria-hidden="true"></i> Logout</h1>
                 </div>
