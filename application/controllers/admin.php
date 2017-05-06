@@ -21,8 +21,7 @@ class admin extends CI_Controller{
     $this->load->view('admin_view', $data);
   }
 
-  function getPeminjam()
-  {
+  function getPeminjam() {
       if ($this->input->post('data')) {
           $data = $this->input->post('data');
           $kategori = $data[0];
@@ -57,6 +56,14 @@ class admin extends CI_Controller{
           echo json_encode($result);
       } else {
           redirect('404');
+      }
+  }
+
+  function addPeminjaman() {
+      if ($this->input->post('submit')) {
+          # code...
+      } else {
+          # code...
       }
   }
 
