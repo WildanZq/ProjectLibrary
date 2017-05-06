@@ -17,10 +17,9 @@ class M_Admin extends CI_Model {
         return $this->db->where($where)->get($table)->row();
     }
 
-    public function GetDataSetting($object)
+    public function GetDataSetting()
     {
-        $query = $this->db->query(sprintf("SELECT %s FROM setting",$object));
-        return $query -> result()[0];
+        return $this->db->get('setting')->row();
     }
 
     public function GetPeminjaman()
