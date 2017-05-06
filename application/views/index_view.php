@@ -2,15 +2,15 @@
 <html>
     <head>
         <title>Perpustakaan SMK Telkom Malang</title>
-        <link rel="icon" type="image/png" href="assets/images/logo.png"/>
+        <link rel="icon" type="image/png" href="<?php echo base_url(); ?>assets/images/logo.png"/>
         <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0">
-        <link rel="stylesheet" href="assets/css/font-awesome.css">
-        <link rel="stylesheet" href="assets/css/style.css">
-        <link rel="stylesheet" href="assets/css/index_style.css">
+        <link rel="stylesheet" href="<?php echo base_url(); ?>assets/css/font-awesome.css">
+        <link rel="stylesheet" href="<?php echo base_url(); ?>assets/css/style.css">
+        <link rel="stylesheet" href="<?php echo base_url(); ?>assets/css/index_style.css">
     </head>
     <body>
         <div class="header">
-            <img class="logo" src="assets/images/logo-s.png">
+            <img class="logo" src="<?php echo base_url(); ?>assets/images/logo-s.png">
             <span class="show-login">Login</span>
             <i class="fa fa-bars" aria-hidden="true"></i>
             <div class="popup login-wrapper">
@@ -68,11 +68,11 @@
         <div class="top">
             <div class="bg"></div>
             <div class="ts">
-                <img src="assets/images/ts.jpg">
-                <img src="assets/images/iso9001.png">
+                <img src="<?php echo base_url(); ?>assets/images/ts.jpg">
+                <img src="<?php echo base_url(); ?>assets/images/iso9001.png">
             </div>
             <div class="wrapper">
-                <img src="assets/images/logo.png">
+                <img src="<?php echo base_url(); ?>assets/images/logo.png">
                 <div class="title">
                     <h1>Perpustakaan SMK Telkom Malang</h1>
                     <p>Lorem Ipsum Dolor Sit Amet</p>
@@ -123,10 +123,10 @@
               </div>
             </div>
         </div>
-        <script src="assets/script/jquery.min.js"></script>
-        <script src="assets/script/loading.js"></script>
-        <script src="assets/script/header.js"></script>
-        <script src="assets/script/navbar.js"></script>
+        <script src="<?php echo base_url(); ?>assets/script/jquery.min.js"></script>
+        <script src="<?php echo base_url(); ?>assets/script/loading.js"></script>
+        <script src="<?php echo base_url(); ?>assets/script/header.js"></script>
+        <script src="<?php echo base_url(); ?>assets/script/navbar.js"></script>
         <script>
           var kategori = "";
           var judul = "";

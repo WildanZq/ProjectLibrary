@@ -2,18 +2,18 @@
 <html>
     <head>
         <title>Perpustakaan SMK Telkom Malang</title>
-        <link rel="icon" type="image/png" href="assets/images/logo.png"/>
+        <link rel="icon" type="image/png" href="<?php echo base_url(); ?>assets/images/logo.png"/>
         <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0">
-        <link rel="stylesheet" href="assets/css/font-awesome.css">
-        <link rel="stylesheet" href="assets/css/style.css">
-        <link rel="stylesheet" href="assets/css/table.css">
-        <link rel="stylesheet" href="assets/css/dashboard_style.css">
+        <link rel="stylesheet" href="<?php echo base_url(); ?>assets/css/font-awesome.css">
+        <link rel="stylesheet" href="<?php echo base_url(); ?>assets/css/style.css">
+        <link rel="stylesheet" href="<?php echo base_url(); ?>assets/css/table.css">
+        <link rel="stylesheet" href="<?php echo base_url(); ?>assets/css/dashboard_style.css">
     </head>
     <body>
         <div class="header">
-            <img class="logo" src="assets/images/logo-s.png" onclick="location.href='../';">
+            <img class="logo" src="<?php echo base_url(); ?>assets/images/logo-s.png" onclick="location.href='<?php echo base_url(); ?>';">
             <div class="img-parent" style="background:none;overflow:visible">
-                <img src="assets/images/blank.jpg" class="pp">
+                <img src="<?php echo base_url(); ?>assets/images/blank.jpg" class="pp">
                 <div class="dropdown-wrapper" onmouseleave="closeP()" onmouseover="showP()">
                     <a href="dashboard"><span>Dashboard</span></a>
                     <a href="dashboard/logout"><span>Logout</span></a>
@@ -29,7 +29,7 @@
             </div>
         </div>
         <div class="wrapper">
-            <div class="img-parent pp"><img src="assets/images/blank.jpg" class="img"></div>
+            <div class="img-parent pp"><img src="<?php echo base_url(); ?>assets/images/blank.jpg" class="img"></div>
             <div class="p-desc">
                 <h1>wildan ziaulhaq</h1>
                 <span><i class="fa fa-id-card-o" aria-hidden="true"></i> 9174981686</span>
@@ -80,8 +80,8 @@
                 </tr>
             </table>
         </div>
-        <script src="assets/script/jquery.min.js"></script>
-        <script src="assets/script/img.js"></script>
-        <script src="assets/script/navbar.js"></script>
+        <script src="<?php echo base_url(); ?>assets/script/jquery.min.js"></script>
+        <script src="<?php echo base_url(); ?>assets/script/img.js"></script>
+        <script src="<?php echo base_url(); ?>assets/script/navbar.js"></script>
     </body>
 </html>
