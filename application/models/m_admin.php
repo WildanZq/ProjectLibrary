@@ -22,11 +22,11 @@ class M_Admin extends CI_Model {
         return $this->db->get('setting')->row();
     }
 
-    public function GetPeminjaman()
+    public function GetPeminjaman($where)
     {
         return $this->db->query("SELECT * FROM peminjaman INNER JOIN siswa ON peminjaman.id_siswa = siswa.id_siswa
             INNER JOIN barcode ON peminjaman.barcode = barcode.barcode INNER JOIN buku ON
-            barcode.id_buku = buku.id_buku")->result();
+            barcode.id_buku = buku.id_buku WHERE $where")->result();
     }
 }
 /* End of file ${TM_FILENAME:${1/(.+)/lMAadmin.php/}} */

@@ -71,36 +71,17 @@
                 <div class="h-wrapper">
                     <div class="load-wrapper"><i class="fa fa-circle-o-notch"></i></div>
                     <table>
-                        <tr>
-                            <th>Nama</th>
-                            <th>Kelas</th>
-                            <th>Barcode</th>
-                            <th>Judul Buku</th>
-                            <th>Status</th>
-                            <th><i class="fa fa-handshake-o" aria-hidden="true"></i></th>
-                        </tr>
-                        <?php foreach ($list_peminjaman as $row):
-                            $kelas = "";
-                            $kembali = date_create($row->tanggal);
-                            date_add($kembali, date_interval_create_from_date_string('7 days'));
-                            $kembali = date_format($kembali, 'Y-m-d');
-                            $kembali = strtotime($kembali);
-                            $now = strtotime(date('Y-m-d'));
-                            $sisa = floor(($kembali - $now) / (60 * 60 * 24));
-                            $status = $now <= $kembali ? $sisa.' Hari' : $sisa * $terlambat;
-                            $class = $sisa * $terlambat != $status ? 'green' : 'red';
-                            if ((date('Y') - 1992) == $row->angkatan) {$kelas = "X $row->jurusan $row->nomor_kelas";}
-                            else if ((date('Y') - 1992) - 1 == $row->angkatan) {$kelas = "XI $row->jurusan $row->nomor_kelas";}
-                            else if ((date('Y') - 1992) - 2 == $row->angkatan) {$kelas = "XII $row->jurusan $row->nomor_kelas";} ?>
+                        <thead>
                             <tr>
-                                <td><?php echo $row->nama_lengkap; ?></td>
-                                <td><?php echo $kelas; ?></td>
-                                <td><?php echo $row->barcode; ?></td>
-                                <td><?php echo $row->judul; ?></td>
-                                <td class="<?php echo $class; ?>"><i class="fa fa-circle" aria-hidden="true"></i> <?php echo $status; ?></td>
-                                <td><span class="return">Kembali</span><span class="return">Hilang</span></td>
+                                <th>Nama</th>
+                                <th>Kelas</th>
+                                <th>Barcode</th>
+                                <th>Judul Buku</th>
+                                <th>Status</th>
+                                <th><i class="fa fa-handshake-o" aria-hidden="true"></i></th>
                             </tr>
-                        <?php endforeach; ?>
+                        </thead>
+                        <tbody id="list"></tbody>
                     </table>
                 </div>
             </div>
@@ -109,5 +90,78 @@
         <script src="../assets/script/loading.js"></script>
         <script src="../assets/script/change_option.js"></script>
         <script src="../assets/script/admin_setting.js"></script>
+        <script type="text/javascript">
+            var search = $('.searchT').val();
+            var kategori = $('.selectS').val();
+            cariPinjam();
+            $('.searchT').on('input', function(event) {
+                event.preventDefault();
+                search = this.value.trim();
+                cariPinjam();
+            });
+            $('.selectS').change(function(event) {
+                kategori = $(this).val();
+                loadin();
+                cariPinjam();
+            });
+            function cariPinjam() {
+                if (kategori != "" || search != "") {
+                    var data = [kategori, search];
+                    $.ajax({
+                        url: 'getPeminjam',
+                        type: 'post',
+                        data: {data: data}
+                    }).done(function(data) {
+                        setTimeout(function(){
+                            var response = JSON.parse(data);
+                            var row = "";
+                            var kelas = "";
+                            for (var i = 0; i < response.length; i++) {
+                                var nama = "<td>"+response[i].nama_lengkap+"</td>";
+                                var now = new Date().getFullYear();
+                                if (now - 1992 == response[i].angkatan)
+                                    kelas = "X "+response[i].jurusan+" "+response[i].nomor_kelas;
+                                if ((now - 1992) - 1 == response[i].angkatan)
+                                    kelas = "XI "+response[i].jurusan+" "+response[i].nomor_kelas;
+                                if ((now - 1992) - 2 == response[i].angkatan)
+                                    kelas = "XII "+response[i].jurusan+" "+response[i].nomor_kelas;
+                                kelas = "<td>"+kelas+"</td>";
+                                var barcode = "<td>"+response[i].barcode+"</td>";
+                                var judul = "<td>"+response[i].judul+"</td>";
+                                var status = getStatus(response[i].tanggal);
+                                status = "<td class='"+status[0]+"'><i class='fa fa-circle' aria-hidden='true'></i> "+status[1]+"</td>";
+                                var aksi = '<td><span class="return">Kembali</span><span class="return">Hilang</span></td>';
+                                row += "<tr>" + nama + kelas + barcode + judul + status + aksi + "<tr>";
+                            }
+                            $('#list').html(row);
+                            loadout();
+                            console.log("success = "+data);
+                        }, 1000);
+                    }).fail(function() {
+                        console.log("error");
+                    }).always(function() {
+                        console.log("complete");
+                    });
+                } else {
+                    alert('kategoridan input kosong');
+                }
+            }
+            function getStatus(tgl) {
+                var result = 0;
+                var denda = <?php echo $terlambat; ?>;
+                var date = new Date(tgl);
+                date.setDate(date.getDate() + 7);
+                var now = new Date();
+                while (date < now) {
+                    var week = date.getDay();
+                    if (week != 0 && week != 6) result++;
+                    date.setDate(date.getDate() + 1);
+                }
+                var timeDiff = Math.abs(date.getTime() - now.getTime());
+                var diffDays = Math.ceil(timeDiff / (1000 * 3600 * 24));
+                result = result != 0 ? ['red', result * denda] : ['green', diffDays+' Hari'];
+                return result;
+            }
+        </script>
     </body>
 </html>
