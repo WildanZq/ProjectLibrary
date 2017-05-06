@@ -98,13 +98,16 @@
         <script src="<?php echo base_url(); ?>assets/script/loading.js"></script>
         <script src="<?php echo base_url(); ?>assets/script/change_option.js"></script>
         <script src="<?php echo base_url(); ?>assets/script/admin_setting.js"></script>
-        <!-- WARNING  -->
+        <!-- ATTENTION >> delete = error  -->
         <script type="text/javascript">
-            function getDenda () {
-                return <?php echo $terlambat; ?>;
+            function getDendaTerlambat () {
+                return <?php echo $denda->terlambat; ?>;
+            }
+            function getDendaHilang () {
+                return <?php echo $denda->hilang; ?>;
             }
         </script>
+        <!-- / ATTENTION -->
         <script src="<?php echo base_url(); ?>assets/script/peminjaman.js" charset="utf-8"></script>
-        <!-- END WARNING -->
     </body>
 </html>

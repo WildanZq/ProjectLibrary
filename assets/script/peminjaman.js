@@ -39,7 +39,9 @@ function cariPinjam() {
                     var judul = "<td>"+response[i].judul+"</td>";
                     var status = getStatus(response[i].tanggal);
                     status = "<td class='"+status[0]+"'><i class='fa fa-circle' aria-hidden='true'></i> "+status[1]+"</td>";
-                    var aksi = '<td><span class="return">Kembali</span><span class="return">Hilang</span></td>';
+                    var kembali = '<span class="return" onclick="kembalikan('+response[i].id_peminjaman+')">Kembali</span>';
+                    var hilang = '<span class="return" onclick="hilang('+response[i].id_peminjaman+')">Hilang</span>';
+                    var aksi = '<td>' + kembali + hilang + '</td>';
                     row += "<tr>" + nama + kelas + barcode + judul + status + aksi + "<tr>";
                 }
                 $('#list').html(row);
@@ -54,7 +56,7 @@ function cariPinjam() {
 }
 function getStatus(tgl) {
     var result = 0;
-    var denda = getDenda();
+    var denda = getDendaTerlambat();
     var date = new Date(tgl);
     date.setDate(date.getDate() + 7);
     var now = new Date();
@@ -67,6 +69,62 @@ function getStatus(tgl) {
     var diffDays = Math.ceil(timeDiff / (1000 * 3600 * 24));
     result = result != 0 ? ['red', result * denda] : ['green', diffDays+' Hari'];
     return result;
+}
+
+function kembalikan(code) {
+    loadin();
+    $.ajax({
+        url: 'getDataPeminjam',
+        type: 'post',
+        data: {data: code}
+    }).done(function(e) {
+        var response = JSON.parse(e);
+        var status = getStatus(response[0].tanggal);
+        var denda = status[0] == 'red' ? status[1] : 0;
+
+        $.ajax({
+            url: 'kembalikan',
+            type: 'post',
+            data: {data: [code, response[0].id_buku, denda]}
+        })
+        .done(function(e) {
+            if (e == true) cariPinjam();
+            else console.log('failed : ' + e);
+        })
+        .fail(function() {
+            console.log("error");
+        });
+    }).fail(function() {
+        console.log("error");
+    });
+}
+
+function hilang(code) {
+    loadin();
+    $.ajax({
+        url: 'getDataPeminjam',
+        type: 'post',
+        data: {data: code}
+    }).done(function(e) {
+        var response = JSON.parse(e);
+        var status = getStatus(response[0].tanggal);
+        var denda = getDendaHilang();
+
+        $.ajax({
+            url: 'hilang',
+            type: 'post',
+            data: {data: [code, response[0].id_buku, denda]}
+        })
+        .done(function(e) {
+            if (e == true) cariPinjam();
+            else console.log('failed : ' + e);
+        })
+        .fail(function() {
+            console.log("error");
+        });
+    }).fail(function() {
+        console.log("error");
+    });
 }
 
 // -------------------- tambah peminjaman --------------------
@@ -107,9 +165,6 @@ function autocomplete() {
     $( "#nama" ).autocomplete({
         minLength:0,
         delay:0,
-        source: availableName,
-        select: function(event, ui) {
-            $('#nama').val(ui.item.nama);
-        }
+        source: availableName
     });
 }

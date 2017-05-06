@@ -16,7 +16,7 @@ class admin extends CI_Controller{
 
   function peminjaman() {
       $data = [
-          'terlambat'       => $this->m_admin->GetDataSetting()->terlambat
+          'denda' => $this->m_admin->GetDataSetting()
       ];
     $this->load->view('admin_view', $data);
   }
@@ -52,6 +52,7 @@ class admin extends CI_Controller{
                   $where = 1;
                   break;
           }
+          $where .= " AND peminjaman.kembali = 0";
           $result = $this->m_admin->GetPeminjaman($where);
           echo json_encode($result);
       } else {
@@ -61,9 +62,44 @@ class admin extends CI_Controller{
 
   function addPeminjaman() {
       if ($this->input->post('submit')) {
-          echo "oke";
+          $db = $this->m_admin->AddPeminjaman();
+          if ($db === true) {
+              redirect('Admin/peminjaman');
+          } else {
+              echo " gak iso";
+          }
       } else {
-          echo "durung submit";
+          redirect('404');
+      }
+  }
+
+  function getDataPeminjam() {
+      if ($this->input->post('data')) {
+          $data = $this->input->post('data');
+          $db = $this->m_admin->GetPeminjaman("peminjaman.id_peminjaman = '$data'");
+          echo json_encode($db);
+      } else {
+          redirect('404');
+      }
+  }
+
+  function kembalikan() {
+      if ($this->input->post('data')) {
+          $data = $this->input->post('data');
+          $db = $this->m_admin->SetKembali($data);
+          echo $db;
+      } else {
+          redirect('404');
+      }
+  }
+
+  function hilang() {
+      if ($this->input->post('data')) {
+          $data = $this->input->post('data');
+          $db = $this->m_admin->SetHilang($data);
+          echo $db;
+      } else {
+          redirect('404');
       }
   }
 
