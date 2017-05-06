@@ -19,6 +19,8 @@ class API extends CI_Controller{
     echo("API Documentation under progress. Please Wait...");
   }
 
+  //TODO : Fix Escape String like Quotation Mark
+  
   function getBukuSimple(){
 
     $kategori = $this->input->post('kategori');
