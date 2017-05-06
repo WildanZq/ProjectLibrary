@@ -185,7 +185,10 @@ input[type=date] {
     padding-bottom: 10px;
     border-bottom: thin solid #a0a0a0;
 }
-.h-wrapper, .h-wrapper table {
+.h-wrapper table {
+    min-width: 990px;
+}
+.h-wrapper {
     max-width: 990px;
     margin: 0;
 }
