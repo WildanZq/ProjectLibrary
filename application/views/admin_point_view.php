@@ -13,10 +13,13 @@
         <div class="popup set-popup">
             <div class="dark" onclick="closeSet()"></div>
             <div class="set-form">
-                <form action="">
+                <form action="<?php echo base_url('Admin/changeSetting'); ?>" method="post">
                     <h1><i class="fa fa-wrench" aria-hidden="true"></i> Harga Poin</h1>
-                    <div class="i-wrapper"><label>Print:</label><input type="number" placeholder="Print" min="1"></div>
-                    <input type="submit">
+                    <input type="hidden" name="from" value="<?php echo base_url('Admin/point'); ?>">
+                    <div class="i-wrapper"><label>Print:</label>
+                        <input type="number" placeholder="Print" min="1" name="print">
+                    </div>
+                    <input type="submit" name="saveSetting">
                 </form>
             </div>
         </div>
