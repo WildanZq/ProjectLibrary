@@ -80,7 +80,7 @@
             </div>
             <a href="#go"><i class="fa fa-angle-down" aria-hidden="true"></i></a>
         </div>
-        <div class="wrapper" style="height: 100vh" id="go">
+        <div class="wrapper" id="go">
             <div class="search-book">
                 <form action="">
                     <select class="kategori">
@@ -97,7 +97,7 @@
                         <option value="sejarah">Sejarah &amp; Geografi</option>
                     </select>
                     <div class="s-wrapper">
-                        <input type="text" class="judul" placeholder="Judul buku"><i class="s-icon fa fa-search" aria-hidden="true"></i>
+                        <input type="text" class="judul" oninput="loadin()" placeholder="Judul buku"><i class="s-icon fa fa-search" aria-hidden="true"></i>
                     </div>
                 </form>
             </div>
@@ -105,6 +105,7 @@
               <div class="dark"></div>
             </div>
             <div class="book-list">
+              <div class="load-wrapper"><i class="fa fa-circle-o-notch"></i></div>
               <div class="book-item" onclick="showDetailBuku()" title="Click to view more">
                 <div><span class="judul">Judul Buku Sangat Panjang Sekali Judul Buku Sangat Panjang Sekali</span></div>
                 <div>7</div>
@@ -123,6 +124,7 @@
             </div>
         </div>
         <script src="assets/script/jquery.min.js"></script>
+        <script src="assets/script/loading.js"></script>
         <script src="assets/script/header.js"></script>
         <script src="assets/script/navbar.js"></script>
         <script>
