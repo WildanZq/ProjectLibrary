@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: 05 Mei 2017 pada 09.24
+-- Generation Time: 06 Mei 2017 pada 04.11
 -- Versi Server: 10.1.21-MariaDB
 -- PHP Version: 7.1.1
 
@@ -4212,6 +4212,13 @@ CREATE TABLE `peminjaman` (
   `denda` int(64) NOT NULL DEFAULT '0'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Dumping data untuk tabel `peminjaman`
+--
+
+INSERT INTO `peminjaman` (`id_peminjaman`, `tanggal`, `id_siswa`, `barcode`, `kembali`, `denda`) VALUES
+(1, '2017-05-05', 1, '03845/SB/09', 0, 0);
+
 -- --------------------------------------------------------
 
 --
@@ -4223,6 +4230,13 @@ CREATE TABLE `setting` (
   `hilang` int(64) NOT NULL,
   `print` int(64) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data untuk tabel `setting`
+--
+
+INSERT INTO `setting` (`terlambat`, `hilang`, `print`) VALUES
+(500, 50000, 10);
 
 -- --------------------------------------------------------
 
@@ -4239,6 +4253,13 @@ CREATE TABLE `siswa` (
   `poin` int(64) NOT NULL DEFAULT '0',
   `pengurus` int(1) NOT NULL DEFAULT '0'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 ROW_FORMAT=COMPACT;
+
+--
+-- Dumping data untuk tabel `siswa`
+--
+
+INSERT INTO `siswa` (`id_siswa`, `nama_lengkap`, `angkatan`, `jurusan`, `nomor_kelas`, `poin`, `pengurus`) VALUES
+(1, 'Wildan Ziaulhaq', 24, 'RPL', 2, 99, 1);
 
 --
 -- Indexes for dumped tables
@@ -4286,12 +4307,12 @@ ALTER TABLE `buku`
 -- AUTO_INCREMENT for table `peminjaman`
 --
 ALTER TABLE `peminjaman`
-  MODIFY `id_peminjaman` int(128) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_peminjaman` int(128) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 --
 -- AUTO_INCREMENT for table `siswa`
 --
 ALTER TABLE `siswa`
-  MODIFY `id_siswa` int(128) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_siswa` int(128) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
