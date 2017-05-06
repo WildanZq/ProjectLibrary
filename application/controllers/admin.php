@@ -63,7 +63,7 @@ class admin extends CI_Controller{
       if ($this->input->post('submit')) {
           echo "oke";
       } else {
-          # code...
+          echo "durung submit";
       }
   }
 
@@ -76,10 +76,12 @@ class admin extends CI_Controller{
           if (!empty($terlambat)) {
               if ($this->m_admin->ChangeSetting(['terlambat' => $terlambat]) == true) $bool = true;
               else $bool = false;
-          } else if (!empty($hilang)) {
+          }
+          if (!empty($hilang)) {
               if ($this->m_admin->ChangeSetting(['hilang' => $hilang]) == true) $bool = true;
               else $bool = false;
-          } else if (!empty($print)) {
+          }
+          if (!empty($print)) {
               if ($this->m_admin->ChangeSetting(['print' => $print]) == true) $bool = true;
               else $bool = false;
           }
