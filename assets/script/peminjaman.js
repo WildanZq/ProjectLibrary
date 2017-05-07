@@ -32,7 +32,6 @@ function cariPinjam() {
                     var istatus = getStatus(response[i].tanggal);
                     for (var j = i + 1; j < response.length; j++) {
                         var jstatus = getStatus(response[j].tanggal);
-
                         if (istatus[0] == jstatus[0]) {
                             if (istatus[0] == 'red') {
                                 if (jstatus[1] > istatus[1]) {
@@ -45,6 +44,15 @@ function cariPinjam() {
                             }
                         } else if (istatus[0] == 'green' && jstatus[0] == 'red') {
                             temp = j;
+                            for (var k = j + 1; k < response.length; k++) {
+                                var kstatus = getStatus(response[k].tanggal);
+                                if (kstatus[0] == 'red') {
+                                    if (kstatus[1] > jstatus[1]) {
+                                        temp = k;
+                                    }
+                                }
+                            }
+                            break;
                         }
                     }
                     tmp = response[i];
