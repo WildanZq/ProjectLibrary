@@ -25,6 +25,32 @@ function cariPinjam() {
                 var response = JSON.parse(data);
                 var row = "";
                 var kelas = "";
+                var temp = 0;
+                var tmp = [];
+                for (var i = 0; i < response.length; i++) {
+                    temp = i;
+                    var istatus = getStatus(response[i].tanggal);
+                    for (var j = i + 1; j < response.length; j++) {
+                        var jstatus = getStatus(response[j].tanggal);
+
+                        if (istatus[0] == jstatus[0]) {
+                            if (istatus[0] == 'red') {
+                                if (jstatus[1] > istatus[1]) {
+                                    temp = j;
+                                }
+                            } else {
+                                if (jstatus[1] < istatus[1]) {
+                                    temp = j;
+                                }
+                            }
+                        } else if (istatus[0] == 'green' && jstatus[0] == 'red') {
+                            temp = j;
+                        }
+                    }
+                    tmp = response[i];
+                    response[i] = response[temp];
+                    response[temp] = tmp;
+                }
                 for (var i = 0; i < response.length; i++) {
                     var nama = "<td>"+response[i].nama_lengkap+"</td>";
                     var now = new Date().getFullYear();
@@ -38,11 +64,12 @@ function cariPinjam() {
                     var barcode = "<td>"+response[i].barcode+"</td>";
                     var judul = "<td>"+response[i].judul+"</td>";
                     var status = getStatus(response[i].tanggal);
+                    status[1] = status[0] == 'green' ? status[1] + ' Hari' : status[1];
                     status = "<td class='"+status[0]+"'><i class='fa fa-circle' aria-hidden='true'></i> "+status[1]+"</td>";
                     var kembali = '<span class="return" onclick="kembalikan('+response[i].id_peminjaman+')">Kembali</span>';
                     var hilang = '<span class="return" onclick="hilang('+response[i].id_peminjaman+')">Hilang</span>';
                     var aksi = '<td>' + kembali + hilang + '</td>';
-                    row += "<tr>" + nama + kelas + barcode + judul + status + aksi + "<tr>";
+                    row += "<tr>" + nama + kelas + barcode + judul + status + aksi + "</tr>";
                 }
                 $('#list').html(row);
                 loadout();
@@ -67,7 +94,7 @@ function getStatus(tgl) {
     }
     var timeDiff = Math.abs(date.getTime() - now.getTime());
     var diffDays = Math.ceil(timeDiff / (1000 * 3600 * 24));
-    result = result != 0 ? ['red', result * denda] : ['green', diffDays+' Hari'];
+    result = result != 0 ? ['red', result * denda] : ['green', diffDays];
     return result;
 }
 
