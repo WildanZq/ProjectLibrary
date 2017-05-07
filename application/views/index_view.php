@@ -101,8 +101,20 @@
                     </div>
                 </form>
             </div>
-            <div class="popup">
-              <div class="dark"></div>
+            <div class="popup detail-wrapper">
+              <div class="dark" onclick="detailBukuClose()"></div>
+              <div class="book-detail">
+                <h1>Aljabar Linear Dasar</h1>
+                <span>512.5 GUN A</span>
+                <hr>
+                <span>Pengarang:&ensp;R. GUNAWAN</span><br>
+                <span>Penerbit:&ensp;ANDI Yogyakarta</span><br>
+                <span>Tahun Terbit:&ensp;2009</span>
+                <div class="av-wrapper">
+                  <span>Available</span>
+                  <span>2</span>
+                </div>
+              </div>
             </div>
             <div class="book-list">
               <div class="load-wrapper"><i class="fa fa-circle-o-notch"></i></div>
@@ -140,6 +152,24 @@
         <script src="<?php echo base_url(); ?>assets/script/loading.js"></script>
         <script src="<?php echo base_url(); ?>assets/script/header.js"></script>
         <script src="<?php echo base_url(); ?>assets/script/navbar.js"></script>
+        <script>
+          function showDetailBuku() {
+            $(".detail-wrapper").css("display","flex");
+            $(".dark").css("animation","fadein .5s");
+            $(".detail-wrapper .book-detail").css("animation","scalein .5s cubic-bezier(.17, .47, .19, 1.16)");
+            $(document).keyup(function(e) {
+                if (e.keyCode == 27)
+                    detailBukuClose();
+            });
+          }
+          function detailBukuClose() {
+            $(".dark").css("animation","fadeout .5s");
+            $(".detail-wrapper .book-detail").css("animation","scaleout .5s cubic-bezier(.45, -0.34, .54, .2)");
+            setTimeout(function() {
+                $(".detail-wrapper").css("display","none");
+            },480);
+          }
+        </script>
         <script>
           var kategori = "";
           var judul = "";

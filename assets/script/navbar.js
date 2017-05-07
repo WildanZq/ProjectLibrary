@@ -54,16 +54,9 @@ $(".login-tab").on('click', function() {
     }
 });
 $(".show-login").on('click', function() {
-    $(".login-wrapper").css({
-        "display":"flex",
-        "top":"0"
-    });
-    $(".dark").css({
-        "animation":"fadein .5s"
-    });
-    $(".login-wrapper .login").css({
-        "animation":"scalein .5s cubic-bezier(.17, .47, .19, 1.16)"
-    });
+    $(".login-wrapper").css("display","flex");
+    $(".dark").css("animation","fadein .5s");
+    $(".login-wrapper .login").css("animation","scalein .5s cubic-bezier(.17, .47, .19, 1.16)");
     $(document).keyup(function(e) {
         if (e.keyCode == 27) {
             logInClose();
@@ -71,19 +64,11 @@ $(".show-login").on('click', function() {
     });
 });
 function logInClose() {
-    $(".login-wrapper").css({
-        "top":"0vh"
-    });
-    $(".dark").css({
-        "animation":"fadeout .5s"
-    });
-    $(".login-wrapper .login").css({
-        "animation":"scaleout .5s cubic-bezier(.45, -0.34, .54, .2)"
-    });
+    $(".login-wrapper").css("top","0vh");
+    $(".dark").css("animation","fadeout .5s");
+    $(".login-wrapper .login").css("animation","scaleout .5s cubic-bezier(.45, -0.34, .54, .2)");
     setTimeout(function() {
-        $(".login-wrapper").css({
-            "display":"none"
-        });
+        $(".login-wrapper").css("display","none");
         tab1();
     },480);
 }
