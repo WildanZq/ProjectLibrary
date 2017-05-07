@@ -30,6 +30,7 @@
                 <a class="active">Points Exchange</a>
                 <a href="<?php echo base_url(); ?>admin/buku">Buku</a>
                 <a href="<?php echo base_url(); ?>admin/event">Event</a>
+                <a href="<?php echo base_url(); ?>admin/siswa">Siswa</a>
                 <a href="<?php echo base_url(); ?>admin/organisasi">Organisasi</a>
                 <a href="<?php echo base_url(); ?>admin/laporan">Laporan</a>
                 <div class="logout">
