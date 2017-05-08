@@ -212,9 +212,6 @@ input[type=date] {
 .h-wrapper th {
     font-size: .7em;
 }
-.h-wrapper td {
-    font-size: .6em;
-}
 .form-wrapper {
     margin: auto;
     width: 90%;
