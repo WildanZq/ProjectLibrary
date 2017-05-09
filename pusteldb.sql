@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: 06 Mei 2017 pada 04.11
+-- Generation Time: 09 Mei 2017 pada 12.44
 -- Versi Server: 10.1.21-MariaDB
 -- PHP Version: 7.1.1
 
@@ -19,6 +19,26 @@ SET time_zone = "+00:00";
 --
 -- Database: `pusteldb`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Struktur dari tabel `anggota`
+--
+
+CREATE TABLE `anggota` (
+  `id_anggota` int(128) NOT NULL,
+  `nama_lengkap` varchar(128) NOT NULL,
+  `poin` int(64) NOT NULL,
+  `role` int(1) NOT NULL DEFAULT '0'
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 ROW_FORMAT=COMPACT;
+
+--
+-- Dumping data untuk tabel `anggota`
+--
+
+INSERT INTO `anggota` (`id_anggota`, `nama_lengkap`, `poin`, `role`) VALUES
+(1, 'Wildan Ziaulhaq', 24, 0);
 
 -- --------------------------------------------------------
 
@@ -4200,24 +4220,84 @@ INSERT INTO `buku` (`id_buku`, `register`, `judul`, `pengarang`, `penerbit`, `ta
 -- --------------------------------------------------------
 
 --
+-- Struktur dari tabel `event`
+--
+
+CREATE TABLE `event` (
+  `id_event` int(11) NOT NULL,
+  `judul` varchar(32) NOT NULL,
+  `foto` varchar(32) NOT NULL,
+  `tgl_mulai` date NOT NULL,
+  `tgl_akhir` date NOT NULL,
+  `konten` text NOT NULL,
+  `pemenang` int(16) NOT NULL,
+  `reward` int(16) NOT NULL,
+  `view` int(32) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Struktur dari tabel `keperluan`
+--
+
+CREATE TABLE `keperluan` (
+  `id_pengunjung` int(32) NOT NULL,
+  `keperluan` varchar(16) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Struktur dari tabel `pemenang`
+--
+
+CREATE TABLE `pemenang` (
+  `id_event` int(32) NOT NULL,
+  `id_anggota` int(32) NOT NULL,
+  `juara` int(16) NOT NULL,
+  `hadiah` int(16) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
 -- Struktur dari tabel `peminjaman`
 --
 
 CREATE TABLE `peminjaman` (
   `id_peminjaman` int(128) NOT NULL,
   `tanggal` date NOT NULL,
-  `id_siswa` int(128) NOT NULL,
+  `id_anggota` int(128) NOT NULL,
   `barcode` varchar(128) NOT NULL,
-  `kembali` int(1) NOT NULL DEFAULT '0',
+  `kembali` date NOT NULL,
   `denda` int(64) NOT NULL DEFAULT '0'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+-- --------------------------------------------------------
+
 --
--- Dumping data untuk tabel `peminjaman`
+-- Struktur dari tabel `pengunjung`
 --
 
-INSERT INTO `peminjaman` (`id_peminjaman`, `tanggal`, `id_siswa`, `barcode`, `kembali`, `denda`) VALUES
-(1, '2017-05-05', 1, '03845/SB/09', 0, 0);
+CREATE TABLE `pengunjung` (
+  `id_pengunjung` int(11) NOT NULL,
+  `id_anggota` int(11) NOT NULL,
+  `tanggal` date NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Struktur dari tabel `pengurus`
+--
+
+CREATE TABLE `pengurus` (
+  `id_pengurus` int(128) NOT NULL,
+  `id_anggota` int(128) NOT NULL,
+  `username` varchar(16) NOT NULL,
+  `password` varchar(128) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
@@ -4228,15 +4308,16 @@ INSERT INTO `peminjaman` (`id_peminjaman`, `tanggal`, `id_siswa`, `barcode`, `ke
 CREATE TABLE `setting` (
   `terlambat` int(64) NOT NULL,
   `hilang` int(64) NOT NULL,
-  `print` int(64) NOT NULL
+  `print` int(64) NOT NULL,
+  `reward` int(64) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data untuk tabel `setting`
 --
 
-INSERT INTO `setting` (`terlambat`, `hilang`, `print`) VALUES
-(500, 50000, 10);
+INSERT INTO `setting` (`terlambat`, `hilang`, `print`, `reward`) VALUES
+(500, 50000, 10, 10);
 
 -- --------------------------------------------------------
 
@@ -4246,24 +4327,21 @@ INSERT INTO `setting` (`terlambat`, `hilang`, `print`) VALUES
 
 CREATE TABLE `siswa` (
   `id_siswa` int(128) NOT NULL,
-  `nama_lengkap` varchar(128) NOT NULL,
+  `id_anggota` int(128) NOT NULL,
   `angkatan` int(128) NOT NULL,
   `jurusan` varchar(64) NOT NULL,
-  `nomor_kelas` int(64) NOT NULL,
-  `poin` int(64) NOT NULL DEFAULT '0',
-  `pengurus` int(1) NOT NULL DEFAULT '0'
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 ROW_FORMAT=COMPACT;
-
---
--- Dumping data untuk tabel `siswa`
---
-
-INSERT INTO `siswa` (`id_siswa`, `nama_lengkap`, `angkatan`, `jurusan`, `nomor_kelas`, `poin`, `pengurus`) VALUES
-(1, 'Wildan Ziaulhaq', 24, 'RPL', 2, 99, 1);
+  `nomor_kelas` int(64) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Indexes for dumped tables
 --
+
+--
+-- Indexes for table `anggota`
+--
+ALTER TABLE `anggota`
+  ADD PRIMARY KEY (`id_anggota`);
 
 --
 -- Indexes for table `barcode`
@@ -4278,10 +4356,22 @@ ALTER TABLE `buku`
   ADD PRIMARY KEY (`id_buku`);
 
 --
+-- Indexes for table `event`
+--
+ALTER TABLE `event`
+  ADD PRIMARY KEY (`id_event`);
+
+--
 -- Indexes for table `peminjaman`
 --
 ALTER TABLE `peminjaman`
   ADD PRIMARY KEY (`id_peminjaman`);
+
+--
+-- Indexes for table `pengunjung`
+--
+ALTER TABLE `pengunjung`
+  ADD PRIMARY KEY (`id_pengunjung`);
 
 --
 -- Indexes for table `siswa`
@@ -4294,6 +4384,11 @@ ALTER TABLE `siswa`
 --
 
 --
+-- AUTO_INCREMENT for table `anggota`
+--
+ALTER TABLE `anggota`
+  MODIFY `id_anggota` int(128) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+--
 -- AUTO_INCREMENT for table `barcode`
 --
 ALTER TABLE `barcode`
@@ -4304,15 +4399,25 @@ ALTER TABLE `barcode`
 ALTER TABLE `buku`
   MODIFY `id_buku` int(128) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1478;
 --
+-- AUTO_INCREMENT for table `event`
+--
+ALTER TABLE `event`
+  MODIFY `id_event` int(11) NOT NULL AUTO_INCREMENT;
+--
 -- AUTO_INCREMENT for table `peminjaman`
 --
 ALTER TABLE `peminjaman`
-  MODIFY `id_peminjaman` int(128) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id_peminjaman` int(128) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+--
+-- AUTO_INCREMENT for table `pengunjung`
+--
+ALTER TABLE `pengunjung`
+  MODIFY `id_pengunjung` int(11) NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT for table `siswa`
 --
 ALTER TABLE `siswa`
-  MODIFY `id_siswa` int(128) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id_siswa` int(128) NOT NULL AUTO_INCREMENT;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
