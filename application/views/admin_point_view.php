@@ -19,6 +19,9 @@
                     <div class="i-wrapper"><label>Print:</label>
                         <input type="number" placeholder="Print" min="1" name="print">
                     </div>
+                    <div class="i-wrapper"><label>Reward:</label>
+                        <input type="number" placeholder="Reward" min="1" name="reward">
+                    </div>
                     <input type="submit" name="saveSetting">
                 </form>
             </div>
@@ -53,9 +56,8 @@
                             <input type="number" placeholder="1" min="1">
                         </div>
                         <input type="text" placeholder="Nama">
-                        <select>
-                            <option value="print">Print</option>
-                        </select>
+                        <label>Print:</label>
+                        <input type="number" name="lembar" placeholder="1" min="1">
                         <input type="submit">
                     </form>
                     <div class="search-book">
@@ -84,70 +86,70 @@
                             <td>Nama Lengkap</td>
                             <td>XI RPL 2</td>
                             <td class="gold"><i class="fa fa-star" aria-hidden="true"></i> -10</td>
-                            <td>Print</td>
+                            <td>1</td>
                         </tr>
                         <tr>
                             <td>20/03/2017</td>
                             <td>Nama Lengkap</td>
                             <td>XI RPL 2</td>
                             <td class="gold"><i class="fa fa-star" aria-hidden="true"></i> -10</td>
-                            <td>Print</td>
+                            <td>1</td>
                         </tr>
                         <tr>
                             <td>20/03/2017</td>
                             <td>Nama Lengkap</td>
                             <td>XI RPL 2</td>
                             <td class="gold"><i class="fa fa-star" aria-hidden="true"></i> -10</td>
-                            <td>Print</td>
+                            <td>1</td>
                         </tr>
                         <tr>
                             <td>20/03/2017</td>
                             <td>Nama Lengkap</td>
                             <td>XI RPL 2</td>
                             <td class="gold"><i class="fa fa-star" aria-hidden="true"></i> -10</td>
-                            <td>Print</td>
+                            <td>1</td>
                         </tr>
                         <tr>
                             <td>20/03/2017</td>
                             <td>Nama Lengkap</td>
                             <td>XI RPL 2</td>
                             <td class="gold"><i class="fa fa-star" aria-hidden="true"></i> -10</td>
-                            <td>Print</td>
+                            <td>1</td>
                         </tr>
                         <tr>
                             <td>20/03/2017</td>
                             <td>Nama Lengkap</td>
                             <td>XI RPL 2</td>
                             <td class="gold"><i class="fa fa-star" aria-hidden="true"></i> -10</td>
-                            <td>Print</td>
+                            <td>1</td>
                         </tr>
                         <tr>
                             <td>20/03/2017</td>
                             <td>Nama Lengkap</td>
                             <td>XI RPL 2</td>
                             <td class="gold"><i class="fa fa-star" aria-hidden="true"></i> -10</td>
-                            <td>Print</td>
+                            <td>1</td>
                         </tr>
                         <tr>
                             <td>20/03/2017</td>
                             <td>Nama Lengkap</td>
                             <td>XI RPL 2</td>
                             <td class="gold"><i class="fa fa-star" aria-hidden="true"></i> -10</td>
-                            <td>Print</td>
+                            <td>1</td>
                         </tr>
                         <tr>
                             <td>20/03/2017</td>
                             <td>Nama Lengkap</td>
                             <td>XI RPL 2</td>
                             <td class="gold"><i class="fa fa-star" aria-hidden="true"></i> -10</td>
-                            <td>Print</td>
+                            <td>1</td>
                         </tr>
                         <tr>
                             <td>20/03/2017</td>
                             <td>Nama Lengkap</td>
                             <td>XI RPL 2</td>
                             <td class="gold"><i class="fa fa-star" aria-hidden="true"></i> -10</td>
-                            <td>Print</td>
+                            <td>1</td>
                         </tr>
                     </table>
                 </div>
