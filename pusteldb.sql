@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: 09 Mei 2017 pada 13.01
+-- Generation Time: 10 Mei 2017 pada 13.06
 -- Versi Server: 10.1.21-MariaDB
 -- PHP Version: 7.1.1
 
@@ -4241,6 +4241,7 @@ CREATE TABLE `event` (
 --
 
 CREATE TABLE `keperluan` (
+  `id_keperluan` int(11) NOT NULL,
   `id_pengunjung` int(32) NOT NULL,
   `keperluan` varchar(16) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
@@ -4252,6 +4253,7 @@ CREATE TABLE `keperluan` (
 --
 
 CREATE TABLE `pemenang` (
+  `id_pemenang` int(11) NOT NULL,
   `id_event` int(32) NOT NULL,
   `id_anggota` int(32) NOT NULL,
   `juara` int(16) NOT NULL,
@@ -4309,7 +4311,20 @@ CREATE TABLE `pengurus` (
   `id_pengurus` int(128) NOT NULL,
   `id_anggota` int(128) NOT NULL,
   `username` varchar(16) NOT NULL,
-  `password` varchar(128) NOT NULL
+  `password` varchar(128) NOT NULL,
+  `role` varchar(8) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Struktur dari tabel `piket`
+--
+
+CREATE TABLE `piket` (
+  `id_piket` int(32) NOT NULL,
+  `id_pengurus` int(32) NOT NULL,
+  `tanggal` date NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -4375,16 +4390,46 @@ ALTER TABLE `event`
   ADD PRIMARY KEY (`id_event`);
 
 --
+-- Indexes for table `keperluan`
+--
+ALTER TABLE `keperluan`
+  ADD PRIMARY KEY (`id_keperluan`);
+
+--
+-- Indexes for table `pemenang`
+--
+ALTER TABLE `pemenang`
+  ADD PRIMARY KEY (`id_pemenang`);
+
+--
 -- Indexes for table `peminjaman`
 --
 ALTER TABLE `peminjaman`
   ADD PRIMARY KEY (`id_peminjaman`);
 
 --
+-- Indexes for table `pengembalian`
+--
+ALTER TABLE `pengembalian`
+  ADD PRIMARY KEY (`id_pengembalian`);
+
+--
 -- Indexes for table `pengunjung`
 --
 ALTER TABLE `pengunjung`
   ADD PRIMARY KEY (`id_pengunjung`);
+
+--
+-- Indexes for table `pengurus`
+--
+ALTER TABLE `pengurus`
+  ADD PRIMARY KEY (`id_pengurus`);
+
+--
+-- Indexes for table `piket`
+--
+ALTER TABLE `piket`
+  ADD PRIMARY KEY (`id_piket`);
 
 --
 -- Indexes for table `siswa`
@@ -4417,15 +4462,40 @@ ALTER TABLE `buku`
 ALTER TABLE `event`
   MODIFY `id_event` int(11) NOT NULL AUTO_INCREMENT;
 --
+-- AUTO_INCREMENT for table `keperluan`
+--
+ALTER TABLE `keperluan`
+  MODIFY `id_keperluan` int(11) NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT for table `pemenang`
+--
+ALTER TABLE `pemenang`
+  MODIFY `id_pemenang` int(11) NOT NULL AUTO_INCREMENT;
+--
 -- AUTO_INCREMENT for table `peminjaman`
 --
 ALTER TABLE `peminjaman`
   MODIFY `id_peminjaman` int(128) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 --
+-- AUTO_INCREMENT for table `pengembalian`
+--
+ALTER TABLE `pengembalian`
+  MODIFY `id_pengembalian` int(64) NOT NULL AUTO_INCREMENT;
+--
 -- AUTO_INCREMENT for table `pengunjung`
 --
 ALTER TABLE `pengunjung`
   MODIFY `id_pengunjung` int(11) NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT for table `pengurus`
+--
+ALTER TABLE `pengurus`
+  MODIFY `id_pengurus` int(128) NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT for table `piket`
+--
+ALTER TABLE `piket`
+  MODIFY `id_piket` int(32) NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT for table `siswa`
 --
