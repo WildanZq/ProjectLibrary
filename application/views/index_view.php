@@ -137,13 +137,13 @@
             <div class="pagination-wrapper">
               <div class="pagination">
                 <div class="main">
-                  <span><i class="fa fa-angle-double-left" aria-hidden="true"></i></span>
-                  <span class="active">1</span>
-                  <span>2</span>
-                  <span>3</span>
-                  <span>...</span>
-                  <span>37</span>
-                  <span><i class="fa fa-angle-double-right" aria-hidden="true"></i></span>
+                  <div class="page"><i class="fa fa-angle-double-left" aria-hidden="true"></i></div>
+                  <div class="page active">1</div>
+                  <div class="page">2</div>
+                  <div class="page">3</div>
+                  <div class="page">...</div>
+                  <div class="page">27</div>
+                  <div class="page"><i class="fa fa-angle-double-right" aria-hidden="true"></i></div>
                 </div>
               </div>
             </div>

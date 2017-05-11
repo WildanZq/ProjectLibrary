@@ -304,11 +304,11 @@ input[type=submit]:hover {
     width: 90px;
 }
 .pagination-wrapper {width: 100%;margin-top: 20px;margin-bottom: 20px;overflow: visible;transform: translateY(-2px);}
-.pagination {margin: auto;width: 90%;max-width: 235px;}
-.pagination .main {color: #6d6d6d;overflow: hidden;box-shadow: 0 0 8px #ebebeb;display: flex;justify-content: center;width: 100%;border: thin solid #bfbfbf;border-radius: 2px;}
-.pagination span {padding: 10px;cursor: pointer;border-right: thin solid #bfbfbf;width: 43px;font-size: .5em;}
-.pagination span:last-child {border-right: none;}
-.pagination span:hover {background: #e8e8e8;color: #750d0d;}
+.pagination {margin: auto;}
+.pagination .main {color: #6d6d6d;border-radius: 2px;display: table;padding-bottom: 10px;margin: auto;}
+.pagination .page {cursor: pointer;font-size: .5em;display: inline;padding: 10px 13px;margin: auto;border: thin solid #d9d9d9;border-right: none;box-shadow: 0 3px 5px #eeeeee}
+.pagination .page:last-child {border-right: thin solid #d9d9d9;}
+.pagination .page:hover {background: #e8e8e8;color: #750d0d;}
 .pagination .active {color: white;background-color: #cf0e0e;}
 .pagination .active:hover {color: white;background-color: #bd0a0a;}
 .login-tab {
