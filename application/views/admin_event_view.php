@@ -26,7 +26,8 @@
             </div>
             <div class="wrapper">
                 <div class="form-wrapper">
-                    <form action="" style="flex-direction:column" enctype="multipart/form-data">
+                    <input type="button" value="Show Form" onclick="showForm()" id="bForm">
+                    <form action="" style="flex-direction:column;display:none" enctype="multipart/form-data" id="form">
                         <div class="img-wrapper">
                             <img class="img" src="<?php echo base_url(); ?>assets/images/blank.png" style="height:auto;width:100%">
                             <label for="gbrE" class="label-file"><i class="fa fa-upload" aria-hidden="true"></i> Pilih gambar</label>
@@ -59,6 +60,8 @@
                             <input type="submit">
                         </div>
                     </form>
+                </div>
+                <div class="form-wrapper">
                     <div class="search-book">
                         <form action="">
                             <label>Search:</label>
@@ -134,5 +137,19 @@
         <script src="<?php echo base_url(); ?>assets/ckeditor/ckeditor.js"></script>
         <script src="<?php echo base_url(); ?>assets/script/loading.js"></script>
         <script src="<?php echo base_url(); ?>assets/script/img_input.js"></script>
+        <script>
+        var formC = 0;
+        function showForm() {
+          if (formC == 0) {
+            $('#bForm').val("Close Form");
+            $('#form').css('display','flex');
+            formC = 1;
+          } else {
+            $('#bForm').val("Show Form");
+            $('#form').css('display','none');
+            formC = 0;
+          }
+        }
+        </script>
     </body>
 </html>

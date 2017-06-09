@@ -53,14 +53,14 @@ input:focus, textarea:focus, select:focus {
 input:active, textarea:active, select:active {
     outline: none;
 }
-input[type=submit], button {
+input[type=submit], input[type=button], button {
     padding: 13px 0;
     cursor: pointer;
     color: white;
     background: #f22323;
     transition: .5s;
 }
-input[type=submit]:hover {
+input[type=submit]:hover, input[type=button]:hover, button:hover {
     background: #ff0000;
 }
 .label-file {
@@ -72,7 +72,7 @@ input[type=submit]:hover {
     cursor: pointer;
     height: 100%;
     width: 100%;
-    background-color: rgba(172, 172, 172, 0.8);
+    background-color: rgba(0, 0, 0, 0.55);
     opacity: 0;
     position: absolute;
     top: 0;

@@ -4,6 +4,10 @@ input {
 input[type=date] {
     padding: 5px;
 }
+#bForm {
+    font-size: .5em;
+    padding: 7px 13px;
+}
 .nav-laporan {
     position:absolute;
     right:35px;

@@ -175,10 +175,11 @@
     border-top: thin solid #c3c3c3;
 }
 .book-item {
-    box-shadow: 1px 1px 3px #777777;
+    box-shadow: 1px 2px 3px #ada6a6;
+    border-radius: 0 0 3px 3px;
     height: 35px;
     width: 250px;
-    background: #f2f2f2;
+    background: #f9f4f4;
     overflow: hidden;
     margin: 10px 15px;
     position: relative;
@@ -200,6 +201,7 @@
     overflow: hidden;
 }
 .book-item div:nth-child(2) {
+   border-radius: 0 3px 3px 0;
    position: absolute;
    right: 0;
    top: 0;
