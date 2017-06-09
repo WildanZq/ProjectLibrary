@@ -153,6 +153,19 @@
                         </tr>
                     </table>
                 </div>
+                <div class="pagination-wrapper">
+                  <div class="pagination">
+                    <div class="main">
+                      <div class="page"><i class="fa fa-angle-double-left" aria-hidden="true"></i></div>
+                      <div class="page active">1</div>
+                      <div class="page">2</div>
+                      <div class="page">3</div>
+                      <div class="page">...</div>
+                      <div class="page">27</div>
+                      <div class="page"><i class="fa fa-angle-double-right" aria-hidden="true"></i></div>
+                    </div>
+                  </div>
+                </div>
             </div>
         </div>
         <script src="<?php echo base_url(); ?>assets/script/jquery.min.js"></script>
