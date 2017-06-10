@@ -148,6 +148,12 @@
               </div>
             </div>
         </div>
+        <footer>
+          <div class="wrapper">
+            <span>SMK Telkom Malang &copy; <?php $now = new DateTime; echo $now->format('Y');  ?></span>
+            <span class="f-right">Contact</span>
+          </div>
+        </footer>
         <script src="<?php echo base_url(); ?>assets/script/jquery.min.js"></script>
         <script src="<?php echo base_url(); ?>assets/script/loading.js"></script>
         <script src="<?php echo base_url(); ?>assets/script/header.js"></script>

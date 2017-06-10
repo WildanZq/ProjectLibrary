@@ -87,6 +87,12 @@ input[type=submit]:hover, input[type=button]:hover, button:hover {
 .label-file:hover {
     opacity: 1;
 }
+.f-right {
+    float: right;
+}
+footer .f-right {
+    margin-top: 7px;
+}
 .kelas {
     padding: 0;
     display: flex;
@@ -363,6 +369,7 @@ input[type=submit]:hover, input[type=button]:hover, button:hover {
     max-width: 400px;
     height: 100vh;
     background: black;
+    border-left: thick solid rgb(210, 35, 42);
 }
 .sidebar-wrapper .sidebar .close-nav {
     float: right;
@@ -375,6 +382,17 @@ input[type=submit]:hover, input[type=button]:hover, button:hover {
     width: 90%;
     max-width: 1100px;
     margin: auto;
+}
+footer {
+    background: black;
+    color: white;
+    border-top: thick solid rgb(210, 35, 42);
+}
+footer * {
+    font-size: .7em;
+}
+footer .wrapper {
+    padding: 20px 0;
 }
 @media only screen and (max-width: 768px) {
     .header i {
