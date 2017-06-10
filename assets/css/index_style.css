@@ -113,6 +113,9 @@
     margin-right: auto;
     padding-right: 20px;
 }
+.news-wrapper {
+  margin-bottom: 25px;
+}
 .search-book form {
     display: flex;
     justify-content: center;

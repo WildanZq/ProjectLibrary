@@ -5,6 +5,9 @@
         <link rel="icon" type="image/png" href="<?php echo base_url(); ?>assets/images/logo.png"/>
         <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0">
         <link rel="stylesheet" href="<?php echo base_url(); ?>assets/css/font-awesome.css">
+        <link rel="stylesheet" href="<?php echo base_url(); ?>assets/css/owl.carousel.css">
+        <link rel="stylesheet" href="<?php echo base_url(); ?>assets/css/owl.theme.default.css">
+        <link rel="stylesheet" href="<?php echo base_url(); ?>assets/css/owl.css">
         <link rel="stylesheet" href="<?php echo base_url(); ?>assets/css/style.css">
         <link rel="stylesheet" href="<?php echo base_url(); ?>assets/css/index_style.css">
     </head>
@@ -81,6 +84,50 @@
             <a href="#go"><i class="fa fa-angle-down" aria-hidden="true"></i></a>
         </div>
         <div class="wrapper" id="go">
+          <div class="news-wrapper">
+            <div class="posterList owl-carousel owl-theme">
+              <div class="posterItem">
+                <img src="<?php echo base_url(); ?>assets/uploads/event/1.jpg" style="width:auto;height:50vh">
+                <div class="detil">
+                  <h1>Judul Event/Pengumuman Judul Event/Pengumuman</h1>
+                  <span>10 May 2017 - 10 May 2017</span>
+                </div>
+                <div class="read">
+                  <a href="#">Read More &#x226B;</a>
+                </div>
+              </div>
+              <div class="posterItem">
+                <img src="<?php echo base_url(); ?>assets/uploads/event/1.jpg" style="width:auto;height:50vh">
+                <div class="detil">
+                  <h1>Judul Event/Pengumuman</h1>
+                  <span>10 May 2017 - 10 May 2017</span>
+                </div>
+                <div class="read">
+                  <a href="#">Read More &#x226B;</a>
+                </div>
+              </div>
+              <div class="posterItem">
+                <img src="<?php echo base_url(); ?>assets/uploads/event/1.jpg" style="width:auto;height:50vh">
+                <div class="detil">
+                  <h1>Judul Event/Pengumuman</h1>
+                  <span>10 May 2017 - 10 May 2017</span>
+                </div>
+                <div class="read">
+                  <a href="#">Read More &#x226B;</a>
+                </div>
+              </div>
+              <div class="posterItem">
+                <img src="<?php echo base_url(); ?>assets/uploads/event/1.jpg" style="width:auto;height:50vh">
+                <div class="detil">
+                  <h1>Judul Event/Pengumuman</h1>
+                  <span>10 May 2017 - 10 May 2017</span>
+                </div>
+                <div class="read">
+                  <a href="#">Read More &#x226B;</a>
+                </div>
+              </div>
+            </div>
+          </div>
             <div class="search-book">
                 <form action="">
                     <select class="kategori">
@@ -155,6 +202,8 @@
           </div>
         </footer>
         <script src="<?php echo base_url(); ?>assets/script/jquery.min.js"></script>
+        <script src="<?php echo base_url(); ?>assets/script/owl.carousel.min.js"></script>
+        <script src="<?php echo base_url(); ?>assets/script/owl.js"></script>
         <script src="<?php echo base_url(); ?>assets/script/loading.js"></script>
         <script src="<?php echo base_url(); ?>assets/script/header.js"></script>
         <script src="<?php echo base_url(); ?>assets/script/navbar.js"></script>

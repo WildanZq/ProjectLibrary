@@ -1,0 +1,74 @@
+.posterItem {
+  height: 50vh;
+  overflow: hidden;
+  border-bottom: solid 3px #d2232a;
+  border-radius: 4px 4px 0 0;
+}
+.posterItem .read {
+  position: absolute;
+  bottom: 13px;
+  right: 15px;
+  overflow: hidden;
+  margin-top: 10px;
+  height: 44px;
+}
+.posterItem a {
+  text-decoration: none;
+  position: relative;
+  font-size: .4em;
+  padding: 10px;
+  color: white;
+  background: #d2232a;
+  overflow: hidden;
+  margin-top: -10px;
+}
+.posterItem a:after {
+  content: '';
+  display: none;
+  z-index: 2;
+  position: absolute;
+  top: 0;right: -50px;bottom: 0;left: 0;
+  height: 25px;
+  transform: translateX(50%) rotate(-50deg);
+  background: rgba(255,255,255,.7);
+  transition: .5s;
+}
+.posterItem a:hover:after {
+  transform: translateX(-100%) rotate(-50deg);
+}
+.posterItem:hover a:after {
+  display: block;
+}
+.posterItem .detil {
+  background: white;
+  border-top: solid 3px #d2232a;
+  padding: 10px 20px;
+  padding-bottom: 15px;
+}
+.posterItem .detil h1 {
+  margin: 0;
+  font-size: .8em;
+}
+.posterItem .detil span {
+  font-size: 16px;
+}
+.posterItem:hover img {
+  transform: translateY(-15%);
+  filter: brightness(.7);
+}
+.posterItem:hover .detil {
+  transform: translateY(-100%);
+}
+@media only screen and (max-width: 768px) and (orientation: portrait) {
+  .posterItem .detil h1 , .posterItem .detil span {
+    text-align: center;
+    display: block;
+    margin: auto;
+  }
+  .posterItem .detil h1 {
+    font-size: 18px;
+  }
+  .posterItem .detil span {
+    font-size: 14px;
+  }
+}
