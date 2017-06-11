@@ -236,6 +236,7 @@ footer .f-right {
     height: 100vh;
     background: rgba(0, 0, 0, .2);
     transition: .7s;
+    opacity: 0;
 }
 .dark-login {
     position: absolute;
@@ -361,7 +362,6 @@ footer .f-right {
     100% {transform: translateX(100%)}
 }
 .sidebar-wrapper .sidebar {
-    animation: slidein .5s ease-out;
     position: absolute;
     top: 0;
     right: 0;
@@ -370,6 +370,7 @@ footer .f-right {
     height: 100vh;
     background: black;
     border-left: thick solid rgb(210, 35, 42);
+    /*transform: translateX(100%);*/
 }
 .sidebar-wrapper .sidebar .close-nav {
     float: right;

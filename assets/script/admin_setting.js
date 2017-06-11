@@ -2,9 +2,7 @@ $(".set-wrapper").on('click', function() {
     $(".set-popup").css({
         "display":"flex"
     });
-    $(".dark").css({
-        "animation":"fadein .5s"
-    });
+    $(".dark").css({"animation":"fadein .5s","opacity":"1"});
     $(".set-form").css({
         "animation":"scalein .5s ease"
     });
@@ -15,9 +13,7 @@ $(".set-wrapper").on('click', function() {
     });
 });
 function closeSet() {
-    $(".dark").css({
-        "animation":"fadeout .5s"
-    });
+    $(".dark").css({"animation":"fadeout .5s","opacity":"0"});
     $(".set-form").css({
         "animation":"scaleout .5s ease"
     });

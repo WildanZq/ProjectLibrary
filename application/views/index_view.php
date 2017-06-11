@@ -202,6 +202,9 @@
           </div>
         </footer>
         <script src="<?php echo base_url(); ?>assets/script/jquery.min.js"></script>
+        <script src="<?php echo base_url(); ?>assets/script/jquery-migrate-3.0.0.js"></script>
+        <script src="<?php echo base_url(); ?>assets/script/jquery-ui.min.js"></script>
+        <script src="<?php echo base_url(); ?>assets/script/jquery.mobile.custom.min.js"></script>
         <script src="<?php echo base_url(); ?>assets/script/owl.carousel.min.js"></script>
         <script src="<?php echo base_url(); ?>assets/script/owl.js"></script>
         <script src="<?php echo base_url(); ?>assets/script/img.js"></script>
@@ -211,7 +214,7 @@
         <script>
           function showDetailBuku() {
             $(".detail-wrapper").css("display","flex");
-            $(".dark").css("animation","fadein .5s");
+            $(".dark").css({"animation":"fadein .5s","opacity":"1"});
             $(".detail-wrapper .book-detail").css("animation","scalein .5s cubic-bezier(.17, .47, .19, 1.16)");
             $(document).keyup(function(e) {
                 if (e.keyCode == 27)
@@ -219,7 +222,7 @@
             });
           }
           function detailBukuClose() {
-            $(".dark").css("animation","fadeout .5s");
+            $(".dark").css({"animation":"fadeout .5s","opacity":"0"});
             $(".detail-wrapper .book-detail").css("animation","scaleout .5s cubic-bezier(.45, -0.34, .54, .2)");
             setTimeout(function() {
                 $(".detail-wrapper").css("display","none");

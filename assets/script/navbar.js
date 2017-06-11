@@ -55,7 +55,7 @@ $(".login-tab").on('click', function() {
 });
 $(".show-login").on('click', function() {
     $(".login-wrapper").css("display","flex");
-    $(".dark").css("animation","fadein .5s");
+    $(".dark").css({"animation":"fadein .5s","opacity":"1"});
     $(".login-wrapper .login").css("animation","scalein .5s cubic-bezier(.17, .47, .19, 1.16)");
     $(document).keyup(function(e) {
         if (e.keyCode == 27) {
@@ -65,7 +65,7 @@ $(".show-login").on('click', function() {
 });
 function logInClose() {
     $(".login-wrapper").css("top","0vh");
-    $(".dark").css("animation","fadeout .5s");
+    $(".dark").css({"animation":"fadeout .5s", "opacity":"0"});
     $(".login-wrapper .login").css("animation","scaleout .5s cubic-bezier(.45, -0.34, .54, .2)");
     setTimeout(function() {
         $(".login-wrapper").css("display","none");
@@ -73,31 +73,46 @@ function logInClose() {
     },480);
 }
 $(".fa-bars").on('click', function() {
-    $(".sidebar-wrapper").css({
-        "display":"block"
-    });
-    $(".dark").css({
-        "animation":"fadein .5s"
-    });
-    $(".sidebar-wrapper .sidebar").css({
-        "animation":"slidein .5s ease-out"
-    });
-    $(document).keyup(function(e) {
-        if (e.keyCode == 27) {
-            closeNav();
-        }
-    });
+  showNav();
 });
-function closeNav() {
-    $(".dark").css({
-        "animation":"fadeout .5s"
-    });
+$(document).on("swipeleft", function() {
+  showNav();
+});
+$(".posterList").on("swipeleft", function() {
+  setTimeout(function() {
+      closeNav(1);
+  },1);
+});
+function showNav() {
+  $(".sidebar-wrapper").css({
+      "display":"block"
+  });
+  $(".dark").css({"animation":"fadein .3s", "opacity":"1"});
+  $(".sidebar-wrapper .sidebar").css({
+      "animation":"slidein .3s", "transform":"translateX(0)"
+  });
+  $(document).keyup(function(e) {
+      if (e.keyCode == 27) {
+          closeNav();
+      }
+  });
+  $(document).on("swiperight", function() {
+    closeNav();
+  });
+}
+function closeNav(f) {
+    if (f == 1) {
+      $(".sidebar-wrapper").css({
+          "display":"none"
+      });
+    }
+    $(".dark").css({"animation":"fadeout .3s", "opacity":"0"});
     $(".sidebar-wrapper .sidebar").css({
-        "animation":"slideout .5s ease-in"
+        "animation":"slideout .3s", "transform":"translateX(100%)"
     });
     setTimeout(function() {
         $(".sidebar-wrapper").css({
             "display":"none"
         });
-    },480);
+    },280);
 }
