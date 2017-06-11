@@ -3,7 +3,7 @@ function resizeImg() {
     var img = document.getElementsByClassName('img');
     img.height = "auto";
     img.width = "auto";
-    
+
     for(i = 0; i < imgP.length; i++) {
         var widthP = imgP[i].clientWidth;
         var heightP = imgP[i].clientHeight;
@@ -52,11 +52,14 @@ function resizeImg() {
         }
     }
 }
+$(document).ready(function() {
+  try {resizeImg();} catch(e) {}
+})
 $(window).on("load", function() {
     try {resizeImg();} catch(e) {}
-    $(window).resize(function() {
-        setTimeout(function() {
-            try {resizeImg();} catch(e) {}
-        }, 100);
-    });
+});
+$(window).resize(function() {
+    setTimeout(function() {
+        try {resizeImg();} catch(e) {}
+    }, 500);
 });
