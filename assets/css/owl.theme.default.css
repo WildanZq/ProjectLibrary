@@ -47,6 +47,9 @@
   margin-top: 10px; }
 
 .owl-theme .owl-dots {
+  display: table;
+  top: 0;left: 20px;
+  position: absolute;
   text-align: center;
   -webkit-tap-highlight-color: transparent; }
   .owl-theme .owl-dots .owl-dot {
@@ -54,13 +57,16 @@
     zoom: 1;
     *display: inline; }
     .owl-theme .owl-dots .owl-dot span {
-      width: 10px;
-      height: 10px;
-      margin: 5px 7px;
-      background: #D6D6D6;
+      transition: .5s;
+      width: 8px;
+      height: 8px;
+      margin: 5px 4px;
+      background: rgba(255, 255, 255, 0.4);
+      border: 2px solid rgba(210, 35, 42, .4);
       display: block;
       -webkit-backface-visibility: visible;
       transition: opacity 200ms ease;
       border-radius: 30px; }
     .owl-theme .owl-dots .owl-dot.active span, .owl-theme .owl-dots .owl-dot:hover span {
-      background: #869791; }
+      border: 2px solid rgba(210, 35, 42, 1);
+      background: rgba(255, 255, 255, 0.9); }

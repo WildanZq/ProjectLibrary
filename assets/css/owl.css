@@ -1,7 +1,11 @@
+.posterList {
+  border-bottom: solid 3px #d2232a;
+}
 .posterItem {
+  display: flex;
+  align-items: center;
   height: 50vh;
   overflow: hidden;
-  border-bottom: solid 3px #d2232a;
   border-radius: 4px 4px 0 0;
 }
 .posterItem .read {
@@ -11,6 +15,7 @@
   overflow: hidden;
   margin-top: 10px;
   height: 44px;
+  z-index: 2;
 }
 .posterItem a {
   text-decoration: none;
@@ -40,26 +45,33 @@
   display: block;
 }
 .posterItem .detil {
+  position: absolute;
+  bottom: 0;
+  transform: translateY(100%);
+  width: calc(100% - 60px);
   background: white;
   border-top: solid 3px #d2232a;
-  padding: 10px 20px;
+  padding: 10px 30px;
   padding-bottom: 15px;
 }
 .posterItem .detil h1 {
+  cursor: pointer;
   margin: 0;
+  margin-top: 5px;
   font-size: .8em;
 }
 .posterItem .detil span {
   font-size: 16px;
 }
 .posterItem:hover img {
-  transform: translateY(-15%);
-  filter: brightness(.7);
+  transform: translateY(-13%);
+  filter: brightness(.85);
 }
 .posterItem:hover .detil {
-  transform: translateY(-100%);
+  transform: translateY(0);
 }
 @media only screen and (max-width: 768px) and (orientation: portrait) {
+  .posterItem:hover .read {transform: translateY(-40vh);}
   .posterItem .detil h1 , .posterItem .detil span {
     text-align: center;
     display: block;

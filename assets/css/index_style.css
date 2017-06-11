@@ -114,7 +114,7 @@
     padding-right: 20px;
 }
 .news-wrapper {
-  margin-bottom: 25px;
+  margin-bottom: 40px;
 }
 .search-book form {
     display: flex;
@@ -182,7 +182,7 @@
     border-radius: 0 0 3px 3px;
     height: 35px;
     width: 250px;
-    background: #f9f4f4;
+    background: white;
     overflow: hidden;
     margin: 10px 15px;
     position: relative;

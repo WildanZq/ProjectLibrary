@@ -3,10 +3,11 @@ $(document).ready(function(){
         center: true,
         nav:true,
         loop:true,
-        margin:10,
+        margin:5,
+        items:1,
         navText:['&#8882;','&#8883;'],
-        autoWidth:true,
-        autoHeight:false,
+        autoWidth:false,
+        autoHeight:true,
         autoplay:true,
         autoplayTimeout:4000
     });
