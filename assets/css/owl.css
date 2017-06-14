@@ -6,7 +6,6 @@
   align-items: center;
   height: 50vh;
   overflow: hidden;
-  border-radius: 4px 4px 0 0;
 }
 .posterItem .read {
   position: absolute;
@@ -64,7 +63,7 @@
   font-size: 16px;
 }
 .posterItem:hover img {
-  transform: translateY(-13%);
+  transform: translateY(-10%);
   filter: brightness(.85);
 }
 .posterItem:hover .detil {

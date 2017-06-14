@@ -47,6 +47,9 @@ input {
     margin: 0 5px;
     padding: 10px;
 }
+select {
+  cursor: pointer;
+}
 input:focus, textarea:focus, select:focus {
     outline: 1px solid #f51818;
 }
@@ -168,6 +171,7 @@ footer .f-right {
     position: relative;
     padding-bottom: 2px;
     color: rgba(255, 255, 255, 0.9);
+    transform: translateY(2px);
 }
 .header span:after {
     content: "";
@@ -188,7 +192,7 @@ footer .f-right {
 }
 .dropdown-wrapper {
     position: absolute;
-    top: 28px;
+    top: 30px;
     left: 42px;
     justify-content: center;
     align-items: center;
@@ -199,6 +203,9 @@ footer .f-right {
     height: 0;
     overflow: hidden;
     box-shadow: 0 0 10px #8e8e8e;
+}
+.header .dropdown-wrapper a {
+  text-decoration: none;
 }
 .header .dropdown-wrapper span {
     color: #b51212;
@@ -396,12 +403,20 @@ footer .wrapper {
     padding: 20px 0;
 }
 @media only screen and (max-width: 768px) {
+    .header {
+        height: 60px;
+    }
+    .header span {
+        font-size: .5em;
+    }
     .header i {
+        font-size: 1em;
         margin-right: .5em;
         margin-left: .3em;
     }
     .header .logo {
         left: .5em;
+        height: 90px;
     }
     .sidebar-wrapper .sidebar .close-nav {
         margin-right: .3em;

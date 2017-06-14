@@ -250,6 +250,10 @@
     cursor: pointer;
 }
 @media only screen and (max-width: 768px) {
+    .top .ts {
+        height: 50px;
+        top: 20px;
+    }
     .top .bg {
         background-image: url(../images/bg-s.jpeg);
     }

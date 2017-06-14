@@ -31,12 +31,12 @@
     font-size: 30px;
     margin: 5px;
     padding: 4px 13px;
-    background: rgba(0,0,0,.3);
+    background: rgba(0,0,0,.25);
     display: inline-block;
     cursor: pointer;
     border-radius: 100px; }
     .owl-theme .owl-nav [class*='owl-']:hover {
-      background: rgba(0,0,0,.7);
+      background: rgba(0,0,0,.6);
       color: #FFF;
       text-decoration: none; }
   .owl-theme .owl-nav .disabled {

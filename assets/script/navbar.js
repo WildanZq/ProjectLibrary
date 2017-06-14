@@ -1,5 +1,5 @@
 function showP() {
-    $(".dropdown-wrapper").css({height: "80px"});
+    $(".dropdown-wrapper").css({height: "82px"});
 }
 function closeP() {
     $(".dropdown-wrapper").css({height: "0"});

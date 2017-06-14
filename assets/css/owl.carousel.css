@@ -26,6 +26,7 @@
     line-height: 0;
     height: 0; }
   .owl-carousel .owl-stage-outer {
+    border-radius: 4px 4px 0 0;
     position: relative;
     overflow: hidden;
     /* fix for flashing background */
