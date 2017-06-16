@@ -20,9 +20,13 @@
                 <div class="dark dark-login" onclick="logInClose()"></div>
                 <div class="login">
                     <div class="form-wrapper">
-                        <form action="" class="form-login">
+                        <form action="" class="form-login" method="post">
                             <h1><i class="fa fa-sign-in" aria-hidden="true"></i> Login</h1>
-                            <input type="text" placeholder="Username" required>
+                            <div class="input-wrapper">
+                              <input type="text" placeholder="Username" required>
+                              <i class="fa fa-exclamation-circle error" aria-hidden="true"></i>
+                              <span class="error error-msg">Username tidak ada</span>
+                            </div>
                             <input type="password" placeholder="Password" required>
                             <input type="submit">
                         </form>
@@ -31,7 +35,7 @@
                             <span class="s2">Login</span>
                             <i class="fa fa-long-arrow-down" aria-hidden="true"></i>
                         </div>
-                        <form action="">
+                        <form action="" method="post">
                             <h1><i class="fa fa-user-plus" aria-hidden="true"></i> Signup</h1>
                             <div class="signup-wrapper">
                                 <div>

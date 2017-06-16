@@ -90,6 +90,48 @@ input[type=submit]:hover, input[type=button]:hover, button:hover {
 .label-file:hover {
     opacity: 1;
 }
+.input-wrapper {
+    position: relative;
+}
+.input-wrapper input {
+    margin: 0 !important;
+    width: calc(100% - 20px);
+}
+.error {
+    cursor: auto !important;
+    margin: 0 !important;
+    position: absolute !important;
+    right: 10px;
+    top: 4px;
+    font-size: 25px !important;
+    color: #800808 !important;
+}
+input:hover ~ .error-msg, input:focus ~ .error-msg {
+    display: block;
+}
+.error-msg {
+    animation: fadein .5s;
+    display: none;
+    top: 45px;
+    font-size: 15px !important;
+    background: #800808;
+    color: white !important;
+    padding: 7px !important;
+    transition: .5s;
+    border-radius: 3px;
+}
+.error-msg:before {
+  content:'';
+  display:block;
+  width:0;
+  height:0;
+  position:absolute;
+  border-left: 8px solid transparent;
+  border-bottom: 8px solid #800808;
+  border-right:8px solid transparent;
+  top:-8px;
+  right: 3px;
+}
 .f-right {
     float: right;
 }
