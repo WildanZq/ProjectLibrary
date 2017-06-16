@@ -60,6 +60,34 @@ class admin extends CI_Controller{
       }
   }
 
+  function getStatusPeminjam() {
+      if ($this->input->post('tgl')) {
+          $date = $this->input->post('tgl');
+          $kembali = strtotime($date);
+          $now = strtotime(date('Y-m-d'));
+          $work_days = 0;
+          $result = [];
+          if ($kembali <= $now) {
+              while ($kembali <= $now) {
+                  $week = date('N', $kembali);
+                  if ($week < 5) {
+                      $work_days++;
+                  }
+                  $kembali += 86400; // tambah 1 hari
+              }
+              $denda = $this->m_admin->GetDataSetting()->terlambat;
+            //   $result = 'red|'.$work_days*$denda;
+              $result = [ "status" => "red", "sisa" => $work_days*$denda ];
+          } else {
+              $sisa = floor(($kembali - $now) / (60 * 60 * 24));
+              $result = [ "status" => "green", "sisa" => $sisa ];
+          }
+          echo json_encode($result);
+      } else {
+          redirect('404');
+      }
+  }
+
   function addPeminjaman() {
       if ($this->input->post('submit')) {
           $db = $this->m_admin->AddPeminjaman();
@@ -108,6 +136,7 @@ class admin extends CI_Controller{
           $terlambat = $this->input->post('terlambat');
           $hilang = $this->input->post('hilang');
           $print = $this->input->post('print');
+          $reward = $this->input->post('reward');
           $bool = false;
           if (!empty($terlambat)) {
               if ($this->m_admin->ChangeSetting(['terlambat' => $terlambat]) == true) $bool = true;
@@ -119,6 +148,10 @@ class admin extends CI_Controller{
           }
           if (!empty($print)) {
               if ($this->m_admin->ChangeSetting(['print' => $print]) == true) $bool = true;
+              else $bool = false;
+          }
+          if (!empty($reward)) {
+              if ($this->m_admin->ChangeSetting(['reward' => $reward]) == true) $bool = true;
               else $bool = false;
           }
           if ($bool == true)

@@ -24,24 +24,20 @@ class M_Admin extends CI_Model {
 
     public function GetPeminjaman($where)
     {
-        return $this->db->query("SELECT * FROM peminjaman INNER JOIN siswa ON peminjaman.id_siswa = siswa.id_siswa
+        return $this->db->query("SELECT * FROM peminjaman INNER JOIN anggota ON peminjaman.id_anggota = anggota.id_anggota
             INNER JOIN barcode ON peminjaman.barcode = barcode.barcode INNER JOIN buku ON
             barcode.id_buku = buku.id_buku WHERE $where")->result();
     }
 
     public function GetSpecificSiswa($where)
     {
-        return $this->db->query("SELECT * FROM siswa WHERE $where")->result();
+        return $this->db->query("SELECT * FROM anggota WHERE $where")->result();
     }
 
     public function ChangeSetting($field)
     {
         $this->db->update('setting', $field);
-        if ($this->db->affected_rows() > 0) {
-            return true;
-        } else {
-            return false;
-        }
+        return true;
     }
 
     public function AddPeminjaman()
@@ -66,11 +62,14 @@ class M_Admin extends CI_Model {
                 'jurusan'       => $jurusan,
                 'nomor_kelas'   => $nkelas
             ];
-            $id = $this->GetData($where, 'siswa')->id_siswa;
+            $id = $this->GetData($where, 'anggota')->id_anggota;
             $this->db->insert('peminjaman', array(
-                'tanggal'   => date('Y-m-d'),
-                'id_siswa'  => $id,
-                'barcode'   => $barcode
+                // 'id_pengurus'   => $this->session->userdata('logged_admin_id'),
+                'id_pengurus'   => 1,
+                'tanggal'       => date('Y-m-d'),
+                'deadline'      => date('Y-m-d', strtotime("+1 week")),
+                'id_anggota'    => $id,
+                'barcode'       => $barcode
             ));
             if ($this->db->affected_rows() == 1) {
                 $id_buku = $this->GetData(['barcode' => $barcode], 'barcode')->id_buku;
@@ -92,12 +91,18 @@ class M_Admin extends CI_Model {
     public function SetKembali($data)
     {
         $id_peminjaman = $data[0];
-        $id_buku = $data[1];
-        $denda = $data[2];
+        $data_peminjaman = $this->GetData(['id_peminjaman' => $id_peminjaman], 'peminjaman');
+        $id_buku = $this->GetData(array('barcode' => $data_peminjaman->barcode), 'barcode')->id_buku;
+        $denda = $data[1];
 
         $this->db->where('id_peminjaman', $id_peminjaman)->update('peminjaman', array(
-            'kembali'   => 1,
-            'denda'     => $denda
+            'kembali'   => 1
+        ));
+        $this->db->insert('pengembalian', array(
+            'id_peminjaman' => $id_peminjaman,
+            'id_pengurus'   => $data_peminjaman->id_pengurus,
+            'tgl_kembali'   => date('Y-m-d'),
+            'denda'         => $denda
         ));
         if ($this->db->affected_rows() > 0) {
             $this->db->query("UPDATE buku SET jumlah = jumlah + 1 WHERE id_buku = '$id_buku'");
@@ -114,12 +119,12 @@ class M_Admin extends CI_Model {
     public function SetHilang($data)
     {
         $id_peminjaman = $data[0];
-        $id_buku = $data[1];
-        $denda = $data[2];
+        $data_peminjaman = $this->GetData(['id_peminjaman' => $id_peminjaman], 'peminjaman');
+        $id_buku = $this->GetData(array('barcode' => $data_peminjaman->barcode), 'barcode')->id_buku;
+        $denda = $data[1];
 
         $this->db->where('id_peminjaman', $id_peminjaman)->update('peminjaman', array(
-            'kembali'   => 1,
-            'denda'     => $denda
+            'kembali'   => 1
         ));
         if ($this->db->affected_rows() > 0) {
             return true;

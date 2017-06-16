@@ -29,9 +29,9 @@ function cariPinjam() {
                 var tmp = [];
                 for (var i = 0; i < response.length; i++) {
                     temp = i;
-                    var istatus = getStatus(response[i].tanggal);
+                    var istatus = getStatus(response[i].deadline);
                     for (var j = i + 1; j < response.length; j++) {
-                        var jstatus = getStatus(response[j].tanggal);
+                        var jstatus = getStatus(response[j].deadline);
                         if (istatus[0] == jstatus[0]) {
                             if (istatus[0] == 'red') {
                                 if (jstatus[1] > istatus[1]) {
@@ -45,7 +45,7 @@ function cariPinjam() {
                         } else if (istatus[0] == 'green' && jstatus[0] == 'red') {
                             temp = j;
                             for (var k = j + 1; k < response.length; k++) {
-                                var kstatus = getStatus(response[k].tanggal);
+                                var kstatus = getStatus(response[k].deadline);
                                 if (kstatus[0] == 'red') {
                                     if (kstatus[1] > jstatus[1]) {
                                         temp = k;
@@ -71,8 +71,8 @@ function cariPinjam() {
                     kelas = "<td>"+kelas+"</td>";
                     var barcode = "<td>"+response[i].barcode+"</td>";
                     var judul = "<td>"+response[i].judul+"</td>";
-                    var status = getStatus(response[i].tanggal);
-                    status[1] = status[0] == 'green' ? status[1] + ' Hari' : status[1];
+                    var status = getStatus(response[i].deadline);
+                    status[1] = status[0] == "green" ? status[1] + ' Hari' : status[1];
                     status = "<td class='"+status[0]+"'><i class='fa fa-circle' aria-hidden='true'></i> "+status[1]+"</td>";
                     var kembali = '<span class="return" onclick="kembalikan('+response[i].id_peminjaman+')">Kembali</span>';
                     var hilang = '<span class="return" onclick="hilang('+response[i].id_peminjaman+')">Hilang</span>';
@@ -90,19 +90,18 @@ function cariPinjam() {
     }
 }
 function getStatus(tgl) {
-    var result = 0;
-    var denda = getDendaTerlambat();
-    var date = new Date(tgl);
-    date.setDate(date.getDate() + 7);
-    var now = new Date();
-    while (date < now) {
-        var week = date.getDay();
-        if (week != 0 && week != 6) result++;
-        date.setDate(date.getDate() + 1);
-    }
-    var timeDiff = Math.abs(date.getTime() - now.getTime());
-    var diffDays = Math.ceil(timeDiff / (1000 * 3600 * 24));
-    result = result != 0 ? ['red', result * denda] : ['green', diffDays];
+    var result = new Array();
+    $.ajax({
+        url: 'getStatusPeminjam',
+        type: 'POST',
+        data: {tgl: tgl},
+        async: false,
+        success: function(e) {
+            var response = JSON.parse(e);
+            result[0] = response.status;
+            result[1] = parseInt(response.sisa);
+        }
+    });
     return result;
 }
 
@@ -114,13 +113,13 @@ function kembalikan(code) {
         data: {data: code}
     }).done(function(e) {
         var response = JSON.parse(e);
-        var status = getStatus(response[0].tanggal);
+        var status = getStatus(response[0].deadline);
         var denda = status[0] == 'red' ? status[1] : 0;
 
         $.ajax({
             url: 'kembalikan',
             type: 'post',
-            data: {data: [code, response[0].id_buku, denda]}
+            data: {data: [code, denda]}
         })
         .done(function(e) {
             if (e == true) cariPinjam();
@@ -142,13 +141,13 @@ function hilang(code) {
         data: {data: code}
     }).done(function(e) {
         var response = JSON.parse(e);
-        var status = getStatus(response[0].tanggal);
+        var status = getStatus(response[0].deadline);
         var denda = getDendaHilang();
 
         $.ajax({
             url: 'hilang',
             type: 'post',
-            data: {data: [code, response[0].id_buku, denda]}
+            data: {data: [code, denda]}
         })
         .done(function(e) {
             if (e == true) cariPinjam();
