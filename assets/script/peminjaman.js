@@ -1,204 +1,297 @@
-// -------------------- menampilkan peminjaman --------------------
-var search = $('.searchT').val();
-var kategori = $('.selectS').val();
-loadin();
-cariPinjam();
-$('.searchT').on('input', function(event) {
-    event.preventDefault();
-    search = this.value.trim();
-    cariPinjam();
-});
-$('.selectS').change(function(event) {
-    kategori = $(this).val();
+$(document).ready(function() {
+    // -------------------- menampilkan peminjaman --------------------
+    var search = $('.searchT').val();
+    var kategori = $('.selectS').val();
+    var current_page = 1;
+    var records_per_page = 5;
+    var total_row = 0;
+    var total_page = 0;
+    var pagination = false;
     loadin();
     cariPinjam();
-});
-function cariPinjam() {
-    if (kategori != "" || search != "") {
-        var data = [kategori, search];
-        $.ajax({
-            url: 'getPeminjam',
-            type: 'post',
-            data: {data: data}
-        }).done(function(data) {
-            setTimeout(function(){
-                var response = JSON.parse(data);
-                var row = "";
-                var kelas = "";
-                var temp = 0;
-                var tmp = [];
-                for (var i = 0; i < response.length; i++) {
-                    temp = i;
-                    var istatus = getStatus(response[i].deadline);
-                    for (var j = i + 1; j < response.length; j++) {
-                        var jstatus = getStatus(response[j].deadline);
-                        if (istatus[0] == jstatus[0]) {
-                            if (istatus[0] == 'red') {
-                                if (jstatus[1] > istatus[1]) {
-                                    temp = j;
-                                }
-                            } else {
-                                if (jstatus[1] < istatus[1]) {
-                                    temp = j;
-                                }
-                            }
-                        } else if (istatus[0] == 'green' && jstatus[0] == 'red') {
-                            temp = j;
-                            for (var k = j + 1; k < response.length; k++) {
-                                var kstatus = getStatus(response[k].deadline);
-                                if (kstatus[0] == 'red') {
-                                    if (kstatus[1] > jstatus[1]) {
-                                        temp = k;
+    $('.searchT').on('input', function(event) {
+        event.preventDefault();
+        search = this.value.trim();
+        cariPinjam();
+    });
+    $('.selectS').change(function(event) {
+        kategori = $(this).val();
+        loadin();
+        cariPinjam();
+    });
+    function cariPinjam() {
+        if (kategori != "" || search != "") {
+            var data = [kategori, search];
+            $.ajax({
+                url: 'getPeminjam',
+                type: 'post',
+                async: false,
+                data: {data: data}
+            }).done(function(data) {
+                setTimeout(function(){
+                    var response = JSON.parse(data);
+                    var row = "";
+                    var kelas = "";
+                    var temp = 0;
+                    var tmp = [];
+                    for (var i = 0; i < response.length; i++) {
+                        temp = i;
+                        var istatus = getStatus(response[i].deadline);
+                        for (var j = i + 1; j < response.length; j++) {
+                            var jstatus = getStatus(response[j].deadline);
+                            if (istatus[0] == jstatus[0]) {
+                                if (istatus[0] == 'red') {
+                                    if (jstatus[1] > istatus[1]) {
+                                        temp = j;
+                                    }
+                                } else {
+                                    if (jstatus[1] < istatus[1]) {
+                                        temp = j;
                                     }
                                 }
+                            } else if (istatus[0] == 'green' && jstatus[0] == 'red') {
+                                temp = j;
+                                for (var k = j + 1; k < response.length; k++) {
+                                    var kstatus = getStatus(response[k].deadline);
+                                    if (kstatus[0] == 'red') {
+                                        if (kstatus[1] > jstatus[1]) {
+                                            temp = k;
+                                        }
+                                    }
+                                }
+                                break;
                             }
-                            break;
                         }
+                        tmp = response[i];
+                        response[i] = response[temp];
+                        response[temp] = tmp;
                     }
-                    tmp = response[i];
-                    response[i] = response[temp];
-                    response[temp] = tmp;
+                    for (var i = 0; i < response.length; i++) {
+                        var nama = "<td>"+response[i].nama_lengkap+"</td>";
+                        var now = new Date().getFullYear();
+                        if (now - 1992 == response[i].angkatan)
+                            kelas = "X "+response[i].jurusan+" "+response[i].nomor_kelas;
+                        if ((now - 1992) - 1 == response[i].angkatan)
+                            kelas = "XI "+response[i].jurusan+" "+response[i].nomor_kelas;
+                        if ((now - 1992) - 2 == response[i].angkatan)
+                            kelas = "XII "+response[i].jurusan+" "+response[i].nomor_kelas;
+                        kelas = "<td>"+kelas+"</td>";
+                        var barcode = "<td>"+response[i].barcode+"</td>";
+                        var judul = "<td>"+response[i].judul+"</td>";
+                        var status = getStatus(response[i].deadline);
+                        status[1] = status[0] == "green" ? status[1] + ' Hari' : status[1];
+                        status = "<td class='"+status[0]+"'><i class='fa fa-circle' aria-hidden='true'></i> "+status[1]+"</td>";
+                        var kembali = '<span class="return" onclick="kembalikan('+response[i].id_peminjaman+')">Kembali</span>';
+                        var hilang = '<span class="return" onclick="hilang('+response[i].id_peminjaman+')">Hilang</span>';
+                        var aksi = '<td>' + kembali + hilang + '</td>';
+                        row += "<tr>" + nama + kelas + barcode + judul + status + aksi + "</tr>";
+                    }
+                    $('#list').html(row);
+                    current_page = 1;
+                    changePage(current_page, records_per_page, total_row);
+                    loadout();
+                }, 500);
+            }).fail(function() {
+                console.log("error");
+            });
+        } else {
+            alert('kategori dan input kosong');
+        }
+    }
+    setTimeout(function(){
+        pagination = true;
+        total_row = $("#list").find('tr').length;
+        total_page = Math.ceil(total_row / records_per_page);
+        for (var i = 0; i < total_page; i++) {
+            $('#btn_next').before('<div class="page" data-target="'+(i+1)+'">'+(i+1)+'</div>');
+            // if (i < 10 && i > total_page - 3) {
+            //     $('#btn_next').before('<div class="page" data-target="'+(i+1)+'">'+(i+1)+'</div>');
+            // } else {
+            //     $('#btn_next').before('<div class="page" data-target="'+(i+1)+'">...</div>');
+            // }
+        }
+        changePage(current_page, records_per_page, total_row);
+        $('.page').click(function(event) {
+            var attr = $(this).attr('id');
+            if ( typeof attr !== typeof undefined && attr !== false) {
+                if (attr === "btn_next") {
+                    nextPage();
+                } else {
+                    prevPage();
                 }
-                for (var i = 0; i < response.length; i++) {
-                    var nama = "<td>"+response[i].nama_lengkap+"</td>";
-                    var now = new Date().getFullYear();
-                    if (now - 1992 == response[i].angkatan)
-                        kelas = "X "+response[i].jurusan+" "+response[i].nomor_kelas;
-                    if ((now - 1992) - 1 == response[i].angkatan)
-                        kelas = "XI "+response[i].jurusan+" "+response[i].nomor_kelas;
-                    if ((now - 1992) - 2 == response[i].angkatan)
-                        kelas = "XII "+response[i].jurusan+" "+response[i].nomor_kelas;
-                    kelas = "<td>"+kelas+"</td>";
-                    var barcode = "<td>"+response[i].barcode+"</td>";
-                    var judul = "<td>"+response[i].judul+"</td>";
-                    var status = getStatus(response[i].deadline);
-                    status[1] = status[0] == "green" ? status[1] + ' Hari' : status[1];
-                    status = "<td class='"+status[0]+"'><i class='fa fa-circle' aria-hidden='true'></i> "+status[1]+"</td>";
-                    var kembali = '<span class="return" onclick="kembalikan('+response[i].id_peminjaman+')">Kembali</span>';
-                    var hilang = '<span class="return" onclick="hilang('+response[i].id_peminjaman+')">Hilang</span>';
-                    var aksi = '<td>' + kembali + hilang + '</td>';
-                    row += "<tr>" + nama + kelas + barcode + judul + status + aksi + "</tr>";
-                }
-                $('#list').html(row);
-                loadout();
-            }, 500);
+            } else {
+                current_page = $(this).attr('data-target');
+                changePage(current_page, records_per_page, total_row);
+            }
+            event.preventDefault;
+        });
+    }, 500);
+    function changePage(c, r, t) {
+        var current_page = c;
+        var start_row = (r * (current_page - 1));
+        var last_row = r * current_page;
+        var total_row = t;
+        for (var i = 0; i < total_row; i++) {
+            if (i < last_row && i >= start_row) {
+                $('#list tr:eq('+i+')').show(0);
+            } else {
+                $('#list tr:eq('+i+')').hide(0);
+            }
+        }
+    }
+
+    function prevPage()
+    {
+        if (current_page > 1) {
+            current_page--;
+            changePage(current_page, records_per_page, total_row);
+        }
+    }
+
+    function nextPage()
+    {
+        if (current_page < total_page) {
+            current_page++;
+            changePage(current_page, records_per_page, total_row);
+        }
+    }
+
+    function getStatus(tgl) {
+        var result = new Array();
+        $.ajax({
+            url: 'getStatusPeminjam',
+            type: 'POST',
+            data: {tgl: tgl},
+            async: false,
+            success: function(e) {
+                var response = JSON.parse(e);
+                result[0] = response.status;
+                result[1] = parseInt(response.sisa);
+            }
+        });
+        return result;
+    }
+
+    function kembalikan(code) {
+        loadin();
+        $.ajax({
+            url: 'getDataPeminjam',
+            type: 'post',
+            data: {data: code}
+        }).done(function(e) {
+            var response = JSON.parse(e);
+            var status = getStatus(response[0].deadline);
+            var denda = status[0] == 'red' ? status[1] : 0;
+
+            $.ajax({
+                url: 'kembalikan',
+                type: 'post',
+                data: {data: [code, denda]}
+            })
+            .done(function(e) {
+                if (e == true) cariPinjam();
+                else console.log('failed : ' + e);
+            })
+            .fail(function() {
+                console.log("error");
+            });
         }).fail(function() {
             console.log("error");
         });
-    } else {
-        alert('kategori dan input kosong');
     }
-}
-function getStatus(tgl) {
-    var result = new Array();
-    $.ajax({
-        url: 'getStatusPeminjam',
-        type: 'POST',
-        data: {tgl: tgl},
-        async: false,
-        success: function(e) {
+
+    function hilang(code) {
+        loadin();
+        $.ajax({
+            url: 'getDataPeminjam',
+            type: 'post',
+            data: {data: code}
+        }).done(function(e) {
             var response = JSON.parse(e);
-            result[0] = response.status;
-            result[1] = parseInt(response.sisa);
-        }
-    });
-    return result;
-}
+            var status = getStatus(response[0].deadline);
+            var denda = getDendaHilang();
 
-function kembalikan(code) {
-    loadin();
-    $.ajax({
-        url: 'getDataPeminjam',
-        type: 'post',
-        data: {data: code}
-    }).done(function(e) {
-        var response = JSON.parse(e);
-        var status = getStatus(response[0].deadline);
-        var denda = status[0] == 'red' ? status[1] : 0;
+            $.ajax({
+                url: 'hilang',
+                type: 'post',
+                data: {data: [code, denda]}
+            })
+            .done(function(e) {
+                if (e == true) cariPinjam();
+                else console.log('failed : ' + e);
+            })
+            .fail(function() {
+                console.log("error");
+            });
+        }).fail(function() {
+            console.log("error");
+        });
+    }
 
+    // -------------------- tambah peminjaman --------------------
+    var kelas = $('#kelas');
+    var nkelas = $('#nkelas');
+    function getName() {
+        var availableName = [];
+        var kls = kelas.val();
+        var nkls = nkelas.val();
         $.ajax({
-            url: 'kembalikan',
+            url: '../API/getSiswa',
             type: 'post',
-            data: {data: [code, denda]}
+            data: {data : [kls, nkls]}
         })
         .done(function(e) {
-            if (e == true) cariPinjam();
-            else console.log('failed : ' + e);
+            var response = JSON.parse(e);
+            for (var i = 0; i < response.length; i++) {
+                availableName.push(response[i].nama_lengkap);
+            }
+            return availableName;
         })
         .fail(function() {
             console.log("error");
+            availableName = "";
         });
-    }).fail(function() {
-        console.log("error");
-    });
-}
-
-function hilang(code) {
-    loadin();
-    $.ajax({
-        url: 'getDataPeminjam',
-        type: 'post',
-        data: {data: code}
-    }).done(function(e) {
-        var response = JSON.parse(e);
-        var status = getStatus(response[0].deadline);
-        var denda = getDendaHilang();
-
-        $.ajax({
-            url: 'hilang',
-            type: 'post',
-            data: {data: [code, denda]}
-        })
-        .done(function(e) {
-            if (e == true) cariPinjam();
-            else console.log('failed : ' + e);
-        })
-        .fail(function() {
-            console.log("error");
-        });
-    }).fail(function() {
-        console.log("error");
-    });
-}
-
-// -------------------- tambah peminjaman --------------------
-var kelas = $('#kelas');
-var nkelas = $('#nkelas');
-function getName() {
-    var availableName = [];
-    var kls = kelas.val();
-    var nkls = nkelas.val();
-    $.ajax({
-        url: '../API/getSiswa',
-        type: 'post',
-        data: {data : [kls, nkls]}
-    })
-    .done(function(e) {
-        var response = JSON.parse(e);
-        for (var i = 0; i < response.length; i++) {
-            availableName.push(response[i].nama_lengkap);
-        }
         return availableName;
-    })
-    .fail(function() {
-        console.log("error");
-        availableName = "";
+    }
+    var availableName = getName();
+    kelas.change(function(event) {
+        availableName = getName();
+        autocomplete();
     });
-    return availableName;
-}
-var availableName = getName();
-kelas.change(function(event) {
-    availableName = getName();
-    autocomplete();
-});
-nkelas.on('input', function(event) {
-    availableName = getName();
-    autocomplete();
-});
-function autocomplete() {
-    $( "#nama" ).autocomplete({
-        minLength:0,
-        delay:0,
-        source: availableName
+    nkelas.on('input', function(event) {
+        availableName = getName();
+        autocomplete();
     });
-}
+    function autocomplete() {
+        $( "#nama" ).autocomplete({
+            minLength:0,
+            delay:0,
+            source: availableName
+        });
+    }
+
+    // PAGINATION
+    // $('#data').after('<div id="nav"></div>');
+    // var rowsShown = 4;
+    // // var rowsTotal = $('#data tbody tr').length;
+    // var rowsTotal = $('tbody#list tr').length;
+    // var numPages = rowsTotal/rowsShown;
+    // for(i = 0;i < numPages;i++) {
+    //     var pageNum = i + 1;
+    //     $('.pagination .main').append('<div class="page" rel="'+i+'">'+pageNum+'</div> ');
+    // }
+    // $('tbody#list tr').hide();
+    // $('tbody#list tr').slice(0, rowsShown).show();
+    // $('.pagination .main .page:first').addClass('active');
+    // $('.pagination .main .page').bind('click', function(){
+    //
+    // $('.pagination .main .page').removeClass('active');
+    //     $(this).addClass('active');
+    //     var currPage = $(this).attr('rel');
+    //     var startItem = currPage * rowsShown;
+    //     var endItem = startItem + rowsShown;
+    //     $('tbody#list tr').css('opacity','0.0').hide().slice(startItem, endItem).
+    //         css('display','table-row').animate({opacity:1}, 300);
+    // });
+
+});
