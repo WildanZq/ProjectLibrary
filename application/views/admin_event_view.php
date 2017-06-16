@@ -32,9 +32,11 @@
                             <img class="img" src="<?php echo base_url(); ?>assets/images/blank.png" style="height:auto;width:100%">
                             <label for="gbrE" class="label-file"><i class="fa fa-upload" aria-hidden="true"></i> Pilih gambar</label>
                         </div>
+                        <div style="min-width:200px;width: 95%">
+                            <input type="text" placeholder="Judul" style="width: calc(100% - 40px);text-align:center;">
+                        </div>
                         <div>
                             <input id="gbrE" type="file" onchange="readURL(this,0)" class="hidden">
-                            <input type="text" placeholder="Judul">
                             <label>Mulai Dari:</label>
                             <input type="date">
                             <label>Sampai:</label>
@@ -42,21 +44,6 @@
                         </div>
                         <textarea name="konten" class="ckeditor" required></textarea>
                         <div>
-                            <label>Pemenang:</label>
-                            <select>
-                                <option value="0">0</option>
-                                <option value="1">1</option>
-                                <option value="2">2</option>
-                                <option value="3">3</option>
-                                <option value="4">4</option>
-                                <option value="5">5</option>
-                                <option value="6">6</option>
-                                <option value="7">7</option>
-                                <option value="8">8</option>
-                                <option value="9">9</option>
-                                <option value="10">10</option>
-                            </select>
-                            <input type="number" placeholder="Reward (Points)" style="width:140px" min="0">
                             <input type="submit">
                         </div>
                     </form>
@@ -65,8 +52,12 @@
                     <div class="search-book">
                         <form action="">
                             <label>Search:</label>
-                            <div class="s-wrapper" style="width: auto">
-                                <input type="date" oninput="loadin()" onreset="loadout()"><i class="s-icon fa fa-search" aria-hidden="true" style="top: 5px"></i>
+                            <div>
+                                <input type="date" oninput="loadin()" onreset="loadout()">
+                            </div>
+                            <div class="s-wrapper">
+                                <input class="searchT" type="text" placeholder="Judul" oninput="loadin()">
+                                <i class="s-icon fa fa-search" aria-hidden="true"></i>
                             </div>
                         </form>
                     </div>
@@ -78,42 +69,42 @@
                             <th>Dari</th>
                             <th>Sampai</th>
                             <th>Judul</th>
-                            <th>Reward</th>
+                            <th>Views</th>
                             <th><i class="fa fa-pencil-square-o" aria-hidden="true"></i></th>
                         </tr>
                         <tr>
                             <td>20/03/2017</td>
                             <td>20/03/2017</td>
                             <td>Judul Event</td>
-                            <td class="gold"><i class="fa fa-star" aria-hidden="true"></i> 1000</td>
+                            <td class="gold">1000</td>
                             <td><span class="return" onclick="location.href='./edit_event';">Edit</span><span class="return">Hapus</span></td>
                         </tr>
                         <tr>
                             <td>20/03/2017</td>
                             <td>20/03/2017</td>
                             <td>Judul Event</td>
-                            <td class="gold"><i class="fa fa-star" aria-hidden="true"></i> 1000</td>
+                            <td class="gold">1000</td>
                             <td><span class="return" onclick="location.href='./edit_event';">Edit</span><span class="return">Hapus</span></td>
                         </tr>
                         <tr>
                             <td>20/03/2017</td>
                             <td>20/03/2017</td>
                             <td>Judul Event</td>
-                            <td class="gold"><i class="fa fa-star" aria-hidden="true"></i> 1000</td>
+                            <td class="gold">1000</td>
                             <td><span class="return" onclick="location.href='./edit_event';">Edit</span><span class="return">Hapus</span></td>
                         </tr>
                         <tr>
                             <td>20/03/2017</td>
                             <td>20/03/2017</td>
                             <td>Judul Event</td>
-                            <td class="gold"><i class="fa fa-star" aria-hidden="true"></i> 1000</td>
+                            <td class="gold">1000</td>
                             <td><span class="return" onclick="location.href='./edit_event';">Edit</span><span class="return">Hapus</span></td>
                         </tr>
                         <tr>
                             <td>20/03/2017</td>
                             <td>20/03/2017</td>
                             <td>Judul Event</td>
-                            <td class="gold"><i class="fa fa-star" aria-hidden="true"></i> 1000</td>
+                            <td class="gold">1000</td>
                             <td><span class="return" onclick="location.href='./edit_event';">Edit</span><span class="return">Hapus</span></td>
                         </tr>
                     </table>
