@@ -90,36 +90,27 @@
         <div class="wrapper" id="go">
           <div class="news-wrapper">
             <div class="posterList owl-carousel owl-theme">
-              <div class="posterItem img-parent">
-                <img src="<?php echo base_url(); ?>assets/uploads/event/1.jpg" class="img" style="width:100%;height:auto">
-                <div class="detil">
-                  <h1 onclick="location.href='event/';">Judul Event/Pengumuman Judul Event/Pengumuman</h1>
-                  <span>10 May 2017 - 10 May 2017</span>
-                </div>
-                <div class="read">
-                  <a href="#">Read More &#x226B;</a>
-                </div>
-              </div>
-              <div class="posterItem img-parent">
-                <img src="<?php echo base_url(); ?>assets/uploads/event/1.jpg" class="img" style="width:100%;height:auto">
-                <div class="detil">
-                  <h1>Judul Event/Pengumuman</h1>
-                  <span>10 May 2017 - 10 May 2017</span>
-                </div>
-                <div class="read">
-                  <a href="#">Read More &#x226B;</a>
-                </div>
-              </div>
-              <div class="posterItem img-parent">
-                <img src="<?php echo base_url(); ?>assets/uploads/event/1.jpg" class="img" style="width:100%;height:auto">
-                <div class="detil">
-                  <h1>Judul Event/Pengumuman</h1>
-                  <span>10 May 2017 - 10 May 2017</span>
-                </div>
-                <div class="read">
-                  <a href="#">Read More &#x226B;</a>
-                </div>
-              </div>
+              <?php foreach ($list_event as $le): ?>
+                  <div class="posterItem img-parent">
+                    <img src="<?php echo base_url().'assets/images/event/'.$le->foto_event; ?>" class="img" style="width:100%;height:auto">
+                    <div class="detil">
+                      <h1><?php echo $le->judul_event; ?></h1>
+                      <?php
+                      $dayF = date('d', strtotime($le->tgl_mulai));
+                      $monthF = date('M', strtotime($le->tgl_mulai));
+                      $yearF = date('Y', strtotime($le->tgl_mulai));
+                      $dateF = $dayF." ".$monthF." ".$yearF;
+                      $dayL = date('d', strtotime($le->tgl_akhir));
+                      $monthL = date('m', strtotime($le->tgl_akhir));
+                      $yearL = date('Y', strtotime($le->tgl_akhir));
+                      $dateL = $dayL." ".$monthL." ".$yearL; ?>
+                      <span><?php echo $dateF ." - ". $dateL; ?></span>
+                    </div>
+                    <div class="read">
+                      <a href="#">Read More &#x226B;</a>
+                    </div>
+                  </div>
+              <?php endforeach; ?>
               <div class="posterItem img-parent">
                 <img src="<?php echo base_url(); ?>assets/uploads/event/1.jpg" class="img" style="width:100%;height:auto">
                 <div class="detil">

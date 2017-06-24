@@ -31,7 +31,7 @@
                 <a href="<?php echo base_url(); ?>admin/siswa">Siswa</a>
                 <a href="<?php echo base_url(); ?>admin/organisasi">Organisasi</a>
                 <a class="active">Laporan</a>
-                <div class="logout">
+                <div class="logout" onclick="window.location='<?php echo base_url(); ?>admin/logout'">
                     <h1><i class="fa fa-sign-out" aria-hidden="true"></i> Logout</h1>
                 </div>
             </div>
@@ -58,6 +58,24 @@
             $(".print").on('click',function(){
                 window.print();
             });
+            var all_peminjaman = "<?php echo $all[0]; ?>";
+            all_peminjaman = all_peminjaman.split("|");
+            var all_pengembalian = "<?php echo $all[1]; ?>";
+            all_pengembalian = all_pengembalian.split("|");
+            var list_denda = "<?php echo $denda; ?>";
+            list_denda = list_denda.split("|");
+            var peminjamanx = "<?php echo $peminjaman[0]; ?>";
+            peminjamanx = peminjamanx.split("|");
+            var peminjamanxi = "<?php echo $peminjaman[1]; ?>";
+            peminjamanxi = peminjamanxi.split("|");
+            var peminjamanxii = "<?php echo $peminjaman[2]; ?>";
+            peminjamanxii = peminjamanxii.split("|");
+            var pengembalianx = "<?php echo $pengembalian[0]; ?>";
+            pengembalianx = pengembalianx.split("|");
+            var pengembalianxi = "<?php echo $pengembalian[1]; ?>";
+            pengembalianxi = pengembalianxi.split("|");
+            var pengembalianxii = "<?php echo $pengembalian[2]; ?>";
+            pengembalianxii = pengembalianxii.split("|");
         </script>
         <script>
             var all = document.getElementById("all");
@@ -67,13 +85,13 @@
                     labels: ["Januari", "Februari", "Maret", "April", "Mei", "Juni", "Juli", "Agustus", "September", "Oktober", "November", "Desember"],
                     datasets: [{
                         label: 'Peminjaman',
-                        data: [5, 11, 8, 10, 7, 12],
+                        data: all_peminjaman,
                         backgroundColor: 'rgba(255, 99, 132, 0.2)',
                         borderColor: 'rgba(255,99,132,1)',
                         borderWidth: 2
                     },{
                         label: 'Pengembalian',
-                        data: [7, 9, 10, 13, 12, 9],
+                        data: all_pengembalian,
                         backgroundColor: 'rgba(54, 162, 235, 0.2)',
                         borderColor: 'rgba(54, 162, 235, 1)',
                         borderWidth: 2
@@ -96,7 +114,7 @@
                     labels: ["Januari", "Februari", "Maret", "April", "Mei", "Juni", "Juli", "Agustus", "September", "Oktober", "November", "Desember"],
                     datasets: [{
                         label: 'Denda (Rp)',
-                        data: [2000, 1000, 1500, 3000, 1500, 2500],
+                        data: list_denda,
                         backgroundColor: 'rgba(5, 232, 153, 0.2)',
                         borderColor: 'rgb(5, 232, 153)',
                         borderWidth: 2
@@ -119,19 +137,19 @@
                     labels: ["Januari", "Februari", "Maret", "April", "Mei", "Juni", "Juli", "Agustus", "September", "Oktober", "November", "Desember"],
                     datasets: [{
                         label: 'X',
-                        data: [4, 5, 3, 3, 4, 2],
+                        data: peminjamanx,
                         backgroundColor: 'rgba(29, 41, 185, 0.1)',
                         borderColor: 'rgb(29, 41, 185)',
                         borderWidth: 2
                     },{
                         label: 'XI',
-                        data: [2, 1, 2, 3, 2, 3],
+                        data: peminjamanxi,
                         backgroundColor: 'rgba(28, 190, 35, 0.1)',
                         borderColor: 'rgb(28, 190, 35)',
                         borderWidth: 2
                     },{
                         label: 'XII',
-                        data: [2, 3, 2, 2, 2, 4],
+                        data: peminjamanxii,
                         backgroundColor: 'rgba(222, 77, 0, 0.1)',
                         borderColor: 'rgb(222, 77, 0)',
                         borderWidth: 2
@@ -154,19 +172,19 @@
                     labels: ["Januari", "Februari", "Maret", "April", "Mei", "Juni", "Juli", "Agustus", "September", "Oktober", "November", "Desember"],
                     datasets: [{
                         label: 'X',
-                        data: [4, 5, 3, 3, 4, 2],
+                        data: pengembalianx,
                         backgroundColor: 'rgba(29, 41, 185, 0.1)',
                         borderColor: 'rgb(29, 41, 185)',
                         borderWidth: 2
                     },{
                         label: 'XI',
-                        data: [2, 1, 2, 3, 2, 3],
+                        data: pengembalianxi,
                         backgroundColor: 'rgba(28, 190, 35, 0.1)',
                         borderColor: 'rgb(28, 190, 35)',
                         borderWidth: 2
                     },{
                         label: 'XII',
-                        data: [2, 3, 2, 2, 2, 4],
+                        data: pengembalianxii,
                         backgroundColor: 'rgba(222, 77, 0, 0.1)',
                         borderColor: 'rgb(222, 77, 0)',
                         borderWidth: 2
