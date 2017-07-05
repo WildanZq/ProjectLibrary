@@ -16,16 +16,16 @@ function adaptHeader() {
 $(document).ready(function(){
     adaptHeader();
     $(window).scroll(function() {
-        adaptHeader();
+      adaptHeader();
     });
     //Slide scroll effect
     $("a").on('click', function(event) {
         if (this.hash !== "") {
             event.preventDefault();
             var hash = this.hash;
-
+            var headerHeight = $('.header').height();
             $('html, body').animate({
-                scrollTop: $(hash).offset().top - 70
+                scrollTop: $(hash).offset().top - headerHeight
             }, 800, function(){
                 window.location.hash = hash;
             });

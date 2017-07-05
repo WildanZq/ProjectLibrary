@@ -69,16 +69,19 @@
                 <div onclick="closeNav()" class="dark dark-nav"></div>
                 <div class="sidebar">
                     <i onclick="closeNav()" class="fa fa-times close-nav" aria-hidden="true"></i>
+                    <a href="#">News</a>
+                    <a href="#">Dashboard</a>
+                    <a href="#">About</a>
                 </div>
             </div>
         </div>
         <div class="top">
-            <div class="bg"></div>
+            <div class="bg noTransition"></div>
             <div class="ts">
                 <img src="<?php echo base_url(); ?>assets/images/ts.jpg">
                 <img src="<?php echo base_url(); ?>assets/images/iso9001.png">
             </div>
-            <div class="wrapper">
+            <div class="wrapper noTransition">
                 <img src="<?php echo base_url(); ?>assets/images/logo.png">
                 <div class="title">
                     <h1>Perpustakaan SMK Telkom Malang</h1>
@@ -201,8 +204,10 @@
         </div>
         <footer>
           <div class="wrapper">
-            <span>SMK Telkom Malang &copy; <?php $now = new DateTime; echo $now->format('Y');  ?></span>
-            <span class="f-right">Contact</span>
+            <a href="facebook.com"><i class="fa fa-facebook-square" aria-hidden="true"></i> Perpustakaan SMK Telkom Malang</a><br>
+            <a href="instagram.com"><i class="fa fa-instagram" aria-hidden="true"></i> @ipustel</a><br>
+            <a href="twitter.com"><i class="fa fa-twitter" aria-hidden="true"></i> @sahabatpustel</a>
+            <span class="f-right">SMK Telkom Malang &copy; <?php $now = new DateTime; echo $now->format('Y');  ?></span>
           </div>
         </footer>
         <script src="<?php echo base_url(); ?>assets/script/jquery.min.js"></script>
@@ -211,6 +216,7 @@
         <script src="<?php echo base_url(); ?>assets/script/jquery.mobile.custom.min.js"></script>
         <script src="<?php echo base_url(); ?>assets/script/owl.carousel.min.js"></script>
         <script src="<?php echo base_url(); ?>assets/script/owl.js"></script>
+        <script src="<?php echo base_url(); ?>assets/script/parallax.js"></script>
         <script src="<?php echo base_url(); ?>assets/script/img.js"></script>
         <script src="<?php echo base_url(); ?>assets/script/loading.js"></script>
         <script src="<?php echo base_url(); ?>assets/script/header.js"></script>

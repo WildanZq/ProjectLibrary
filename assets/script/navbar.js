@@ -78,7 +78,7 @@ $(".fa-bars").on('click', function() {
 $(document).on("swipeleft", function() {
   showNav();
 });
-$(".posterList").on("swipeleft", function() {
+$(".posterList, p, input").on("swipeleft", function() {
   setTimeout(function() {
       closeNav(1);
   },1);
@@ -106,7 +106,7 @@ function closeNav(f) {
           "display":"none"
       });
     }
-    $(".dark").css({"animation":"fadeout .3s", "opacity":"0"});
+    $(".dark-nav").css({"animation":"fadeout .3s", "opacity":"0"});
     $(".sidebar-wrapper .sidebar").css({
         "animation":"slideout .3s", "transform":"translateX(100%)"
     });
