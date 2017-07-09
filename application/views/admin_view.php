@@ -54,10 +54,10 @@
                                 <option value="xii rpl">XII RPL</option>
                                 <option value="xii tkj">XII TKJ</option>
                             </select>
-                            <input type="number" placeholder="1" min="1" id="nkelas" name="nkelas">
+                            <input type="number" placeholder="1" min="1" id="nkelas" name="nkelas" required>
                         </div>
-                        <input type="text" placeholder="Nama" id="nama" name="nama">
-                        <input type="text" placeholder="Barcode" id="barcode" name="barcode">
+                        <input type="text" placeholder="Nama" id="nama" name="nama" required>
+                        <input type="text" placeholder="Barcode" id="barcode" name="barcode" required>
                         <input type="submit" name="submit">
                     </form>
                     <div class="search-book">

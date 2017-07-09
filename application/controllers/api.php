@@ -81,4 +81,17 @@ class API extends CI_Controller{
       echo json_encode($siswa);
   }
 
+  public function getEvent()
+  {
+      $where = 1;
+      $date = $this->input->post('data');
+      if ($date != "") {
+          $where = "'$date' <= tgl_akhir AND '$date' >= tgl_mulai";
+      } else {
+          $where = 1;
+      }
+      $event = $this->m_admin->getEvent($where);
+      echo json_encode($event);
+  }
+
 }

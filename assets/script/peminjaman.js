@@ -2,7 +2,7 @@
 var search = $('.searchT').val();
 var kategori = $('.selectS').val();
 var current_page = 1;
-var records_per_page = 5;
+var records_per_page = 2;
 var total_row = 0;
 var total_page = 0;
 var pagination = false;
@@ -80,6 +80,7 @@ function cariPinjam() {
                     var status = getStatus(response[i].deadline);
                     status[1] = status[0] == "green" ? status[1] + ' Hari' : status[1];
                     status = "<td class='"+status[0]+"'><i class='fa fa-circle' aria-hidden='true'></i> "+status[1]+"</td>";
+                    // var code = setCode(response[i].id_peminjaman);
                     var kembali = '<span class="return" onclick="kembalikan('+response[i].id_peminjaman+')">Kembali</span>';
                     var hilang = '<span class="return" onclick="hilang('+response[i].id_peminjaman+')">Hilang</span>';
                     var aksi = '<td>' + kembali + hilang + '</td>';
@@ -97,17 +98,13 @@ function cariPinjam() {
         alert('kategori dan input kosong');
     }
 }
-setTimeout(function(){
+
+setTimeout(function (){
     pagination = true;
     total_row = $("#list").find('tr').length;
     total_page = Math.ceil(total_row / records_per_page);
     for (var i = 0; i < total_page; i++) {
         $('#btn_next').before('<div class="page" data-target="'+(i+1)+'">'+(i+1)+'</div>');
-        // if (i < 10 && i > total_page - 3) {
-        //     $('#btn_next').before('<div class="page" data-target="'+(i+1)+'">'+(i+1)+'</div>');
-        // } else {
-        //     $('#btn_next').before('<div class="page" data-target="'+(i+1)+'">...</div>');
-        // }
     }
     changePage(current_page, records_per_page, total_row);
     $('.page').click(function(event) {
@@ -125,8 +122,9 @@ setTimeout(function(){
         event.preventDefault;
     });
 }, 500);
+
 function changePage(c, r, t) {
-    var current_page = c;
+    current_page = c;
     var start_row = (r * (current_page - 1));
     var last_row = r * current_page;
     var total_row = t;
@@ -136,6 +134,29 @@ function changePage(c, r, t) {
         } else {
             $('#list tr:eq('+i+')').hide(0);
         }
+    }
+    $('.page').each(function() {
+        var attr = $(this).attr('data-target');
+        if ( typeof attr !== typeof undefined && attr !== false) {
+            if (attr == current_page) {
+                $(this).addClass('active');
+            } else {
+                $(this).removeClass('active');
+            }
+        }
+    });
+    if (current_page == 1 && current_page == total_page) {
+        $('#btn_next').hide(0);
+        $('#btn_prev').hide(0);
+    } else if (current_page == 1) {
+        $('#btn_prev').hide(0);
+        $('#btn_next').show(0);
+    } else if (current_page == total_page) {
+        $('#btn_next').hide(0);
+        $('#btn_prev').show(0);
+    } else if (current_page > 1 && current_page < total_page) {
+        $('#btn_next').show(0);
+        $('#btn_prev').show(0);
     }
 }
 
@@ -171,6 +192,24 @@ function getStatus(tgl) {
     return result;
 }
 
+function setCode(hx) {
+    hx = parseInt(hx);
+    var h = hx / 16;
+    var x = hx % 16;
+    h = Math.floor(h);
+    if (x == 10) x = "A";
+    else if (x == 11) x = "B";
+    else if (x == 12) x = "C";
+    else if (x == 13) x = "D";
+    else if (x == 14) x = "E";
+    else if (x == 15) x = "F";
+    else if (x == 16) x = "0";
+    else x = x;
+    hx = h+""+x;
+    console.log(hx);
+    return hx;
+}
+
 function kembalikan(code) {
     loadin();
     $.ajax({
@@ -201,28 +240,18 @@ function kembalikan(code) {
 
 function hilang(code) {
     loadin();
-    $.ajax({
-        url: 'getDataPeminjam',
-        type: 'post',
-        data: {data: code}
-    }).done(function(e) {
-        var response = JSON.parse(e);
-        var status = getStatus(response[0].deadline);
-        var denda = getDendaHilang();
+    var denda = getDendaHilang();
 
-        $.ajax({
-            url: 'hilang',
-            type: 'post',
-            data: {data: [code, denda]}
-        })
-        .done(function(e) {
-            if (e == true) cariPinjam();
-            else console.log('failed : ' + e);
-        })
-        .fail(function() {
-            console.log("error");
-        });
-    }).fail(function() {
+    $.ajax({
+        url: 'hilang',
+        type: 'post',
+        data: {data: [code, denda]}
+    })
+    .done(function(e) {
+        if (e == true) cariPinjam();
+        else console.log('failed : ' + e);
+    })
+    .fail(function() {
         console.log("error");
     });
 }
