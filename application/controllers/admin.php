@@ -9,11 +9,6 @@ class admin extends CI_Controller{
     $this->load->model('m_admin');
   }
 
-  function index()
-  {
-    $this->load->view('login_view');
-  }
-
   function peminjaman() {
       $data = [
           'denda' => $this->m_admin->GetDataSetting()
@@ -165,6 +160,10 @@ class admin extends CI_Controller{
 
   function point() {
     $this->load->view('admin_point_view');
+  }
+
+  function buku() {
+    $this->load->view('admin_buku_view');
   }
 
   function event() {

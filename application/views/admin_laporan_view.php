@@ -35,11 +35,11 @@
                     <h1><i class="fa fa-sign-out" aria-hidden="true"></i> Logout</h1>
                 </div>
             </div>
-            <div class="nav-laporan">
-                <span class="nav-item-laporan">PP</span>
-                <span class="nav-item-laporan">Buku</span>
-                <span class="nav-item-laporan">Pengunjung</span>
-                <span class="nav-item-laporan print"><i class="fa fa-print" aria-hidden="true"></i> Print</span>
+            <div class="nav-admin">
+                <span class="nav-item-admin">PP</span>
+                <span class="nav-item-admin">Buku</span>
+                <span class="nav-item-admin">Pengunjung</span>
+                <span class="nav-item-admin print"><i class="fa fa-print" aria-hidden="true"></i> Print</span>
             </div>
             <div class="wrapper" id="print">
                 <h1>2017</h1>

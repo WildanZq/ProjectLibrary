@@ -4,29 +4,56 @@ input {
 input[type=date] {
     padding: 5px;
 }
+.plus {
+    height: 25px;
+    width: 25px;
+    padding: 5px;
+    font-size: 30px;
+    color: white;
+    background-color: #cf0e0e;
+    transition: .3s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    border-radius: 3px;
+}
+.plus:hover {
+    background-color: #b40d0d;
+}
+.min {
+    padding: 1px;
+    background-color: transparent;
+    color: #323232;
+    font-size: 17px;
+    border: 2px #404040 solid;
+}
+.min:hover {
+    background-color: #e2e2e2;
+}
 #bForm {
     font-size: .5em;
     padding: 7px 13px;
 }
-.nav-laporan {
+.nav-admin {
     position:absolute;
     right:35px;
-    top:10px;
+    top:5px;
 }
-.nav-laporan * {
+.nav-admin * {
     font-size: .5em;
 }
-.nav-item-laporan {
+.nav-item-admin {
     cursor:pointer;
     border-radius: 3px;
     padding: 5px;
     background: #ebebeb;
     border: thin solid lightgrey;
 }
-.nav-item-laporan:hover {
+.nav-item-admin:hover {
     background: #e3e3e3;
 }
-.nav-item-laporan i {
+.nav-item-admin i {
     font-size: 1.2em;
 }
 .form-wrapper #cke_konten {
@@ -40,10 +67,13 @@ input[type=date] {
     overflow: hidden;
     margin: auto;
     background: white;
-    width: 80%;
+    width: 90%;
     max-width: 400px;
     z-index: 99;
     padding-bottom: 20px;
+}
+.buku-form {
+    max-width: 800px;
 }
 .set-form form {
     padding: 20px;
@@ -53,6 +83,18 @@ input[type=date] {
     align-items: stretch;
     flex-direction: column;
 }
+.buku-form .form {
+    display: flex;
+    flex-direction: row;
+}
+.buku-form .form div {
+    width: 100%;
+    padding: 0;
+}
+.buku-form .form .scroll-down {
+    flex-shrink: 2;
+    padding-left: 5px;
+}
 .set-form form h1 {
     text-align: center;
     font-size: .8em;
@@ -60,12 +102,16 @@ input[type=date] {
 .i-wrapper {
     display: flex;
     justify-content: space-around;
+    align-items: center;
 }
 .i-wrapper label {
     width: 25%;
 }
 .i-wrapper input{
     width: 75%;
+}
+.i-wrapper .input-wrapper {
+  margin: 2px !important;
 }
 .set-form input {
     text-align: center;
