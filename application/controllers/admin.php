@@ -170,6 +170,14 @@ class admin extends CI_Controller{
     $this->load->view('admin_event_view');
   }
 
+  function siswa() {
+    $this->load->view('admin_siswa_view');
+  }
+
+  function organisasi() {
+    $this->load->view('admin_organisasi_view');
+  }
+
   function laporan() {
     $this->load->view('admin_laporan_view');
   }
