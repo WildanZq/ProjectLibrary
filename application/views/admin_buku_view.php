@@ -108,7 +108,7 @@
             </div>
             <div class="popup set-popup edit-popup">
                 <div class="dark" onclick="closeBuku()"></div>
-                <div class="set-form buku-form">
+                <div class="set-form edit-form">
                     <!-- INFO: Ganti action #form-buku lewat function getAction() pada <script> di bawah -->
                     <form method="post" id="form-buku">
                         <h1 id="h1-form-buku">Edit Buku</h1>
@@ -146,7 +146,10 @@
                             </div>
                           </div>
                         </div>
-                        <input type="submit" name="saveSetting">
+                        <div class="button-wrapper">
+                          <input class="cancel" type="button" value="Cancel" onclick="closeBuku()">
+                          <input class="save" type="submit" value="Save" name="saveBuku">
+                        </div>
                     </form>
                 </div>
             </div>
@@ -159,6 +162,7 @@
         </div>
         <script src="<?php echo base_url(); ?>assets/script/jquery.min.js"></script>
         <script src="<?php echo base_url(); ?>assets/script/loading.js"></script>
+        <script src="<?php echo base_url(); ?>assets/script/admin_table.js"></script>
         <script>
         function addBuku() {
           editBuku(true);

@@ -1,4 +1,4 @@
-input {
+input, select {
     padding: 10px;
 }
 input[type=date] {
@@ -41,17 +41,38 @@ input[type=date] {
     top:5px;
 }
 .nav-admin * {
-    font-size: .5em;
+    font-size: .5rem;
 }
 .nav-item-admin {
+    transition: .5s;
     cursor:pointer;
-    border-radius: 3px;
-    padding: 5px;
-    background: #ebebeb;
-    border: thin solid lightgrey;
+    float: left;
+    border-radius: 3px 3px 0 0;
+    padding: 5px 10px;
+    margin: 0 3px;
+    position: relative;
+    overflow: hidden;
+    border-bottom: 2px solid #f91414;
+}
+.nav-item-admin span, .nav-item-admin i {
+  transition: 0s;
+}
+.nav-item-admin:after {
+    content: '';
+    z-index: -2;
+    position: absolute;
+    left: 0;
+    top: 100%;
+    width: 100%;
+    height: 100%;
+    transition: .5s;
+    background-color: #f91414;
 }
 .nav-item-admin:hover {
-    background: #e3e3e3;
+  color: white;
+}
+.nav-item-admin:hover:after {
+    top: 0;
 }
 .nav-item-admin i {
     font-size: 1.2em;
@@ -72,7 +93,7 @@ input[type=date] {
     z-index: 99;
     padding-bottom: 20px;
 }
-.buku-form {
+.edit-form {
     max-width: 800px;
 }
 .set-form form {
@@ -83,21 +104,31 @@ input[type=date] {
     align-items: stretch;
     flex-direction: column;
 }
-.buku-form .form {
+.edit-form .form {
     display: flex;
     flex-direction: row;
 }
-.buku-form .form div {
+.edit-form .form div {
     width: 100%;
     padding: 0;
 }
-.buku-form .form .scroll-down {
+.edit-form .form .scroll-down {
     flex-shrink: 2;
     padding-left: 5px;
 }
 .set-form form h1 {
     text-align: center;
     font-size: .8em;
+}
+.set-form .kelas {
+  margin: 0;
+  width: 80% !important;
+}
+.set-form .kelas input[type="number"]:first-child {
+  margin-left: 2px;
+}
+.set-form .kelas input[type="number"]:last-child {
+  /*margin-right: 0;*/
 }
 .i-wrapper {
     display: flex;
@@ -107,17 +138,20 @@ input[type=date] {
 .i-wrapper label {
     width: 25%;
 }
-.i-wrapper input{
+.i-wrapper input {
     width: 75%;
+}
+.i-wrapper select {
+    width: 79%;
 }
 .i-wrapper .input-wrapper {
   margin: 2px !important;
 }
-.set-form input {
+.set-form input, .set-form select {
     text-align: center;
     margin: 2px;
 }
-.set-form input[type=submit] {
+.set-form:not(.edit-form) input[type=submit] {
     margin-top: 10px;
 }
 .h-wrapper td i {
@@ -234,9 +268,6 @@ input[type=date] {
 .wrapper > form {
     padding-bottom: 10px;
     border-bottom: thin solid #a0a0a0;
-}
-.h-wrapper table {
-    min-width: 990px;
 }
 .h-wrapper {
     max-width: 990px;

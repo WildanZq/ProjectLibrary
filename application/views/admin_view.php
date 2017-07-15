@@ -110,6 +110,7 @@
         <script src="<?php echo base_url(); ?>assets/script/jquery.min.js"></script>
         <script src="<?php echo base_url(); ?>assets/script/jquery-ui.min.js"></script>
         <script src="<?php echo base_url(); ?>assets/script/loading.js"></script>
+        <script src="<?php echo base_url(); ?>assets/script/admin_table.js"></script>
         <script src="<?php echo base_url(); ?>assets/script/change_option.js"></script>
         <script src="<?php echo base_url(); ?>assets/script/admin_setting.js"></script>
         <!-- ATTENTION >> delete = error  -->

@@ -39,6 +39,12 @@ form * {
     padding: 5px;
     transition: 0s;
 }
+hr {
+    padding: 0 !important;
+    height: 1px;
+    border: none;
+    background-color: #636363;
+}
 input {
     border-radius: 2px;
     border: thin solid #808080;
@@ -69,6 +75,9 @@ input[type=submit]:hover, input[type=button]:hover, button:hover {
 .noTransition {
     transition: 0s !important;
 }
+.overflow-hidden {
+  overflow: hidden;
+}
 .scroll-down {
     overflow: hidden;
     overflow-y: auto;
@@ -81,11 +90,30 @@ input[type=submit]:hover, input[type=button]:hover, button:hover {
   display: flex;
   flex-direction: column;
 }
+.save {
+  background-color: #52b1ae !important;
+}
+.save:hover {
+  background-color: #22b4b0 !important;
+}
+.cancel {
+  /*flex-shrink: 2.5;*/
+}
+.button-wrapper {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin-top: 7px;
+  width: calc(100% - 10px);
+}
+.save, .cancel {
+    width: 48%;
+}
 .label-file {
     text-align: center;
     padding: 0;
     transition: .5s;
-    font-size: 1.5em;
+    font-size: 1.3em;
     color: white;
     cursor: pointer;
     height: 100%;
@@ -184,7 +212,7 @@ footer .f-right {
     display: flex;
     justify-content: center;
     align-items: center;
-    background-color: #d3d3d3;
+    background-color: #f6f6f6;
 }
 .hidden, .disable {
     display: none !important;

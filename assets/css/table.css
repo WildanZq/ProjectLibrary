@@ -4,10 +4,10 @@
     margin: auto;
     max-width: 1100px;
     width: 90%;
-    min-height: 150px;
     box-shadow: 0 0 5px #8b8b8b;
 }
 .h-wrapper table {
+    transition: 0s;
     margin: auto;
     min-width: 1100px;
     border-collapse: collapse;

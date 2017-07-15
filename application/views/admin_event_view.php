@@ -49,8 +49,9 @@
                             <input type="date" name="tgl_akhir" required>
                         </div>
                         <textarea name="konten" class="ckeditor" required></textarea>
-                        <div>
-                            <input type="submit" name="submit">
+                        <div class="button-wrapper">
+                          <input class="cancel" type="button" value="Cancel" onclick="showForm()">
+                          <input class="save" type="submit" value="Save" name="submit">
                         </div>
                     </form>
                 </div>
@@ -102,6 +103,7 @@
         <script src="<?php echo base_url(); ?>assets/script/jquery-ui.min.js"></script>
         <script src="<?php echo base_url(); ?>assets/ckeditor/ckeditor.js"></script>
         <script src="<?php echo base_url(); ?>assets/script/loading.js"></script>
+        <script src="<?php echo base_url(); ?>assets/script/admin_table.js"></script>
         <script src="<?php echo base_url(); ?>assets/script/img_input.js"></script>
         <script src="<?php echo base_url(); ?>assets/script/event.js"></script>
         <script>

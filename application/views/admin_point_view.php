@@ -170,6 +170,7 @@
         </div>
         <script src="<?php echo base_url(); ?>assets/script/jquery.min.js"></script>
         <script src="<?php echo base_url(); ?>assets/script/loading.js"></script>
+        <script src="<?php echo base_url(); ?>assets/script/admin_table.js"></script>
         <script src="<?php echo base_url(); ?>assets/script/admin_setting.js"></script>
     </body>
 </html>

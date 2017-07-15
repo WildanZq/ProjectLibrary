@@ -78,7 +78,7 @@ $(".fa-bars").on('click', function() {
 $(document).on("swipeleft", function() {
   showNav();
 });
-$(".posterList, p, input").on("swipeleft", function() {
+$(".posterList, p, input, img, h1, a, select, span").on("swipeleft", function() {
   setTimeout(function() {
       closeNav(1);
   },1);
