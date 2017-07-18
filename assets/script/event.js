@@ -43,7 +43,7 @@ function cariEvent() {
             }
             $('#list').html(row);
             current_page = 1;
-            changePage(current_page, records_per_page, total_row);
+            changePage(current_page);
             loadout();
         }, 500);
     }).fail(function() {
@@ -126,7 +126,7 @@ function prevPage()
 {
     if (current_page > 1) {
         current_page--;
-        changePage(current_page, records_per_page, total_row);
+        changePage(current_page);
     }
 }
 
@@ -134,7 +134,7 @@ function nextPage()
 {
     if (current_page < total_page) {
         current_page++;
-        changePage(current_page, records_per_page, total_row);
+        changePage(current_page);
     }
 }
 
