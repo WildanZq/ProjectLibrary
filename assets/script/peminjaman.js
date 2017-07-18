@@ -2,7 +2,7 @@
 var search = $('.searchT').val();
 var kategori = $('.selectS').val();
 var current_page = 1;
-var records_per_page = 2;
+var records_per_page = 3;
 var total_row = 0;
 var total_page = 0;
 var pagination = false;
@@ -88,9 +88,9 @@ function cariPinjam() {
                 }
                 $('#list').html(row);
                 current_page = 1;
-                changePage(current_page, records_per_page, total_row);
+                changePage(current_page);
                 loadout();
-            }, 500);
+            }, 100);
         }).fail(function() {
             console.log("error");
         });
@@ -101,12 +101,7 @@ function cariPinjam() {
 
 setTimeout(function (){
     pagination = true;
-    total_row = $("#list").find('tr').length;
-    total_page = Math.ceil(total_row / records_per_page);
-    for (var i = 0; i < total_page; i++) {
-        $('#btn_next').before('<div class="page" data-target="'+(i+1)+'">'+(i+1)+'</div>');
-    }
-    changePage(current_page, records_per_page, total_row);
+    changePage(current_page);
     $('.page').click(function(event) {
         var attr = $(this).attr('id');
         if ( typeof attr !== typeof undefined && attr !== false) {
@@ -117,17 +112,27 @@ setTimeout(function (){
             }
         } else {
             current_page = $(this).attr('data-target');
-            changePage(current_page, records_per_page, total_row);
+            changePage(current_page);
         }
         event.preventDefault;
     });
-}, 500);
+}, 100);
 
-function changePage(c, r, t) {
+function changePage(c) {
     current_page = c;
-    var start_row = (r * (current_page - 1));
-    var last_row = r * current_page;
-    var total_row = t;
+    $('.page').each(function() {
+        var attr = $(this).attr('data-target');
+        if ( typeof attr !== typeof undefined && attr !== false) {
+            $(this).remove();
+        }
+    });
+    total_row = $("#list").find('tr').length;
+    total_page = Math.ceil(total_row / records_per_page);
+    for (var i = 0; i < total_page; i++) {
+        $('#btn_next').before('<div class="page" data-target="'+(i+1)+'">'+(i+1)+'</div>');
+    }
+    var start_row = (records_per_page * (current_page - 1));
+    var last_row = records_per_page * current_page;
     for (var i = 0; i < total_row; i++) {
         if (i < last_row && i >= start_row) {
             $('#list tr:eq('+i+')').show(0);
@@ -145,18 +150,23 @@ function changePage(c, r, t) {
             }
         }
     });
-    if (current_page == 1 && current_page == total_page) {
+    if (total_row > 0) {
+        if (current_page == 1 && current_page == total_page) {
+            $('#btn_next').hide(0);
+            $('#btn_prev').hide(0);
+        } else if (current_page == 1) {
+            $('#btn_prev').hide(0);
+            $('#btn_next').show(0);
+        } else if (current_page == total_page) {
+            $('#btn_next').hide(0);
+            $('#btn_prev').show(0);
+        } else if (current_page > 1 && current_page < total_page) {
+            $('#btn_next').show(0);
+            $('#btn_prev').show(0);
+        }
+    } else {
         $('#btn_next').hide(0);
         $('#btn_prev').hide(0);
-    } else if (current_page == 1) {
-        $('#btn_prev').hide(0);
-        $('#btn_next').show(0);
-    } else if (current_page == total_page) {
-        $('#btn_next').hide(0);
-        $('#btn_prev').show(0);
-    } else if (current_page > 1 && current_page < total_page) {
-        $('#btn_next').show(0);
-        $('#btn_prev').show(0);
     }
 }
 
@@ -164,7 +174,7 @@ function prevPage()
 {
     if (current_page > 1) {
         current_page--;
-        changePage(current_page, records_per_page, total_row);
+        changePage(current_page);
     }
 }
 
@@ -172,7 +182,7 @@ function nextPage()
 {
     if (current_page < total_page) {
         current_page++;
-        changePage(current_page, records_per_page, total_row);
+        changePage(current_page);
     }
 }
 

@@ -53,12 +53,7 @@ function cariEvent() {
 
 setTimeout(function (){
     pagination = true;
-    total_row = $("#list").find('tr').length;
-    total_page = Math.ceil(total_row / records_per_page);
-    for (var i = 0; i < total_page; i++) {
-        $('#btn_next').before('<div class="page" data-target="'+(i+1)+'">'+(i+1)+'</div>');
-    }
-    changePage(current_page, records_per_page, total_row);
+    changePage(current_page);
     $('.page').click(function(event) {
         var attr = $(this).attr('id');
         if ( typeof attr !== typeof undefined && attr !== false) {
@@ -69,17 +64,27 @@ setTimeout(function (){
             }
         } else {
             current_page = $(this).attr('data-target');
-            changePage(current_page, records_per_page, total_row);
+            changePage(current_page);
         }
         event.preventDefault;
     });
-}, 500);
+}, 100);
 
-function changePage(c, r, t) {
+function changePage(c) {
     current_page = c;
-    var start_row = (r * (current_page - 1));
-    var last_row = r * current_page;
-    var total_row = t;
+    $('.page').each(function() {
+        var attr = $(this).attr('data-target');
+        if ( typeof attr !== typeof undefined && attr !== false) {
+            $(this).remove();
+        }
+    });
+    total_row = $("#list").find('tr').length;
+    total_page = Math.ceil(total_row / records_per_page);
+    for (var i = 0; i < total_page; i++) {
+        $('#btn_next').before('<div class="page" data-target="'+(i+1)+'">'+(i+1)+'</div>');
+    }
+    var start_row = (records_per_page * (current_page - 1));
+    var last_row = records_per_page * current_page;
     for (var i = 0; i < total_row; i++) {
         if (i < last_row && i >= start_row) {
             $('#list tr:eq('+i+')').show(0);
