@@ -66,30 +66,6 @@
                             <td>2015</td>
                             <td><span class="return" onclick="editBuku()">Edit</span><span class="return">Hapus</span></td>
                         </tr>
-                        <tr>
-                            <td>153.4 BUZ B</td>
-                            <td>Buku Pintar Mindmap</td>
-                            <td>Tony Buzan</td>
-                            <td>PT Gramedia Pustaka Utama</td>
-                            <td>2015</td>
-                            <td><span class="return" onclick="editBuku()">Edit</span><span class="return">Hapus</span></td>
-                        </tr>
-                        <tr>
-                            <td>153.4 BUZ B</td>
-                            <td>Buku Pintar Mindmap</td>
-                            <td>Tony Buzan</td>
-                            <td>PT Gramedia Pustaka Utama</td>
-                            <td>2015</td>
-                            <td><span class="return" onclick="editBuku()">Edit</span><span class="return">Hapus</span></td>
-                        </tr>
-                        <tr>
-                            <td>153.4 BUZ B</td>
-                            <td>Buku Pintar Mindmap</td>
-                            <td>Tony Buzan</td>
-                            <td>PT Gramedia Pustaka Utama</td>
-                            <td>2015</td>
-                            <td><span class="return" onclick="editBuku()">Edit</span><span class="return">Hapus</span></td>
-                        </tr>
                     </table>
                 </div>
                 <div class="pagination-wrapper">
@@ -226,7 +202,7 @@
         };
         function getAction(form,baru) {
           if (baru == true) {
-            form.action = "baru.php";
+            form.action = "addBuku";
           } else {
             form.action = "edit.php";
           }

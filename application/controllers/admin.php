@@ -267,12 +267,46 @@ class admin extends CI_Controller{
     $this->load->view('admin_buku_view');
   }
 
+  function addBuku() {
+      if ($this->input->post('saveBuku')) {
+          $this->form_validation->set_rules('register', 'Register', 'trim|required');
+          $this->form_validation->set_rules('judul', 'Judul', 'trim|required');
+          $this->form_validation->set_rules('pengarang', 'Pengarang', 'trim|required');
+          $this->form_validation->set_rules('penerbit', 'Penerbit', 'trim|required');
+          $this->form_validation->set_rules('tahun', 'Tahun Terbit', 'trim|required');
+          $this->form_validation->set_rules('jumlah', 'Available', 'trim|required');
+          $bool = false;
+          $number = 1;
+          $barcode = [];
+          while ($bool == false) {
+              $name = 'barcode'.$number; $label = 'Barcode '.$number;
+              if (!empty($this->input->post($name))) {
+                  $this->form_validation->set_rules($name, $label, 'trim|required');
+                  $barcode[] = $this->input->post($name);
+              } else {
+                  $bool = true;
+              }
+              $number++;
+          }
+          if ($this->form_validation->run() == TRUE) {
+              if ($this->m_admin->addBuku($barcode) == true) {
+                  redirect('buku');
+              } else {
+                  echo "gagal";
+              }
+          } else {
+              echo "ggl";
+          }
+      } else {
+          $this->load->view('View File');
+      }
+
+  }
+
   function event() {
     if ($this->session->userdata(md5('logged_in'))) {
         if ($this->session->userdata(md5('logged_role')) == 'pengurus') {
             if ($this->input->post('submit')) {
-                // $this->form_validation->set_rules('judul', 'Judul', 'trim|required');
-                // $this->form_validation->set_rules('konten', 'Konten', 'trim|required|min_length[10]');
                 $tgl_mulai = $this->input->post('tgl_mulai');
                 $tgl_akhir = $this->input->post('tgl_akhir');
                 if ($tgl_mulai <= $tgl_akhir) {

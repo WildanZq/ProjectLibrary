@@ -193,6 +193,31 @@ class M_Admin extends CI_Model {
         return $this->db->order_by($field, 'desc')->limit(1)->get($table)->row($field);
     }
 
+    public function addBuku($barcode) {
+        $this->db->insert('buku', array(
+            'register'      => $this->input->post('register'),
+            'judul'         => $this->input->post('judul'),
+            'pengarang'     => $this->input->post('pengarang'),
+            'penerbit'      => $this->input->post('penerbit'),
+            'tahun_terbit'  => $this->input->post('tahun'),
+            'jumlah'        => $this->input->post('jumlah')
+        ));
+        $insert_id = $this->db->insert_id();
+        for ($i=0; $i < count($barcode); $i++) {
+            $this->db->insert('barcode', array(
+                'id_buku'   => $insert_id,
+                'barcode'   => $barcode[$i],
+                'checked'   => 1
+            ));
+        }
+        if ($this->db->affected_rows() > 0) {
+            return true;
+        } else {
+            return false;
+        }
+
+    }
+
     public function addEvent($foto)
     {
         $this->db->insert('event', array(
