@@ -127,10 +127,10 @@
                                 <input type="text" placeholder="Penerbit" id="penerbit" name="penerbit" required>
                             </div>
                             <div class="i-wrapper"><label>Tahun Terbit:</label>
-                                <input type="number" placeholder="Tahun" id="tahun" name="tahun" required>
+                                <input type="number" placeholder="Tahun" id="tahun" name="tahun" min="1" required>
                             </div>
                             <div class="i-wrapper"><label>Available:</label>
-                                <input type="number" placeholder="Available" id="jumlah" name="jumlah" required>
+                                <input type="number" placeholder="Available" id="jumlah" name="jumlah" min="1" required>
                             </div>
                           </div>
                           <div class="scroll-down" style="max-height:280px;">

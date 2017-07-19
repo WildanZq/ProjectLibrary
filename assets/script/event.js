@@ -54,7 +54,8 @@ function cariEvent() {
 setTimeout(function (){
     pagination = true;
     changePage(current_page);
-    $('.page').click(function(event) {
+    $(document).on('click', '.page', function(event) {
+        event.preventDefault();
         var attr = $(this).attr('id');
         if ( typeof attr !== typeof undefined && attr !== false) {
             if (attr === "btn_next") {
@@ -66,12 +67,10 @@ setTimeout(function (){
             current_page = $(this).attr('data-target');
             changePage(current_page);
         }
-        event.preventDefault;
     });
 }, 100);
 
-function changePage(c) {
-    current_page = c;
+function refreshButton() {
     $('.page').each(function() {
         var attr = $(this).attr('data-target');
         if ( typeof attr !== typeof undefined && attr !== false) {
@@ -83,6 +82,11 @@ function changePage(c) {
     for (var i = 0; i < total_page; i++) {
         $('#btn_next').before('<div class="page" data-target="'+(i+1)+'">'+(i+1)+'</div>');
     }
+}
+
+function changePage(c) {
+    current_page = c;
+    refreshButton();
     var start_row = (records_per_page * (current_page - 1));
     var last_row = records_per_page * current_page;
     for (var i = 0; i < total_row; i++) {
