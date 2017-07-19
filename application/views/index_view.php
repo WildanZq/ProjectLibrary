@@ -70,7 +70,7 @@
                 <div class="sidebar">
                     <i onclick="closeNav()" class="fa fa-times close-nav" aria-hidden="true"></i>
                     <a href="#">News</a>
-                    <a href="#">Dashboard</a>
+                    <a href="<?php echo base_url(); ?>dashboard">Dashboard</a>
                     <a href="#">About</a>
                 </div>
             </div>

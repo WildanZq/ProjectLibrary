@@ -30,6 +30,8 @@
                 <span class="nav-item-admin" onclick="changePage(2)">Cetak Barcode</span>
             </div>
             <div class="wrapper" id="list">
+                <div class="notif notif-danger">Tambah Buku Gagal</div>
+                <div class="notif notif-success">Tambah Buku Berhasil</div>
                 <div class="form-wrapper">
                     <form action="">
                         <label>Search:</label>

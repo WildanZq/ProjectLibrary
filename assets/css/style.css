@@ -99,6 +99,19 @@ input[type=submit]:hover, input[type=button]:hover, button:hover {
 .cancel {
   /*flex-shrink: 2.5;*/
 }
+.notif {
+  padding: 10px;
+  font-size: 15px;
+  border-radius: 5px;
+  color: white;
+  background-color: var(--notif-bg);
+}
+.notif-danger {
+  --notif-bg: rgba(208, 15, 15, 0.7);
+}
+.notif-success {
+  --notif-bg: rgba(18, 208, 15, 0.7);
+}
 .button-wrapper {
   display: flex;
   flex-direction: row;
