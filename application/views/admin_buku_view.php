@@ -25,9 +25,9 @@
                 </div>
             </div>
             <div class="nav-admin">
-                <span class="nav-item-admin" onclick="changePage(0)">List</span>
+                <span class="nav-item-admin" onclick="ChangePage(0)">List</span>
                 <span class="nav-item-admin" onclick="addBuku()">Tambah Buku</span>
-                <span class="nav-item-admin" onclick="changePage(2)">Cetak Barcode</span>
+                <span class="nav-item-admin" onclick="ChangePage(2)">Cetak Barcode</span>
             </div>
             <div class="wrapper" id="list">
                 <div class="notif notif-danger">Tambah Buku Gagal</div>
@@ -44,42 +44,46 @@
                 <div class="h-wrapper">
                     <div class="load-wrapper"><i class="fa fa-circle-o-notch"></i></div>
                     <table>
-                        <tr>
-                            <th>Register</th>
-                            <th>Judul</th>
-                            <th>Pengarang</th>
-                            <th>Penerbit</th>
-                            <th>Tahun</th>
-                            <th><i class="fa fa-handshake-o" aria-hidden="true"></i></th>
-                        </tr>
-                        <tr>
-                            <td>153.4 BUZ B</td>
-                            <td>Buku Pintar Mindmap</td>
-                            <td>Tony Buzan</td>
-                            <td>PT Gramedia Pustaka Utama</td>
-                            <td>2015</td>
-                            <td><span class="return" onclick="editBuku()">Edit</span><span class="return">Hapus</span></td>
-                        </tr>
-                        <tr>
-                            <td>153.4 BUZ B</td>
-                            <td>Buku Pintar Mindmap</td>
-                            <td>Tony Buzan</td>
-                            <td>PT Gramedia Pustaka Utama</td>
-                            <td>2015</td>
-                            <td><span class="return" onclick="editBuku()">Edit</span><span class="return">Hapus</span></td>
-                        </tr>
+                        <thead>
+                            <tr>
+                                <th>Register</th>
+                                <th>Judul</th>
+                                <th>Pengarang</th>
+                                <th>Penerbit</th>
+                                <th>Tahun</th>
+                                <th><i class="fa fa-handshake-o" aria-hidden="true"></i></th>
+                            </tr>
+                        </thead>
+                        <tbody id="list_buku">
+                            <?php if(!empty($buku)): foreach($buku as $buku): ?>
+                            <tr>
+                                <td><?php echo $buku->register; ?></td>
+                                <td><?php echo $buku->judul; ?></td>
+                                <td><?php echo $buku->pengarang; ?></td>
+                                <td><?php echo $buku->penerbit; ?></td>
+                                <td><?php echo $buku->tahun_terbit; ?></td>
+                                <td>
+                                    <span class="return" onclick="editBuku()">Edit</span>
+                                    <span class="return">Hapus</span>
+                                </td>
+                            </tr>
+                            <?php endforeach; else: ?>
+                            <p>Book(s) not available.</p>
+                            <?php endif; ?>
+                        </tbody>
                     </table>
                 </div>
                 <div class="pagination-wrapper">
                   <div class="pagination">
                     <div class="main">
-                      <div class="page"><i class="fa fa-angle-double-left" aria-hidden="true"></i></div>
-                      <div class="page active">1</div>
-                      <div class="page">2</div>
-                      <div class="page">3</div>
-                      <div class="page">...</div>
-                      <div class="page">27</div>
-                      <div class="page"><i class="fa fa-angle-double-right" aria-hidden="true"></i></div>
+                        <?php echo $this->ajax_pagination->create_links(); ?>
+                        <!-- <div class="page" id="btn_prev"><i class="fa fa-angle-double-left" aria-hidden="true"></i></div> -->
+                        <!-- <div class="page active">1</div>
+                        <div class="page">2</div>
+                        <div class="page">3</div>
+                        <div class="page">...</div>
+                        <div class="page">27</div> -->
+                        <!-- <div class="page" id="btn_next"><i class="fa fa-angle-double-right" aria-hidden="true"></i></div> -->
                     </div>
                   </div>
                 </div>
@@ -141,6 +145,7 @@
         <script src="<?php echo base_url(); ?>assets/script/jquery.min.js"></script>
         <script src="<?php echo base_url(); ?>assets/script/loading.js"></script>
         <script src="<?php echo base_url(); ?>assets/script/admin_table.js"></script>
+        <!-- <script src="<?php echo base_url(); ?>assets/script/buku.js"></script> -->
         <script>
         function addBuku() {
           editBuku(true);
@@ -204,9 +209,9 @@
         };
         function getAction(form,baru) {
           if (baru == true) {
-            form.action = "addBuku";
+            form.action = "buku/add";
           } else {
-            form.action = "edit.php";
+            form.action = "buku/edit";
           }
         }
         function closeBuku() {
@@ -216,7 +221,7 @@
             $(".set-popup").css({"display":"none"});
           },480);
         }
-        function changePage(n) {
+        function ChangePage(n) {
           var all = $('.wrapper');
           if (n==0) {
             all.css('display','none');
@@ -228,6 +233,27 @@
             all.css('display','none');
             $('#cetak').css('display','flex');
           }
+        }
+        var search = $('.searchT').val();
+        $('.searchT').on('input', function(event) {
+            event.preventDefault();
+            search = this.value.trim();
+            searchFilter(1);
+        });
+        function searchFilter(page_num) {
+            page_num = page_num ? page_num : 0;
+            $.ajax({
+                type: 'POST',
+                url: 'getBuku/'+page_num,
+                data:'page='+page_num+'&data='+search,
+                beforeSend: function () {
+                    loadin();
+                },
+                success: function (html) {
+                    $('#list_buku').html(html);
+                    loadout();
+                }
+            });
         }
         </script>
     </body>

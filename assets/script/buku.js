@@ -1,46 +1,38 @@
 // -------------------- menampilkan event --------------------
 var search = $('.searchT').val();
-var date = $('.inputD').val();
 var current_page = 1;
-var records_per_page = 1;
+var records_per_page = 10;
 var total_row = 0;
 var total_page = 0;
 loadin();
-cariEvent();
+cariBuku();
 $('.searchT').on('input', function(event) {
     event.preventDefault();
     search = this.value.trim();
-    cariEvent();
+    cariBuku();
 });
-$('.inputD').change(function(event) {
-    date = $(this).val();
-    availableEvent = getEvent();
-    autocomplete();
-    loadin();
-    cariEvent();
-});
-function cariEvent() {
-    var data = [date, search];
+function cariBuku() {
     $.ajax({
-        url: 'getEvent',
+        url: 'getBuku',
         type: 'post',
         async: false,
-        data: {data: data}
+        data: {data: search}
     }).done(function(data) {
         setTimeout(function(){
             var response = JSON.parse(data);
             var row = "";
             for (var i = 0; i < response.length; i++) {
-                var dari = "<td>" + response[i].tgl_mulai + "</td>";
-                var sampai = "<td>" + response[i].tgl_akhir + "</td>";
-                var judul = "<td>" + response[i].judul_event + "</td>";
-                var views = "<td>" + response[i].view + "</td>";
-                var edit = '<span class="return" onclick="location.href="./edit_event";">Edit</span>';
-                var hapus = '<span class="return" onclick="Delete('+ response[i].id_event +')">Hapus</span>';
+                var register = "<td>" + response[i].register + "</td>";
+                var judul = "<td>" + response[i].judul + "</td>";
+                var pengarang = "<td>" + response[i].pengarang + "</td>";
+                var penerbit = "<td>" + response[i].penerbit + "</td>";
+                var tahun = "<td>" + response[i].tahun_terbit + "</td>";
+                var edit = '<span class="return" onclick="editBuku()">Edit</span>';
+                var hapus = '<span class="return">Hapus</span>';
                 var aksi = '<td>' + edit + hapus + '</td>';
-                row += "<tr>" + dari + sampai + judul + views + aksi + "</tr>";
+                row += "<tr>" + register + judul + pengarang + penerbit + tahun + aksi + "</tr>";
             }
-            $('#list').html(row);
+            $('#list_buku').html(row);
             current_page = 1;
             changePage(current_page);
             loadout();
@@ -75,7 +67,7 @@ function refreshButton() {
             $(this).remove();
         }
     });
-    total_row = $("#list").find('tr').length;
+    total_row = $("#list_buku").find('tr').length;
     total_page = Math.ceil(total_row / records_per_page);
     for (var i = 0; i < total_page; i++) {
         $('#btn_next').before('<div class="page" data-target="'+(i+1)+'">'+(i+1)+'</div>');
@@ -89,9 +81,9 @@ function changePage(c) {
     var last_row = records_per_page * current_page;
     for (var i = 0; i < total_row; i++) {
         if (i < last_row && i >= start_row) {
-            $('#list tr:eq('+i+')').show(0);
+            $('#list_buku tr:eq('+i+')').show(0);
         } else {
-            $('#list tr:eq('+i+')').hide(0);
+            $('#list_buku tr:eq('+i+')').hide(0);
         }
     }
     $('.page').each(function() {
@@ -147,7 +139,7 @@ function Delete(code) {
         type: 'post',
         data: {data: code}
     }).done(function(e) {
-        if (e == "true") cariEvent();
+        if (e == "true") cariBuku();
         else console.log('failed : ' + e);
     }).fail(function() {
         console.log("error");
@@ -155,29 +147,33 @@ function Delete(code) {
 }
 
 // -------------------- autocomplete search event --------------------
-function getEvent() {
-    var availableEvent = [];
-    $.ajax({
-        url: '../API/getEvent',
-        type: 'post',
-        data: {data : date}
-    }).done(function(e) {
-        var response = JSON.parse(e);
-        for (var i = 0; i < response.length; i++) {
-            availableEvent.push(response[i].judul_event);
-        }
-        return availableEvent;
-    }).fail(function() {
-        console.log("error");
-        availableEvent = "";
-    });
-    return availableEvent;
-}
-var availableEvent = getEvent();
-function autocomplete() {
-    $( "#search" ).autocomplete({
-        minLength:0,
-        delay:0,
-        source: availableEvent
-    });
-}
+// function getBuku() {
+//     var availableBuku = [];
+//     $.ajax({
+//         url: '../API/getEvent',
+//         type: 'post',
+//         data: {data : date}
+//     }).done(function(e) {
+//         var response = JSON.parse(e);
+//         for (var i = 0; i < response.length; i++) {
+//             availableBuku.push(response[i].judul);
+//             availableBuku.push(response[i].pengarang);
+//             availableBuku.push(response[i].penerbit);
+//             availableBuku.push(response[i].tahun_terbit);
+//             availableBuku.push(response[i].register);
+//         }
+//         return availableBuku;
+//     }).fail(function() {
+//         console.log("error");
+//         availableBuku = "";
+//     });
+//     return availableBuku;
+// }
+// var availableBuku = getEvent();
+// function autocomplete() {
+//     $( "#search" ).autocomplete({
+//         minLength:0,
+//         delay:0,
+//         source: availableBuku
+//     });
+// }

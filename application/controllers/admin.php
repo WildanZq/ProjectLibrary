@@ -7,6 +7,8 @@ class admin extends CI_Controller{
   {
     parent::__construct();
     $this->load->model('m_admin');
+    $this->load->library('Ajax_pagination');
+    $this->perPage = 10;
   }
 
   function index()
@@ -264,43 +266,113 @@ class admin extends CI_Controller{
   }
 
   function buku() {
-    $this->load->view('admin_buku_view');
+    if ($this->session->userdata(md5('logged_in'))) {
+        if ($this->session->userdata(md5('logged_role')) == 'pengurus') {
+            if ($this->input->post('saveBuku')) {
+                $this->form_validation->set_rules('register', 'Register', 'trim|required');
+                $this->form_validation->set_rules('judul', 'Judul', 'trim|required');
+                $this->form_validation->set_rules('pengarang', 'Pengarang', 'trim|required');
+                $this->form_validation->set_rules('penerbit', 'Penerbit', 'trim|required');
+                $this->form_validation->set_rules('tahun', 'Tahun Terbit', 'trim|required');
+                $this->form_validation->set_rules('jumlah', 'Available', 'trim|required');
+                $bool = false;
+                $number = 1;
+                $barcode = [];
+                while ($bool == false) {
+                    $name = 'barcode'.$number; $label = 'Barcode '.$number;
+                    if (!empty($this->input->post($name))) {
+                        $this->form_validation->set_rules($name, $label, 'trim|required');
+                        $barcode[] = $this->input->post($name);
+                    } else {
+                        $bool = true;
+                    }
+                    $number++;
+                }
+                if ($this->form_validation->run() == TRUE) {
+                    $status = $this->uri->segment(3);
+                    if ($status == "add") {
+                        if ($this->m_admin->addBuku($barcode) == true) {
+                            redirect('buku');
+                        } else {
+                            echo "gagal";
+                        }
+                    } else if ($status == "edit") {
+                        # code...
+                    }
+                } else {
+                    echo "ggl";
+                }
+            } else {
+                $data = array();
+
+                //total rows count
+                $totalRec = count($this->m_admin->GetBuku());
+
+                //pagination configuration
+                $config['target']      = '#list_buku';
+                $config['base_url']    = base_url().'admin/getBuku';
+                $config['total_rows']  = $totalRec;
+                $config['per_page']    = $this->perPage;
+                $config['link_func']   = 'searchFilter';
+                $this->ajax_pagination->initialize($config);
+
+                //get the posts data
+                $data['buku'] = $this->m_admin->GetBuku(array('limit'=>$this->perPage));
+
+                //load the view
+                //echo $data['buku'];
+                $this->load->view('admin_buku_view', $data);
+            }
+        } else {
+            redirect('_404');
+        }
+    } else {
+        redirect('_404');
+    }
   }
 
-  function addBuku() {
-      if ($this->input->post('saveBuku')) {
-          $this->form_validation->set_rules('register', 'Register', 'trim|required');
-          $this->form_validation->set_rules('judul', 'Judul', 'trim|required');
-          $this->form_validation->set_rules('pengarang', 'Pengarang', 'trim|required');
-          $this->form_validation->set_rules('penerbit', 'Penerbit', 'trim|required');
-          $this->form_validation->set_rules('tahun', 'Tahun Terbit', 'trim|required');
-          $this->form_validation->set_rules('jumlah', 'Available', 'trim|required');
-          $bool = false;
-          $number = 1;
-          $barcode = [];
-          while ($bool == false) {
-              $name = 'barcode'.$number; $label = 'Barcode '.$number;
-              if (!empty($this->input->post($name))) {
-                  $this->form_validation->set_rules($name, $label, 'trim|required');
-                  $barcode[] = $this->input->post($name);
+  public function getBuku() {
+      if ($this->session->userdata(md5('logged_in'))) {
+          if ($this->session->userdata(md5('logged_role')) == 'pengurus') {
+              if ($this->input->post('data')) {
+                  $conditions = array();
+                  //calc offset number
+                  $page = $this->input->post('page');
+                  if (!$page) {
+                      $offset = 0;
+                  } else {
+                      $offset = $page;
+                  }
+                  //set conditions for search
+                  $conditions['data'] = $this->input->post('data');
+                  //total rows count
+                  $totalRec = count($this->m_admin->GetBuku($conditions));
+                  //pagination configuration
+                  $config['target']      = '#list_buku';
+                  $config['base_url']    = base_url().'admin/getBuku';
+                  $config['total_rows']  = $totalRec;
+                  $config['per_page']    = $this->perPage;
+                  $config['link_func']   = 'searchFilter';
+                  $this->ajax_pagination->initialize($config);
+                  //set start and limit
+                  $conditions['start'] = $offset;
+                  $conditions['limit'] = $this->perPage;
+                  //get posts data
+                  $data['buku'] = $this->m_admin->GetBuku($conditions);
+                  //load the view
+                  $this->load->view('pagination/buku_pagination', $data, false);
+                //   $data = $this->input->post('data');
+                //   $result = $this->m_admin->GetBuku();
+                //   echo json_encode($result);
               } else {
-                  $bool = true;
-              }
-              $number++;
-          }
-          if ($this->form_validation->run() == TRUE) {
-              if ($this->m_admin->addBuku($barcode) == true) {
-                  redirect('buku');
-              } else {
-                  echo "gagal";
+                  redirect('404');
               }
           } else {
-              echo "ggl";
+              redirect('_404');
           }
       } else {
-          $this->load->view('View File');
+          redirect('_404');
       }
-
   }
 
   function event() {
@@ -362,7 +434,7 @@ class admin extends CI_Controller{
                   if ($where != 1) {
                       $where = rtrim($where, "AND ");
                   }
-                  $result = $this->m_admin->getEvent($where);
+                  $result = $this->m_admin->GetEvent($where);
                   echo json_encode($result);
               } else {
                   redirect('_404');

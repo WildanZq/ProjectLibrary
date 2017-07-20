@@ -234,6 +234,28 @@ class M_Admin extends CI_Model {
         }
     }
 
+    public function GetBuku($params = array()) {
+        if (!empty($params['data'])) $data = $params['data'];
+        else $data = "";
+
+        $field = ['judul'];
+        $kondisi = array();
+        foreach ($field as $as) {
+            $kondisi[] = "$as LIKE '$data%'";
+        }
+        $query = "SELECT * FROM buku";
+        if (count($kondisi) > 0) {
+            $query .= " WHERE ".implode(' OR ', $kondisi);
+        }
+        //set start and limit
+        if (array_key_exists("start",$params) && array_key_exists("limit",$params)) {
+            $query .= " LIMIT ".$params['start'].", ".$params['limit'];
+        } elseif (!array_key_exists("start",$params) && array_key_exists("limit",$params)) {
+            $query .= " LIMIT ".$params['limit'];
+        }
+        return $this->db->query($query)->result();
+    }
+
     public function GetEvent($where)
     {
         return $this->db->query("SELECT * FROM event WHERE $where")->result();
