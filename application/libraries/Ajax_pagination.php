@@ -22,19 +22,19 @@ class Ajax_pagination{
     var $prev_link       = '&#171;';
     var $last_link       = 'Last';
     var $uri_segment     = 3;
-    var $full_tag_open   = '<div class="page">';
-    var $full_tag_close  = '</div>';
+    var $full_tag_open   = '';
+    var $full_tag_close  = '';
     var $first_tag_open  = '';
-    var $first_tag_close = '&nbsp;';
-    var $last_tag_open   = '&nbsp;';
+    var $first_tag_close = '';
+    var $last_tag_open   = '';
     var $last_tag_close  = '';
-    var $cur_tag_open    = '&nbsp;<b>';
-    var $cur_tag_close   = '</b>';
-    var $next_tag_open   = '&nbsp;';
-    var $next_tag_close  = '&nbsp;';
-    var $prev_tag_open   = '&nbsp;';
+    var $cur_tag_open    = '<div class="page active">';
+    var $cur_tag_close   = '</div>';
+    var $next_tag_open   = '';
+    var $next_tag_close  = '';
+    var $prev_tag_open   = '';
     var $prev_tag_close  = '';
-    var $num_tag_open    = '&nbsp;';
+    var $num_tag_open    = '';
     var $num_tag_close   = '';
     var $target          = '';
     var $anchor_class    = '';
@@ -143,7 +143,8 @@ class Ajax_pagination{
             $info .= $this->total_rows;
 
             $info .= ' of ' . $this->total_rows . ' | ';
-            $output .= $info;
+            // $output .= $info;
+            $output .= '';
         }
 
         // Render the "First" link
@@ -219,6 +220,6 @@ class Ajax_pagination{
 
     function getAJAXlink($count, $text) {
         $pageCount = $count?$count:0;
-        return '<a href="javascript:void(0);"' . $this->anchor_class . ' onclick="'.$this->link_func.'('.$pageCount.')">'. $text .'</a>';
+        return '<div class="page" href="javascript:void(0);"' . $this->anchor_class . ' onclick="'.$this->link_func.'('.$pageCount.')">'. $text .'</div>';
     }
 }
