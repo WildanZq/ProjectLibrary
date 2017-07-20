@@ -239,6 +239,7 @@
             event.preventDefault();
             search = this.value.trim();
             searchFilter(1);
+            console.log("<?php echo $this->session->userdata('q'); ?>");
         });
         function searchFilter(page_num) {
             page_num = page_num ? page_num : 0;

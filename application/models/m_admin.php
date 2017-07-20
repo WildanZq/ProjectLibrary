@@ -253,6 +253,8 @@ class M_Admin extends CI_Model {
         } elseif (!array_key_exists("start",$params) && array_key_exists("limit",$params)) {
             $query .= " LIMIT ".$params['limit'];
         }
+        unset($_SESSION['q']);
+        $this->session->set_userdata( 'q',$query );
         return $this->db->query($query)->result();
     }
 
