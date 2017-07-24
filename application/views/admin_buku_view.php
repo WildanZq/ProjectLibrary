@@ -188,7 +188,7 @@
             });
             /* / INFO */
             document.getElementById('form-buku').reset();
-            $('.i-wrapper:last-child').hide();
+            $('.form > div > .i-wrapper:eq(5)').hide();
             bCounter = 1; $('#barcode1').val("");
             updateBVal();
             refreshBarcode();
@@ -196,7 +196,7 @@
             $('#h1-form-buku').html('Tambah Buku');
             return;
           }
-          $('.i-wrapper:last-child').show();
+          $('.form > div > .i-wrapper:eq(5)').show();
 
           /* INFO >> Ganti action #form-buku untuk edit buku */
           $('#form-buku').submit(function() {
