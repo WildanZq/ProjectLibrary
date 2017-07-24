@@ -215,7 +215,38 @@ class M_Admin extends CI_Model {
         } else {
             return false;
         }
+    }
 
+    public function updateBuku($barcode) {
+        $id = $this->input->post('id');
+        $this->db->where('id_buku', $id)->update('buku', array(
+            'register'      => $this->input->post('register'),
+            'judul'         => $this->input->post('judul'),
+            'pengarang'     => $this->input->post('pengarang'),
+            'penerbit'      => $this->input->post('penerbit'),
+            'tahun_terbit'  => $this->input->post('tahun'),
+            'jumlah'        => $this->input->post('jumlah')
+        ));
+        $total_last_barcode = $this->db->where('id_buku', $id)->get('barcode')->num_rows();
+        $total_new_barcode = count($barcode);
+        $this->db->where('id_buku', $id)->delete('barcode');
+        for ($i=0; $i < $total_new_barcode; $i++) {
+            $this->db->insert('barcode', array(
+                'id_buku'   => $id,
+                'barcode'   => $barcode[$i],
+                'checked'   => 1
+            ));
+        }
+        $total_barcode = $total_new_barcode - $total_last_barcode;
+        if ($total_barcode != 0) {
+            $query = "UPDATE buku SET jumlah = jumlah + $total_barcode WHERE id_buku = '$id' and jumlah > 0";
+            $this->db->query($query);
+        }
+        if ($this->db->affected_rows() > 0) {
+            return true;
+        } else {
+            return false;
+        }
     }
 
     public function addEvent($foto)
@@ -234,11 +265,11 @@ class M_Admin extends CI_Model {
         }
     }
 
-    public function GetBuku($params = array()) {
+    public function GetBook($params = array()) {
         if (!empty($params['data'])) $data = $params['data'];
         else $data = "";
 
-        $field = ['judul'];
+        $field = ['judul', 'register', 'pengarang', 'penerbit', 'tahun_terbit'];
         $kondisi = array();
         foreach ($field as $as) {
             $kondisi[] = "$as LIKE '$data%'";
@@ -253,8 +284,6 @@ class M_Admin extends CI_Model {
         } elseif (!array_key_exists("start",$params) && array_key_exists("limit",$params)) {
             $query .= " LIMIT ".$params['limit'];
         }
-        unset($_SESSION['q']);
-        $this->session->set_userdata( 'q',$query );
         return $this->db->query($query)->result();
     }
 

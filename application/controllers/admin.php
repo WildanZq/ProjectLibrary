@@ -292,35 +292,51 @@ class admin extends CI_Controller{
                     $status = $this->uri->segment(3);
                     if ($status == "add") {
                         if ($this->m_admin->addBuku($barcode) == true) {
-                            redirect('buku');
+                            $this->session->set_flashdata('notif', 'Buku berhasil ditambahkan');
+                            $this->session->set_flashdata('classNotif', 'notif-success');
+                            redirect('admin/buku');
                         } else {
-                            echo "gagal";
+                            $this->session->set_flashdata('notif', 'Buku gagal ditambahkan');
+                            $this->session->set_flashdata('classNotif', 'notif-danger');
+                            redirect('admin/buku');
                         }
                     } else if ($status == "edit") {
-                        # code...
+                        if ($this->m_admin->updateBuku($barcode) === true) {
+                            $this->session->set_flashdata('notif', 'Buku berhasil diperbarui');
+                            $this->session->set_flashdata('classNotif', 'notif-success');
+                            redirect('admin/buku');
+                        } else {
+                            $this->session->set_flashdata('notif', 'Buku gagal diperbarui');
+                            $this->session->set_flashdata('classNotif', 'notif-danger');
+                            redirect('admin/buku');
+                        }
+
                     }
                 } else {
                     echo "ggl";
                 }
             } else {
-                $data = array();
-
                 //total rows count
-                $totalRec = count($this->m_admin->GetBuku());
+                $totalRec = count($this->m_admin->GetBook());
 
-                //pagination configuration
-                $config['target']      = '#list_buku';
-                $config['base_url']    = base_url().'admin/getBuku';
-                $config['total_rows']  = $totalRec;
-                $config['per_page']    = $this->perPage;
-                $config['link_func']   = 'searchFilter';
-                $this->ajax_pagination->initialize($config);
+                $this->load->library('pagination');
+                $config['base_url'] = base_url().'admin/buku';
+                $config['total_rows'] = $totalRec;
+                $config['per_page'] = 10;
+                $config['uri_segment'] = 3;
+                $config['num_links'] = 4;
+                $config['first_link'] = 'First';
+                $config['last_link'] = 'Last';
+                $config['next_link'] = '&gt;';
+                $config['prev_link'] = '&lt;';
+                $config['cur_tag_open'] = '<div class="page active">';
+                $config['cur_tag_close'] = '</div>';
+                $this->pagination->initialize($config);
 
-                //get the posts data
-                $data['buku'] = $this->m_admin->GetBuku(array('limit'=>$this->perPage));
-
-                //load the view
-                //echo $data['buku'];
+                $start = $this->uri->segment(3, 0);
+                $data['buku'] = $this->m_admin->GetBook(array('limit'=>$this->perPage, 'start'=>$start));
+                $data['pagination'] = $this->pagination->create_links();
+                $data['start'] = $start;
                 $this->load->view('admin_buku_view', $data);
             }
         } else {
@@ -331,10 +347,10 @@ class admin extends CI_Controller{
     }
   }
 
-  public function getBuku() {
+  public function getBookPagination() {
       if ($this->session->userdata(md5('logged_in'))) {
           if ($this->session->userdata(md5('logged_role')) == 'pengurus') {
-              if ($this->input->post('data')) {
+              //if ($this->input->post('data')) {
                   $conditions = array();
                   //calc offset number
                   $page = $this->input->post('page');
@@ -345,33 +361,60 @@ class admin extends CI_Controller{
                   }
                   //set conditions for search
                   $conditions['data'] = $this->input->post('data');
+                  unset($_SESSION['q']);
+                  $this->session->set_userdata( 'q',$conditions['data'] );
                   //total rows count
-                  $totalRec = count($this->m_admin->GetBuku($conditions));
+                  $totalRec = count($this->m_admin->GetBook($conditions));
                   //pagination configuration
-                  $config['target']      = '#list_buku';
-                  $config['base_url']    = base_url().'admin/getBuku';
-                  $config['total_rows']  = $totalRec;
-                  $config['per_page']    = $this->perPage;
-                  $config['link_func']   = 'searchFilter';
-                  $this->ajax_pagination->initialize($config);
+                  $this->load->library('pagination');
+                  $config['base_url'] = base_url().'admin/buku';
+                  $config['total_rows'] = $totalRec;
+                  $config['per_page'] = 10;
+                  $config['uri_segment'] = 3;
+                  $config['num_links'] = 4;
+                  $config['first_link'] = 'First';
+                  $config['last_link'] = 'Last';
+                  $config['next_link'] = '&gt;';
+                  $config['prev_link'] = '&lt;';
+                  $config['cur_tag_open'] = '<div class="page active">';
+                  $config['cur_tag_close'] = '</div>';
+                  $this->pagination->initialize($config);
                   //set start and limit
-                  $conditions['start'] = $offset;
-                  $conditions['limit'] = $this->perPage;
+                  $start = $offset;
+                  $data['buku'] = $this->m_admin->GetBook(array('limit'=>$this->perPage, 'start'=>$start));
+                  $data['pagination'] = $this->pagination->create_links();
+                  $data['start'] = $start;
                   //get posts data
-                  $data['buku'] = $this->m_admin->GetBuku($conditions);
+                  $data['buku'] = $this->m_admin->GetBook($conditions);
                   //load the view
                   $this->load->view('pagination/buku_pagination', $data, false);
-                //   $data = $this->input->post('data');
-                //   $result = $this->m_admin->GetBuku();
-                //   echo json_encode($result);
-              } else {
-                  redirect('404');
-              }
+              //} else {
+                //  redirect('404');
+              //}
           } else {
               redirect('_404');
           }
       } else {
           redirect('_404');
+      }
+  }
+
+  function getInfoBuku() {
+      if ($this->session->userdata(md5('logged_in'))) {
+          if ($this->session->userdata(md5('logged_role')) == 'pengurus') {
+              if ($this->input->post('param')) {
+                  $key = $this->input->post('param');
+                  $book = $this->m_admin->GetData(['id_buku' => $key], 'buku');
+                  $barcode = $this->m_admin->GetWhereAllData(['id_buku' => $book->id_buku], 'barcode');
+                  echo json_encode($book)."|".json_encode($barcode);
+              } else {
+                  # code...
+              }
+          } else {
+              # code...
+          }
+      } else {
+          # code...
       }
   }
 

@@ -30,8 +30,9 @@
                 <span class="nav-item-admin" onclick="ChangePage(2)">Cetak Barcode</span>
             </div>
             <div class="wrapper" id="list">
-                <div class="notif notif-danger">Tambah Buku Gagal</div>
-                <div class="notif notif-success">Tambah Buku Berhasil</div>
+                <?php if (!empty($this->session->flashdata('notif')) && !empty($this->session->flashdata('classNotif'))): ?>
+                    <div class="notif <?= $this->session->flashdata('classNotif'); ?>"><?= $this->session->flashdata('notif'); ?></div>
+                <?php endif; ?>
                 <div class="form-wrapper">
                     <form action="">
                         <label>Search:</label>
@@ -63,7 +64,7 @@
                                 <td><?php echo $buku->penerbit; ?></td>
                                 <td><?php echo $buku->tahun_terbit; ?></td>
                                 <td>
-                                    <span class="return" onclick="editBuku()">Edit</span>
+                                    <span class="return" onclick="editBuku(<?= $buku->id_buku; ?>)">Edit</span>
                                     <span class="return">Hapus</span>
                                 </td>
                             </tr>
@@ -76,7 +77,7 @@
                 <div class="pagination-wrapper">
                   <div class="pagination">
                     <div class="main">
-                        <?php echo $this->ajax_pagination->create_links(); ?>
+                        <?php echo $pagination; ?>
                         <!-- <div class="page" id="btn_prev"><i class="fa fa-angle-double-left" aria-hidden="true"></i></div> -->
                         <!-- <div class="page active">1</div>
                         <div class="page">2</div>
@@ -96,6 +97,7 @@
                         <h1 id="h1-form-buku">Edit Buku</h1>
                         <div class="form">
                           <div>
+                            <input type="hidden" name="id" value="" id="idBook">
                             <div class="i-wrapper"><label>Register:</label>
                                 <input type="text" placeholder="Register" id="register" name="register" required>
                             </div>
@@ -179,13 +181,14 @@
           $(".set-form").css({"animation":"scalein .5s ease"});
           $(document).keyup(function(e) {if (e.keyCode == 27) {closeBuku();}});
 
-          if (baru == true) {
+          if (baru === true) {
             /* INFO >> Ganti action #form-buku untuk tambah buku */
             $('#form-buku').submit(function() {
               getAction(this,true);
             });
             /* / INFO */
             document.getElementById('form-buku').reset();
+            $('.i-wrapper:last-child').hide();
             bCounter = 1; $('#barcode1').val("");
             updateBVal();
             refreshBarcode();
@@ -193,6 +196,7 @@
             $('#h1-form-buku').html('Tambah Buku');
             return;
           }
+          $('.i-wrapper:last-child').show();
 
           /* INFO >> Ganti action #form-buku untuk edit buku */
           $('#form-buku').submit(function() {
@@ -206,7 +210,29 @@
             if (bCounter == 1) {$('#minB1').css('display','none');}
           },200);
           $('#h1-form-buku').html('Edit Buku');
-        };
+          $.ajax({
+              url: 'getInfoBuku',
+              type: 'post',
+              data: {param: baru}
+          }).done(function(e) {
+              e = e.split("|");
+              var book = JSON.parse(e[0]);
+              var bar = JSON.parse(e[1]);
+              $('#idBook').val(book.id_buku);
+              $('#register').val(book.register);
+              $('#judul').val(book.judul);
+              $('#pengarang').val(book.pengarang);
+              $('#penerbit').val(book.penerbit);
+              $('#tahun').val(book.tahun_terbit);
+              $('#jumlah').val(book.jumlah);
+              bVal = []; bCounter = bar.length;
+              for (var i = 1; i <= bCounter; i++) {
+                bVal.push(bar[i-1].barcode);
+              }
+              refreshBarcode();
+              if (bCounter > 1) {$('#minB1').css('display','flex');}
+          });
+        }
         function getAction(form,baru) {
           if (baru == true) {
             form.action = "buku/add";
@@ -239,13 +265,14 @@
             event.preventDefault();
             search = this.value.trim();
             searchFilter(1);
+
             console.log("<?php echo $this->session->userdata('q'); ?>");
         });
         function searchFilter(page_num) {
             page_num = page_num ? page_num : 0;
             $.ajax({
                 type: 'POST',
-                url: 'getBuku/'+page_num,
+                url: 'getBookPagination/'+page_num,
                 data:'page='+page_num+'&data='+search,
                 beforeSend: function () {
                     loadin();
