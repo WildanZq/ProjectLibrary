@@ -211,7 +211,7 @@
           },200);
           $('#h1-form-buku').html('Edit Buku');
           $.ajax({
-              url: 'getInfoBuku',
+              url: '<?= base_url(); ?>/admin/getInfoBuku',
               type: 'post',
               data: {param: baru}
           }).done(function(e) {
