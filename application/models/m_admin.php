@@ -200,7 +200,7 @@ class M_Admin extends CI_Model {
             'pengarang'     => $this->input->post('pengarang'),
             'penerbit'      => $this->input->post('penerbit'),
             'tahun_terbit'  => $this->input->post('tahun'),
-            'jumlah'        => $this->input->post('jumlah')
+            'jumlah'        => count($barcode)
         ));
         $insert_id = $this->db->insert_id();
         for ($i=0; $i < count($barcode); $i++) {
