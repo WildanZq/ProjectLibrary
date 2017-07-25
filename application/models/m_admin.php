@@ -217,6 +217,18 @@ class M_Admin extends CI_Model {
         }
     }
 
+    public function checkBarcode($barcode) {
+        $count = 0;
+        foreach ($barcode as $bar) {
+            $count += $this->db->where('barcode', $bar)->get('barcode')->num_rows();
+        }
+        if ($count > 0) {
+            return false;
+        } else {
+            return true;
+        }
+    }
+
     public function updateBuku($barcode) {
         $id = $this->input->post('id');
         $this->db->where('id_buku', $id)->update('buku', array(

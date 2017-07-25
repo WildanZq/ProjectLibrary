@@ -93,8 +93,9 @@
                 <div class="dark" onclick="closeBuku()"></div>
                 <div class="set-form edit-form">
                     <!-- INFO: Ganti action #form-buku lewat function getAction() pada <script> di bawah -->
-                    <form method="post" id="form-buku">
+                    <form method="post" id="form-buku" onsubmit="return validateBarcode()">
                         <h1 id="h1-form-buku">Edit Buku</h1>
+                        <div class="notif notif-danger" style="display: none"></div>
                         <div class="form">
                           <div>
                             <input type="hidden" name="id" value="" id="idBook">
@@ -119,11 +120,11 @@
                           </div>
                           <div class="scroll-down" style="max-height:280px;">
                             <div class="i-wrapper">
-                              <input type="text" placeholder="Barcode 1" id="barcode1" name="barcode1" value="b1" required><span class="plus min" onclick="delBarcode(1)" id="minB1"><i class="fa fa-trash" aria-hidden="true"></i></span>
+                              <input type="text" placeholder="Barcode 1" class="barcodeValue" id="barcode1" name="barcode1" value="b1" required><span class="plus min" onclick="delBarcode(1)" id="minB1"><i class="fa fa-trash" aria-hidden="true"></i></span>
                             </div>
                             <div id="barcode">
-                              <div class="i-wrapper"><input type="text" placeholder="Barcode 2" id="barcode2" name="barcode2" value="b2" required><span class="plus min" onclick="delBarcode(2)"><i class="fa fa-trash" aria-hidden="true"></i></span></div>
-                              <div class="i-wrapper"><input type="text" placeholder="Barcode 3" id="barcode3" name="barcode3" value="b3" required><span class="plus min" onclick="delBarcode(3)"><i class="fa fa-trash" aria-hidden="true"></i></span></div>
+                              <div class="i-wrapper"><input type="text" placeholder="Barcode 2" class="barcodeValue" id="barcode2" name="barcode2" value="b2" required><span class="plus min" onclick="delBarcode(2)"><i class="fa fa-trash" aria-hidden="true"></i></span></div>
+                              <div class="i-wrapper"><input type="text" placeholder="Barcode 3" class="barcodeValue" id="barcode3" name="barcode3" value="b3" required><span class="plus min" onclick="delBarcode(3)"><i class="fa fa-trash" aria-hidden="true"></i></span></div>
                             </div>
                             <div class="i-wrapper" style="margin-top:5px;">
                               <span class="plus" onclick="addBarcode()">+</span>
@@ -149,6 +150,7 @@
         <script src="<?php echo base_url(); ?>assets/script/admin_table.js"></script>
         <!-- <script src="<?php echo base_url(); ?>assets/script/buku.js"></script> -->
         <script>
+        console.log('<?= $this->session->userdata("count")." , ".$this->session->userdata('barcode')[0]; ?>');
         function addBuku() {
           editBuku(true);
         }
@@ -171,9 +173,26 @@
         function refreshBarcode() {
           $('#barcode1').val(bVal[0]);barcode = "";
           for (var i = 2; i <= bVal.length; i++) {
-            barcode += '<div class="i-wrapper"><input type="text" placeholder="Barcode '+i+'" id="barcode'+i+'" name="barcode'+i+'" value="'+bVal[i-1]+'" required><span class="plus min" onclick="delBarcode('+i+')"><i class="fa fa-trash" aria-hidden="true"></i></span></div>';
+            barcode += '<div class="i-wrapper"><input type="text" placeholder="Barcode '+i+'" class="barcodeValue" id="barcode'+i+'" name="barcode'+i+'" value="'+bVal[i-1]+'" required><span class="plus min" onclick="delBarcode('+i+')"><i class="fa fa-trash" aria-hidden="true"></i></span></div>';
           }
           $('#barcode').html(barcode);
+        }
+        function validateBarcode() {
+            var barValue = [], boolBarcode = true;
+            $('.barcodeValue').each(function() { barValue.push($(this).val()); });
+            var sortedBarValue = barValue.slice().sort();
+            for (var i = 0; i < barValue.length - 1; i++) {
+                if (sortedBarValue[i + 1] == sortedBarValue[i]) {
+                    boolBarcode = false;
+                }
+            }
+            if (boolBarcode == false) {
+                $('#form-buku .notif').css('display', 'flex').html('barcode ada yang sama!');
+                setTimeout(function(){
+                    $('#form-buku .notif').css('display', 'none').html('');
+                }, 3500);
+            }
+            return boolBarcode;
         }
         function editBuku(baru) {
           $(".edit-popup").css({"display":"flex"});
@@ -188,7 +207,8 @@
             });
             /* / INFO */
             document.getElementById('form-buku').reset();
-            $('.form > div > .i-wrapper:eq(5)').hide();
+            $('.form > div > .i-wrapper:eq(5)').css('display','none');
+            $('#jumlah').removeAttr('required');
             bCounter = 1; $('#barcode1').val("");
             updateBVal();
             refreshBarcode();
@@ -196,7 +216,8 @@
             $('#h1-form-buku').html('Tambah Buku');
             return;
           }
-          $('.form > div > .i-wrapper:eq(5)').show();
+          $('.form > div > .i-wrapper:eq(5)').css('display','flex');
+          $('#jumlah').attr('required', true);
 
           /* INFO >> Ganti action #form-buku untuk edit buku */
           $('#form-buku').submit(function() {
