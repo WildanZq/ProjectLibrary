@@ -65,7 +65,7 @@
                                 <td><?php echo $buku->tahun_terbit; ?></td>
                                 <td>
                                     <span class="return" onclick="editBuku(<?= $buku->id_buku; ?>)">Edit</span>
-                                    <span class="return">Hapus</span>
+                                    <span class="return" onclick="hapusBuku(<?= $buku->id_buku; ?>)">Hapus</span>
                                 </td>
                             </tr>
                             <?php endforeach; else: ?>
@@ -95,7 +95,7 @@
                     <!-- INFO: Ganti action #form-buku lewat function getAction() pada <script> di bawah -->
                     <form method="post" id="form-buku" onsubmit="return validateBarcode()">
                         <h1 id="h1-form-buku">Edit Buku</h1>
-                        <div class="notif notif-danger" style="display: none"></div>
+                        <div class="notif" style="display: none"></div>
                         <div class="form">
                           <div>
                             <input type="hidden" name="id" value="" id="idBook">
@@ -150,7 +150,6 @@
         <script src="<?php echo base_url(); ?>assets/script/admin_table.js"></script>
         <!-- <script src="<?php echo base_url(); ?>assets/script/buku.js"></script> -->
         <script>
-        console.log('<?= $this->session->userdata("count")." , ".$this->session->userdata('barcode')[0]; ?>');
         function addBuku() {
           editBuku(true);
         }
@@ -187,12 +186,15 @@
                 }
             }
             if (boolBarcode == false) {
-                $('#form-buku .notif').css('display', 'flex').html('barcode ada yang sama!');
+                $('#form-buku .notif').addClass('notif-danger').css('display', 'flex').html('barcode ada yang sama!');
                 setTimeout(function(){
-                    $('#form-buku .notif').css('display', 'none').html('');
+                    $('#form-buku .notif').removeClass('notif-danger').css('display', 'none').html('');
                 }, 3500);
             }
             return boolBarcode;
+        }
+        function hapusBuku(code) {
+            window.location = "<?= base_url(); ?>/admin/Delete/buku/"+code;
         }
         function editBuku(baru) {
           $(".edit-popup").css({"display":"flex"});
@@ -256,9 +258,9 @@
         }
         function getAction(form,baru) {
           if (baru == true) {
-            form.action = "buku/add";
+            form.action = "<?= base_url(); ?>/admin/buku/add";
           } else {
-            form.action = "buku/edit";
+            form.action = "<?= base_url(); ?>/admin/buku/edit";
           }
         }
         function closeBuku() {

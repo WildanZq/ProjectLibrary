@@ -304,14 +304,19 @@ class M_Admin extends CI_Model {
         return $this->db->query("SELECT * FROM event WHERE $where")->result();
     }
 
-    public function DeleteEvent($key)
-    {
-        $where = [ 'id_event' => $key ];
-        $current_file = $this->GetData($where, 'event')->foto_event;
-        $path = './assets/images/event/'.$current_file;
-        $this->db->where($where)->delete('event');
-        if ($this->db->affected_rows() > 0) {
+    public function DeleteData($key, $table) {
+        if ($table == 'event') {
+            $where = [ 'id_event' => $key ];
+            $current_file = $this->GetData($where, $table)->foto_event;
+            $path = './assets/images/event/'.$current_file;
+            $this->db->where($where)->delete('event');
             unlink($path);
+        } elseif ($table == 'buku') {
+            $where = [ 'id_buku' => $key ];
+            $this->db->where($where)->delete('buku');
+            $this->db->where($where)->delete('barcode');
+        }
+        if ($this->db->affected_rows() > 0) {
             return true;
         } else {
             return false;

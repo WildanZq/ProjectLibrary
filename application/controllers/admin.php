@@ -513,10 +513,25 @@ class admin extends CI_Controller{
                   if ($this->uri->segment(3) == 'event') {
                       if ($this->input->post('data')) {
                           $id = $this->input->post('data');
-                          if ($this->m_admin->DeleteEvent($id)) {
+                          if ($this->m_admin->DeleteData($id, 'event')) {
                               echo "true";
                           } else {
                               echo "false";
+                          }
+                      } else {
+                          redirect('_404');
+                      }
+                  } elseif ($this->uri->segment(3) == 'buku') {
+                      if (!empty($this->uri->segment(4))) {
+                          $id = $this->uri->segment(4);
+                          if ($this->m_admin->DeleteData($id, 'buku')) {
+                              $this->session->set_flashdata('notif', 'Buku berhasil dihapus');
+                              $this->session->set_flashdata('classNotif', 'notif-success');
+                              redirect('admin/buku');
+                          } else {
+                              $this->session->set_flashdata('notif', 'Buku gagal dihapus');
+                              $this->session->set_flashdata('classNotif', 'notif-danger');
+                              redirect('admin/buku');
                           }
                       } else {
                           redirect('_404');
