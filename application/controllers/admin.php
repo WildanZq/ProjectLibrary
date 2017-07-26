@@ -24,18 +24,16 @@ class admin extends CI_Controller{
             $this->form_validation->set_rules('username', 'Username', 'trim|required');
             $this->form_validation->set_rules('password', 'Password', 'trim|required');
             if ($this->form_validation->run() == TRUE) {
-                if ($this->m_admin->setLoggedAdmin()) {
+                if ($this->m_admin->setLoggedUser()) {
                     redirect('admin');
                 } else {
-                    $data['notif'] = 'Login Gagal!';
-                    $this->load->view('login_view', $data);
+                    redirect();
                 }
             } else {
-                $data['notif'] = validation_errors();
-                $this->load->view('login_view', $data);
+                redirect();
             }
         } else {
-            $this->load->view('login_view');
+            redirect();
         }
     }
   }
@@ -585,7 +583,8 @@ class admin extends CI_Controller{
       $this->session->unset_userdata(md5('logged_in'));
       $this->session->unset_userdata(md5('logged_role'));
       $this->session->unset_userdata(md5('logged_admin_id'));
-      redirect('Admin');
+      $this->session->sess_destroy();
+      redirect();
   }
 
 }

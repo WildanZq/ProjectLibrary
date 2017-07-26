@@ -20,15 +20,15 @@
                 <div class="dark dark-login" onclick="logInClose()"></div>
                 <div class="login">
                     <div class="form-wrapper">
-                        <form action="" class="form-login" method="post">
+                        <form action="<?php echo base_url('admin'); ?>" class="form-login" method="post">
                             <h1><i class="fa fa-sign-in" aria-hidden="true"></i> Login</h1>
                             <div class="input-wrapper">
-                              <input type="text" placeholder="Username" required>
+                              <input type="text" placeholder="Username" name="username" required>
                               <i class="fa fa-exclamation-circle error" aria-hidden="true"></i>
                               <span class="error error-msg">Username tidak ada</span>
                             </div>
-                            <input type="password" placeholder="Password" required>
-                            <input type="submit">
+                            <input type="password" placeholder="Password" name="password" required>
+                            <input type="submit" name="submit">
                         </form>
                         <div class="login-tab">
                             <span class="s1">Create Account</span>

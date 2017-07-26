@@ -7,13 +7,12 @@ class M_Admin extends CI_Model {
         //Do your magic here
     }
 
-    public function setLoggedAdmin()
+    public function setLoggedUser()
     {
         $username = $this->input->post('username');
         $password = $this->input->post('password');
         $result = $this->db->where('username', $username)
                             ->where('password', $password)
-                            ->where('role', 'pengurus')
                             ->get('anggota');
         if ($result->num_rows() === 1) {
             $array = array(
