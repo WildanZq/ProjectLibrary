@@ -545,7 +545,18 @@ class admin extends CI_Controller{
   }
 
   function siswa() {
-    $this->load->view('admin_siswa_view');
+    if ($this->session->userdata(md5('logged_in'))) {
+        if ($this->session->userdata(md5('logged_role')) == 'pengurus') {
+            $data = [
+                'siswa' => $this->m_admin->GetWhereAllData(['role' => 'anggota'], 'anggota')
+            ];
+            $this->load->view('admin_siswa_view', $data);
+        } else {
+            redirect('_404');
+        }
+    } else {
+        redirect('_404');
+    }
   }
 
   function organisasi() {

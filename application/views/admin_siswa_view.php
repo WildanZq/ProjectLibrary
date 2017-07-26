@@ -39,54 +39,31 @@
                 <div class="h-wrapper">
                     <div class="load-wrapper"><i class="fa fa-circle-o-notch"></i></div>
                     <table>
-                        <tr>
-                            <th>Nama</th>
-                            <th>Angkatan</th>
-                            <th>Jurusan</th>
-                            <th>Kelas</th>
-                            <th>Poin</th>
-                            <th><i class="fa fa-handshake-o" aria-hidden="true"></i></th>
-                        </tr>
-                        <tr>
-                            <td>Wildan Ziaulhaq awdawda wadaw</td>
-                            <td>24</td>
-                            <td>RPL</td>
-                            <td>2</td>
-                            <td>50</td>
-                            <td><span class="return" onclick="editSiswa()">Edit</span><span class="return">Hapus</span></td>
-                        </tr>
-                        <tr>
-                            <td>Wildan Ziaulhaq</td>
-                            <td>24</td>
-                            <td>RPL</td>
-                            <td>2</td>
-                            <td>50</td>
-                            <td><span class="return" onclick="editSiswa()">Edit</span><span class="return">Hapus</span></td>
-                        </tr>
-                        <tr>
-                            <td>Wildan Ziaulhaq</td>
-                            <td>24</td>
-                            <td>RPL</td>
-                            <td>2</td>
-                            <td>50</td>
-                            <td><span class="return" onclick="editSiswa()">Edit</span><span class="return">Hapus</span></td>
-                        </tr>
-                        <tr>
-                            <td>Wildan Ziaulhaq</td>
-                            <td>24</td>
-                            <td>RPL</td>
-                            <td>2</td>
-                            <td>50</td>
-                            <td><span class="return" onclick="editSiswa()">Edit</span><span class="return">Hapus</span></td>
-                        </tr>
-                        <tr>
-                            <td>Wildan Ziaulhaq</td>
-                            <td>24</td>
-                            <td>RPL</td>
-                            <td>2</td>
-                            <td>50</td>
-                            <td><span class="return" onclick="editSiswa()">Edit</span><span class="return">Hapus</span></td>
-                        </tr>
+                        <thead>
+                            <tr>
+                                <th>Nama</th>
+                                <th>Angkatan</th>
+                                <th>Jurusan</th>
+                                <th>Kelas</th>
+                                <th>Poin</th>
+                                <th><i class="fa fa-handshake-o" aria-hidden="true"></i></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <?php foreach($siswa as $siswa): ?>
+                            <tr>
+                                <td><?php echo $siswa->nama_lengkap; ?></td>
+                                <td><?php echo $siswa->angkatan; ?></td>
+                                <td><?php echo $siswa->jurusan; ?></td>
+                                <td><?php echo $siswa->nomor_kelas; ?></td>
+                                <td><?php echo $siswa->poin; ?></td>
+                                <td>
+                                    <span class="return" onclick="editSiswa()">Edit</span>
+                                    <span class="return">Hapus</span>
+                                </td>
+                            </tr>
+                            <?php endforeach; ?>
+                        </tbody>
                     </table>
                 </div>
                 <div class="pagination-wrapper">
