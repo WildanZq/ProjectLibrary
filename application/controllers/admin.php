@@ -301,32 +301,26 @@ class admin extends CI_Controller{
                     $number++;
                 }
                 if ($this->form_validation->run() == TRUE) {
-                    if ($this->m_admin->checkBarcode($barcode) == true) {
-                        if ($status == "add") {
-                            if ($this->m_admin->addBuku($barcode) == true) {
-                                $this->session->set_flashdata('notif', 'Buku berhasil ditambahkan');
-                                $this->session->set_flashdata('classNotif', 'notif-success');
-                                redirect('admin/buku');
-                            } else {
-                                $this->session->set_flashdata('notif', 'Buku gagal ditambahkan');
-                                $this->session->set_flashdata('classNotif', 'notif-danger');
-                                redirect('admin/buku');
-                            }
-                        } else if ($status == "edit") {
-                            if ($this->m_admin->updateBuku($barcode) === true) {
-                                $this->session->set_flashdata('notif', 'Buku berhasil diperbarui');
-                                $this->session->set_flashdata('classNotif', 'notif-success');
-                                redirect('admin/buku');
-                            } else {
-                                $this->session->set_flashdata('notif', 'Buku gagal diperbarui');
-                                $this->session->set_flashdata('classNotif', 'notif-danger');
-                                redirect('admin/buku');
-                            }
+                    if ($status == "add") {
+                        if ($this->m_admin->addBuku($barcode) == true) {
+                            $this->session->set_flashdata('notif', 'Buku berhasil ditambahkan');
+                            $this->session->set_flashdata('classNotif', 'notif-success');
+                            redirect('admin/buku');
+                        } else {
+                            $this->session->set_flashdata('notif', 'Buku gagal ditambahkan');
+                            $this->session->set_flashdata('classNotif', 'notif-danger');
+                            redirect('admin/buku');
                         }
-                    } else {
-                        $this->session->set_flashdata('notif', 'Duplikasi Barcode');
-                        $this->session->set_flashdata('classNotif', 'notif-danger');
-                        redirect('admin/buku');
+                    } else if ($status == "edit") {
+                        if ($this->m_admin->updateBuku($barcode) === true) {
+                            $this->session->set_flashdata('notif', 'Buku berhasil diperbarui');
+                            $this->session->set_flashdata('classNotif', 'notif-success');
+                            redirect('admin/buku');
+                        } else {
+                            $this->session->set_flashdata('notif', 'Buku gagal diperbarui');
+                            $this->session->set_flashdata('classNotif', 'notif-danger');
+                            redirect('admin/buku');
+                        }
                     }
                 } else {
                     echo "ggl";

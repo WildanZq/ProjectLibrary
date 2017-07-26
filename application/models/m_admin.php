@@ -194,30 +194,6 @@ class M_Admin extends CI_Model {
     }
 
     public function addBuku($barcode) {
-        $this->db->insert('buku', array(
-            'register'      => $this->input->post('register'),
-            'judul'         => $this->input->post('judul'),
-            'pengarang'     => $this->input->post('pengarang'),
-            'penerbit'      => $this->input->post('penerbit'),
-            'tahun_terbit'  => $this->input->post('tahun'),
-            'jumlah'        => count($barcode)
-        ));
-        $insert_id = $this->db->insert_id();
-        for ($i=0; $i < count($barcode); $i++) {
-            $this->db->insert('barcode', array(
-                'id_buku'   => $insert_id,
-                'barcode'   => $barcode[$i],
-                'checked'   => 1
-            ));
-        }
-        if ($this->db->affected_rows() > 0) {
-            return true;
-        } else {
-            return false;
-        }
-    }
-
-    public function checkBarcode($barcode) {
         $count = 0;
         foreach ($barcode as $bar) {
             $count += $this->db->where('barcode', $bar)->get('barcode')->num_rows();
@@ -225,39 +201,67 @@ class M_Admin extends CI_Model {
         if ($count > 0) {
             return false;
         } else {
-            return true;
+            $this->db->insert('buku', array(
+                'register'      => $this->input->post('register'),
+                'judul'         => $this->input->post('judul'),
+                'pengarang'     => $this->input->post('pengarang'),
+                'penerbit'      => $this->input->post('penerbit'),
+                'tahun_terbit'  => $this->input->post('tahun'),
+                'jumlah'        => count($barcode)
+            ));
+            $insert_id = $this->db->insert_id();
+            for ($i=0; $i < count($barcode); $i++) {
+                $this->db->insert('barcode', array(
+                    'id_buku'   => $insert_id,
+                    'barcode'   => $barcode[$i],
+                    'checked'   => 1
+                ));
+            }
+            if ($this->db->affected_rows() > 0) {
+                return true;
+            } else {
+                return false;
+            }
         }
     }
 
     public function updateBuku($barcode) {
         $id = $this->input->post('id');
-        $this->db->where('id_buku', $id)->update('buku', array(
-            'register'      => $this->input->post('register'),
-            'judul'         => $this->input->post('judul'),
-            'pengarang'     => $this->input->post('pengarang'),
-            'penerbit'      => $this->input->post('penerbit'),
-            'tahun_terbit'  => $this->input->post('tahun'),
-            'jumlah'        => $this->input->post('jumlah')
-        ));
-        $total_last_barcode = $this->db->where('id_buku', $id)->get('barcode')->num_rows();
-        $total_new_barcode = count($barcode);
-        $this->db->where('id_buku', $id)->delete('barcode');
-        for ($i=0; $i < $total_new_barcode; $i++) {
-            $this->db->insert('barcode', array(
-                'id_buku'   => $id,
-                'barcode'   => $barcode[$i],
-                'checked'   => 1
-            ));
+        $count = 0;
+        foreach ($barcode as $bar) {
+            $count += $this->db->where('barcode', $bar)->where('id_buku !=', $id)->get('barcode')->num_rows();
         }
-        $total_barcode = $total_new_barcode - $total_last_barcode;
-        if ($total_barcode != 0) {
-            $query = "UPDATE buku SET jumlah = jumlah + $total_barcode WHERE id_buku = '$id' and jumlah > 0";
-            $this->db->query($query);
-        }
-        if ($this->db->affected_rows() > 0) {
-            return true;
-        } else {
+        if ($count > 0) {
             return false;
+        } else {
+            $this->db->where('id_buku', $id)->update('buku', array(
+                'register'      => $this->input->post('register'),
+                'judul'         => $this->input->post('judul'),
+                'pengarang'     => $this->input->post('pengarang'),
+                'penerbit'      => $this->input->post('penerbit'),
+                'tahun_terbit'  => $this->input->post('tahun'),
+                'jumlah'        => $this->input->post('jumlah')
+            ));
+            $total_last_barcode = $this->db->where('id_buku', $id)->get('barcode')->num_rows();
+            $total_new_barcode = count($barcode);
+            $this->db->where('id_buku', $id)->delete('barcode');
+            for ($i=0; $i < $total_new_barcode; $i++) {
+                $this->db->insert('barcode', array(
+                    'id_buku'   => $id,
+                    'barcode'   => $barcode[$i],
+                    'checked'   => 1
+                ));
+            }
+            $total_barcode = $total_new_barcode - $total_last_barcode;
+            if ($total_barcode != 0) {
+                $query = "UPDATE buku SET jumlah = jumlah + $total_barcode WHERE id_buku = '$id' and jumlah > 0";
+                $this->db->query($query);
+            }
+            if ($this->db->affected_rows() > 0) {
+                return true;
+            } else {
+                return false;
+            }
         }
     }
 
