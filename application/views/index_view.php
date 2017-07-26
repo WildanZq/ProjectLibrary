@@ -195,10 +195,12 @@
         </div>
         <footer>
           <div class="wrapper">
-            <a href="facebook.com"><i class="fa fa-facebook-square" aria-hidden="true"></i> Perpustakaan SMK Telkom Malang</a><br>
-            <a href="instagram.com"><i class="fa fa-instagram" aria-hidden="true"></i> @ipustel</a><br>
-            <a href="twitter.com"><i class="fa fa-twitter" aria-hidden="true"></i> @sahabatpustel</a>
             <span class="f-right">SMK Telkom Malang &copy; <?php $now = new DateTime; echo $now->format('Y');  ?></span>
+            <div class="icon-sosmed-wrapper">
+              <a class="icon-sosmed" href="https://www.facebook.com/pustelmalang"><i class="fa fa-facebook-square" aria-hidden="true"></i></a>
+              <a class="icon-sosmed" href="https://instagram.com/ipustel"><i class="fa fa-instagram" aria-hidden="true"></i></a>
+              <a class="icon-sosmed" href="https://twitter.com/sahabatpustel"><i class="fa fa-twitter" aria-hidden="true"></i></a>
+            </div>
           </div>
         </footer>
         <script src="<?php echo base_url(); ?>assets/script/jquery.min.js"></script>

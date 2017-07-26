@@ -21,9 +21,12 @@
     overflow: hidden;
 }
 .top .ts {
-    height: 70px;
+    display: flex;
+    align-items: stretch;
+    justify-content: space-between;
+    height: 50px;
     position: absolute;
-    top: 30px;
+    top: 20px;
     left: 50px;
     -webkit-filter: drop-shadow(1px 1px 0 white)
         drop-shadow(-1px 1px 0 white)
@@ -37,6 +40,7 @@
 }
 .top .ts * {
     height: 100%;
+    margin-right: 10px;
 }
 .top .ts:last-child {
     filter: none;
@@ -55,7 +59,7 @@
     height: 100vh;
 }
 .top .wrapper {
-    max-width: 850px;
+    max-width: 800px;
     margin-left: 30px;
     margin-right: 50px;
     display: flex;
@@ -65,8 +69,8 @@
     transform: translateY(1vh);
 }
 .top .wrapper img {
-    width: 25vw;
-    max-width: 280px;
+    width: 23vw;
+    max-width: 260px;
 }
 .top p {
     font-size: .7em;
