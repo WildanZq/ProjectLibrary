@@ -77,6 +77,9 @@
                     </div>
                 </div>
                 <div class="h-wrapper">
+                    <?php if (!empty($this->session->flashdata('notif')) && !empty($this->session->flashdata('classNotif'))): ?>
+                        <div class="notif <?= $this->session->flashdata('classNotif'); ?>"><?= $this->session->flashdata('notif'); ?></div>
+                    <?php endif; ?>
                     <div class="load-wrapper"><i class="fa fa-circle-o-notch"></i></div>
                     <table>
                         <thead>

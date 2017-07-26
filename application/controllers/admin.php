@@ -144,9 +144,13 @@ class admin extends CI_Controller{
               if ($this->input->post('submit')) {
                   $db = $this->m_admin->AddPeminjaman();
                   if ($db === true) {
+                      $this->session->set_flashdata('notif', 'Transaksi peminjaman berhasil');
+                      $this->session->set_flashdata('classNotif', 'notif-success');
                       redirect('Admin/peminjaman');
                   } else {
-                      echo "gak iso";
+                      $this->session->set_flashdata('notif', 'Transaksi peminjaman gagal');
+                      $this->session->set_flashdata('classNotif', 'notif-danger');
+                      redirect('Admin/peminjaman');
                   }
               } else {
                   redirect('_404');
@@ -238,10 +242,15 @@ class admin extends CI_Controller{
                       if ($this->m_admin->ChangeSetting(['reward' => $reward]) == true) $bool = true;
                       else $bool = false;
                   }
-                  if ($bool == true)
+                  if ($bool == true) {
+                      $this->session->set_flashdata('notif', 'Pengaturan berhasil diperbarui');
+                      $this->session->set_flashdata('classNotif', 'notif-success');
                       redirect($this->input->post('from'));
-                  else
-                      echo "gagal";
+                  } else {
+                      $this->session->set_flashdata('notif', 'Pengaturan gagal diperbarui');
+                      $this->session->set_flashdata('classNotif', 'notif-danger');
+                      redirect($this->input->post('from'));
+                  }
               } else {
                   redirect('_404');
               }
@@ -415,13 +424,13 @@ class admin extends CI_Controller{
                   $barcode = $this->m_admin->GetWhereAllData(['id_buku' => $book->id_buku], 'barcode');
                   echo json_encode($book)."|".json_encode($barcode);
               } else {
-                  # code...
+                  redirect('_404');
               }
           } else {
-              # code...
+              redirect('_404');
           }
       } else {
-          # code...
+          redirect('_404');
       }
   }
 
@@ -550,11 +559,6 @@ class admin extends CI_Controller{
       } else {
           redirect('_404');
       }
-  }
-
-  public function asd()
-  {
-      var_dump($this->m_admin->GetLaporan('pengembalian'));
   }
 
   public function logout() {
