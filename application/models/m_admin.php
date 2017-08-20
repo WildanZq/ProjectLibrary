@@ -302,6 +302,71 @@ class M_Admin extends CI_Model {
         return $this->db->query($query)->result();
     }
 
+    public function GetSiswa($params = array()) {
+        if (!empty($params['data'])) $data = $params['data'];
+        else $data = "";
+
+        $field = ['nama_lengkap', 'angkatan', 'jurusan', 'nomor_kelas', 'poin'];
+        $kondisi = array();
+        foreach ($field as $as) {
+            $kondisi[] = "$as LIKE '$data%'";
+        }
+        $query = "SELECT * FROM anggota";
+        if (count($kondisi) > 0) {
+            $query .= " WHERE ".implode(' OR ', $kondisi);
+        }
+        //set start and limit
+        if (array_key_exists("start",$params) && array_key_exists("limit",$params)) {
+            $query .= " LIMIT ".$params['start'].", ".$params['limit'];
+        } elseif (!array_key_exists("start",$params) && array_key_exists("limit",$params)) {
+            $query .= " LIMIT ".$params['limit'];
+        }
+        return $this->db->query($query)->result();
+    }
+
+    public function addSiswa() {
+        $this->db->insert('anggota', array(
+            'nama_lengkap'  => $this->input->post('nama'),
+            'foto'          => $this->input->post('foto') ? $this->input->post('foto') : 'logo.png',
+            'poin'          => $this->input->post('poin') ? $this->input->post('poin') : 0,
+            'role'          => $this->input->post('role') ? $this->input->post('role') : 'anggota',
+            'username'      => $this->input->post('username') ? $this->input->post('username') : '',
+            'password'      => $this->input->post('password') ? $this->input->post('password') : '',
+            'angkatan'      => $this->input->post('angkatan'),
+            'jurusan'       => $this->input->post('jurusan'),
+            'nomor_kelas'   => $this->input->post('nomor_kelas')
+        ));
+        if ($this->db->affected_rows() > 0) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public function updateSiswa() {
+        $id = $this->input->post('id');
+        if ($this->db->where('username', $this->input->post('username'))->get('anggota')->num_rows() > 0) {
+            return false;
+        } else {
+            $this->db->where('id_anggota', $id)->update('anggota', array(
+                'nama_lengkap'  => $this->input->post('nama'),
+                'foto'          => $this->input->post('foto') ? $this->input->post('foto') : 'logo.png',
+                'poin'          => $this->input->post('poin') ? $this->input->post('poin') : 0,
+                'role'          => $this->input->post('role') ? $this->input->post('role') : 'anggota',
+                'username'      => $this->input->post('username'),
+                'password'      => $this->input->post('password'),
+                'angkatan'      => $this->input->post('angkatan'),
+                'jurusan'       => $this->input->post('jurusan'),
+                'nomor_kelas'   => $this->input->post('nomor_kelas')
+            ));
+            if ($this->db->affected_rows() > 0) {
+                return true;
+            } else {
+                return false;
+            }
+        }
+    }
+
     public function GetEvent($where)
     {
         return $this->db->query("SELECT * FROM event WHERE $where")->result();
@@ -318,6 +383,12 @@ class M_Admin extends CI_Model {
             $where = [ 'id_buku' => $key ];
             $this->db->where($where)->delete('buku');
             $this->db->where($where)->delete('barcode');
+        } elseif ($table == 'anggota') {
+            $where = [ 'id_anggota' => $key ];
+            $current_file = $this->GetData($where, $table)->foto;
+            $path = './assets/images/siswa/'.$current_file;
+            $this->db->where($where)->delete('anggota');
+            unlink($path);
         }
         if ($this->db->affected_rows() > 0) {
             return true;

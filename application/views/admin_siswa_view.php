@@ -28,6 +28,9 @@
               <span class="nav-item-admin" onclick="addSiswa()">Tambah Siswa</span>
             </div>
             <div class="wrapper" id="list">
+                <?php if (!empty($this->session->flashdata('notif')) && !empty($this->session->flashdata('classNotif'))): ?>
+                    <div class="notif <?= $this->session->flashdata('classNotif'); ?>"><?= $this->session->flashdata('notif'); ?></div>
+                <?php endif; ?>
                 <div class="form-wrapper">
                     <form action="">
                         <div class="s-wrapper">
@@ -49,8 +52,8 @@
                                 <th><i class="fa fa-handshake-o" aria-hidden="true"></i></th>
                             </tr>
                         </thead>
-                        <tbody>
-                            <?php foreach($siswa as $siswa): ?>
+                        <tbody id="list_siswa">
+                            <?php if(!empty($siswa)): foreach($siswa as $siswa): ?>
                             <tr>
                                 <td><?php echo $siswa->nama_lengkap; ?></td>
                                 <td><?php echo $siswa->angkatan; ?></td>
@@ -58,24 +61,20 @@
                                 <td><?php echo $siswa->nomor_kelas; ?></td>
                                 <td><?php echo $siswa->poin; ?></td>
                                 <td>
-                                    <span class="return" onclick="editSiswa()">Edit</span>
-                                    <span class="return">Hapus</span>
+                                    <span class="return" onclick="editSiswa(<?= $siswa->id_anggota; ?>)">Edit</span>
+                                    <span class="return" onclick="hapusSiswa(<?= $siswa->id_anggota; ?>)">Hapus</span>
                                 </td>
                             </tr>
-                            <?php endforeach; ?>
+                            <?php endforeach; else: ?>
+                            <p>Member(s) not available.</p>
+                            <?php endif; ?>
                         </tbody>
                     </table>
                 </div>
                 <div class="pagination-wrapper">
                   <div class="pagination">
                     <div class="main">
-                      <div class="page"><i class="fa fa-angle-double-left" aria-hidden="true"></i></div>
-                      <div class="page active">1</div>
-                      <div class="page">2</div>
-                      <div class="page">3</div>
-                      <div class="page">...</div>
-                      <div class="page">27</div>
-                      <div class="page"><i class="fa fa-angle-double-right" aria-hidden="true"></i></div>
+                      <?php echo $this->ajax_pagination->create_links(); ?>
                     </div>
                   </div>
                 </div>
@@ -88,17 +87,18 @@
                         <h1 id="h1-form-siswa">Edit Siswa</h1>
                         <div class="form">
                           <div>
+                            <input type="hidden" name="id" value="" id="idSiswa">
                             <div class="i-wrapper"><label>Nama Lengkap:</label>
                                 <input type="text" placeholder="Nama Lengkap" id="nama" name="nama" required>
                             </div>
                             <div class="i-wrapper"><label>Kelas:</label>
                               <div class="kelas">
-                                <input type="number" placeholder="Angkatan" min="1" required>
-                                <select required>
+                                <input type="number" placeholder="Angkatan" id="angkatan"  name="angkatan" min="1" required>
+                                <select id="jurusan" name="jurusan" required>
                                   <option value="RPL">RPL</option>
                                   <option value="TKJ">TKJ</option>
                                 </select>
-                                <input type="number" placeholder="1" min="1" required>
+                                <input type="number" id="nomor_kelas" name="nomor_kelas" placeholder="1" min="1" required>
                               </div>
                             </div>
                             <hr class="siswa-lama">
@@ -109,7 +109,7 @@
                                 <input type="number" placeholder="Poin" id="poin" name="poin" required min="0">
                             </div>
                             <div class="i-wrapper"><label>Role:</label>
-                              <select>
+                              <select id="role" name="role" required>
                                 <option value="anggota">anggota</option>
                                 <option value="pengurus">pengurus</option>
                               </select>
@@ -156,7 +156,7 @@
           $(".set-form").css({"animation":"scalein .5s ease"});
           $(document).keyup(function(e) {if (e.keyCode == 27) {closeSiswa();}});
 
-          if (baru == true) {
+          if (baru === true) {
             /* INFO >> Ganti action #form-siswa untuk tambah buku */
             $('#form-siswa').submit(function() {
               getAction(this,true);
@@ -181,12 +181,30 @@
           $('.siswa-lama-flex').css('display','flex');
           $('.edit-form').css('max-width','800px');
           $('#username').prop('required',true);
+          $.ajax({
+              url: '<?= base_url(); ?>/admin/getInfoSiswa',
+              type: 'POST',
+              dataType: 'json',
+              data: {param: baru}
+          }).done(function(e) {
+              $('#idSiswa').val(e.id_anggota);
+              $('#nama').val(e.nama_lengkap);
+              $('#angkatan').val(e.angkatan);
+              $('#jurusan').val(e.jurusan);
+              $('#nomor_kelas').val(e.nomor_kelas);
+              $('#username').val(e.username);
+              $('#poin').val(e.poin);
+              $('#role').val(e.role);
+          });
         };
+        function hapusSiswa(code) {
+            window.location = "<?= base_url(); ?>/admin/Delete/siswa/"+code;
+        }
         function getAction(form,baru) {
           if (baru == true) {
-            form.action = "baru.php";
+            form.action = "<?= base_url(); ?>admin/siswa/add";
           } else {
-            form.action = "edit.php";
+            form.action = "<?= base_url(); ?>admin/siswa/edit";
           }
         }
         function closeSiswa() {
@@ -195,6 +213,30 @@
           setTimeout(function() {
             $(".set-popup").css({"display":"none"});
           },480);
+        }
+        var search = $('.searchT').val();
+        $('.searchT').on('input', function(event) {
+            event.preventDefault();
+            search = this.value.trim();
+            searchFilter(0);
+        });
+        function searchFilter(page_num) {
+            page_num = page_num ? page_num : 0;
+            var url = '<?= base_url(); ?>/admin/getSiswaPagination/'+page_num;
+            $.ajax({
+                type: 'GET',
+                url: url,
+                data:'page='+page_num+'&data='+search,
+                beforeSend: function () {
+                    loadin();
+                },
+                success: function (html) {
+                    html = JSON.parse(html);
+                    $('#list_siswa').html(html[0]);
+                    $('.pagination .main').html(html[1]);
+                    loadout();
+                }
+            });
         }
         </script>
     </body>

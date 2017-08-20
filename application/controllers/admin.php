@@ -7,6 +7,7 @@ class admin extends CI_Controller{
   {
     parent::__construct();
     $this->load->model('m_admin');
+    $this->load->library('Ajax_pagination');
     $this->perPage = 10;
   }
 
@@ -325,23 +326,15 @@ class admin extends CI_Controller{
             } else {
                 //total rows count
                 $totalRec = count($this->m_admin->GetBook());
-
                 //pagination configuration
-                $this->load->library('Ajax_pagination');
                 $config['target']      = '#list_buku';
                 $config['base_url']    = base_url().'admin/getBookPagination';
                 $config['total_rows']  = $totalRec;
                 $config['per_page']    = $this->perPage;
                 $config['link_func']   = 'searchFilter';
                 $this->ajax_pagination->initialize($config);
-
-                //set current page
-                $data['cur_page'] = 10;
                 //get the posts data
                 $data['buku'] = $this->m_admin->GetBook(array('limit'=>$this->perPage));
-
-                //load the view
-                //echo $data['buku'];
                 $this->load->view('admin_buku_view', $data);
             }
         } else {
@@ -355,7 +348,6 @@ class admin extends CI_Controller{
   public function getBookPagination() {
       if ($this->session->userdata(md5('logged_in'))) {
           if ($this->session->userdata(md5('logged_role')) == 'pengurus') {
-              //if ($this->input->post('data')) {
                     $conditions = array();
                     //calc offset number
                     $page = $this->uri->segment(3);
@@ -370,7 +362,6 @@ class admin extends CI_Controller{
                     //total rows count
                     $totalRec = count($this->m_admin->GetBook($conditions));
                     //pagination configuration
-                    $this->load->library('Ajax_pagination');
                     $config['cur_page']    = $offset;
                     $config['target']      = '#list_buku';
                     $config['base_url']    = base_url().'admin/getBookPagination';
@@ -381,16 +372,11 @@ class admin extends CI_Controller{
                     //set start and limit
                     $conditions['start'] = $offset;
                     $conditions['limit'] = $this->perPage;
-                    //set current page
-                    $data['cur_page'] = $offset;
                     //get posts data
                     $data['buku'] = $this->m_admin->GetBook($conditions);
                     //load the view
                     $array = [$this->load->view('pagination/buku_pagination', $data, true), $this->ajax_pagination->create_links()];
                     echo json_encode($array);
-              //} else {
-                //  redirect('404');
-              //}
           } else {
               redirect('_404');
           }
@@ -520,6 +506,21 @@ class admin extends CI_Controller{
                       } else {
                           redirect('_404');
                       }
+                  } elseif ($this->uri->segment(3) == 'siswa') {
+                      if (!empty($this->uri->segment(4))) {
+                          $id = $this->uri->segment(4);
+                          if ($this->m_admin->DeleteData($id, 'anggota')) {
+                              $this->session->set_flashdata('notif', 'Siswa berhasil dihapus');
+                              $this->session->set_flashdata('classNotif', 'notif-success');
+                              redirect('admin/siswa');
+                          } else {
+                              $this->session->set_flashdata('notif', 'Siswa gagal dihapus');
+                              $this->session->set_flashdata('classNotif', 'notif-danger');
+                              redirect('admin/siswa');
+                          }
+                      } else {
+                          redirect('_404');
+                      }
                   } else {
                       redirect('_404');
                   }
@@ -537,16 +538,122 @@ class admin extends CI_Controller{
   function siswa() {
     if ($this->session->userdata(md5('logged_in'))) {
         if ($this->session->userdata(md5('logged_role')) == 'pengurus') {
-            $data = [
-                'siswa' => $this->m_admin->GetWhereAllData(['role' => 'anggota'], 'anggota')
-            ];
-            $this->load->view('admin_siswa_view', $data);
+            if ($this->input->post('saveSiswa')) {
+                $this->form_validation->set_rules('nama', 'Nama Lengkap', 'trim|required');
+                $this->form_validation->set_rules('angkatan', 'Angkatan', 'trim|required');
+                $this->form_validation->set_rules('jurusan', 'Kelas', 'trim|required');
+                $this->form_validation->set_rules('nomor_kelas', 'Kelas', 'trim|required');
+                $this->form_validation->set_rules('poin', 'Poin', 'trim|required');
+                $this->form_validation->set_rules('role', 'Role', 'trim|required');
+                $status = $this->uri->segment(3);
+                if ($status == "edit") {
+                    $this->form_validation->set_rules('username', 'Username', 'trim|required');
+                }
+                if ($this->form_validation->run() == TRUE) {
+                    if ($status == "add") {
+                        if ($this->m_admin->addSiswa() == true) {
+                            $this->session->set_flashdata('notif', 'Siswa berhasil ditambahkan');
+                            $this->session->set_flashdata('classNotif', 'notif-success');
+                            redirect('admin/siswa');
+                        } else {
+                            $this->session->set_flashdata('notif', 'Siswa gagal ditambahkan');
+                            $this->session->set_flashdata('classNotif', 'notif-danger');
+                            redirect('admin/siswa');
+                        }
+                    } else if ($status == "edit") {
+                        if ($this->m_admin->updateSiswa() === true) {
+                            $this->session->set_flashdata('notif', 'Siswa berhasil diperbarui');
+                            $this->session->set_flashdata('classNotif', 'notif-success');
+                            redirect('admin/siswa');
+                        } else {
+                            $this->session->set_flashdata('notif', 'Siswa gagal diperbarui');
+                            $this->session->set_flashdata('classNotif', 'notif-danger');
+                            redirect('admin/siswa');
+                        }
+                    }
+                } else {
+                    $this->session->set_flashdata('notif', validation_errors());
+                    $this->session->set_flashdata('classNotif', 'notif-danger');
+                    redirect('admin/siswa');
+                }
+            } else {
+                //total rows count
+                $totalRec = count($this->m_admin->GetSiswa());
+                //pagination configuration
+                $config['target']      = '#list_siswa';
+                $config['base_url']    = base_url().'admin/getSiswaPagination';
+                $config['total_rows']  = $totalRec;
+                $config['per_page']    = $this->perPage;
+                $config['link_func']   = 'searchFilter';
+                $this->ajax_pagination->initialize($config);
+                //get the posts data
+                $data['siswa'] = $this->m_admin->GetSiswa(array('limit'=>$this->perPage));
+                $this->load->view('admin_siswa_view', $data);
+            }
         } else {
             redirect('_404');
         }
     } else {
         redirect('_404');
     }
+  }
+
+  public function getSiswaPagination() {
+      if ($this->session->userdata(md5('logged_in'))) {
+          if ($this->session->userdata(md5('logged_role')) == 'pengurus') {
+              $conditions = array();
+              //calc offset number
+              $page = $this->uri->segment(3);
+              $offset = 0;
+              if (!$page) {
+                  $offset = 0;
+              } else {
+                  $offset = (int)$page;
+              }
+              //set conditions for search
+              $conditions['data'] = $this->db->escape_str($this->input->get('data'));
+              //total rows count
+              $totalRec = count($this->m_admin->GetSiswa($conditions));
+              //pagination configuration
+              $config['cur_page']    = $offset;
+              $config['target']      = '#list_siswa';
+              $config['base_url']    = base_url().'admin/getSiswaPagination';
+              $config['total_rows']  = $totalRec;
+              $config['per_page']    = $this->perPage;
+              $config['link_func']   = 'searchFilter';
+              $this->ajax_pagination->initialize($config);
+              //set start and limit
+              $conditions['start'] = $offset;
+              $conditions['limit'] = $this->perPage;
+              //get posts data
+              $data['siswa'] = $this->m_admin->GetSiswa($conditions);
+              //load the view
+              $array = [$this->load->view('pagination/siswa_pagination', $data, true), $this->ajax_pagination->create_links()];
+              echo json_encode($array);
+          } else {
+              redirect('_404');
+          }
+      } else {
+          redirect('_404');
+      }
+  }
+
+  function getInfoSiswa() {
+      if ($this->session->userdata(md5('logged_in'))) {
+          if ($this->session->userdata(md5('logged_role')) == 'pengurus') {
+              if ($this->input->post('param')) {
+                  $key = $this->input->post('param');
+                  $siswa = $this->m_admin->GetData(['id_anggota' => $key], 'anggota');
+                  echo json_encode($siswa);
+              } else {
+                  redirect('_404');
+              }
+          } else {
+              redirect('_404');
+          }
+      } else {
+          redirect('_404');
+      }
   }
 
   function organisasi() {

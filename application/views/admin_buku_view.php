@@ -78,13 +78,6 @@
                   <div class="pagination">
                     <div class="main">
                         <?php echo $this->ajax_pagination->create_links(); ?>
-                        <!-- <div class="page" id="btn_prev"><i class="fa fa-angle-double-left" aria-hidden="true"></i></div> -->
-                        <!-- <div class="page active">1</div>
-                        <div class="page">2</div>
-                        <div class="page">3</div>
-                        <div class="page">...</div>
-                        <div class="page">27</div> -->
-                        <!-- <div class="page" id="btn_next"><i class="fa fa-angle-double-right" aria-hidden="true"></i></div> -->
                     </div>
                   </div>
                 </div>
