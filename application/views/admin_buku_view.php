@@ -77,7 +77,7 @@
                 <div class="pagination-wrapper">
                   <div class="pagination">
                     <div class="main">
-                        <?php echo $pagination; ?>
+                        <?php echo $this->ajax_pagination->create_links(); ?>
                         <!-- <div class="page" id="btn_prev"><i class="fa fa-angle-double-left" aria-hidden="true"></i></div> -->
                         <!-- <div class="page active">1</div>
                         <div class="page">2</div>
@@ -287,21 +287,22 @@
         $('.searchT').on('input', function(event) {
             event.preventDefault();
             search = this.value.trim();
-            searchFilter(1);
-
-            console.log("<?php echo $this->session->userdata('q'); ?>");
+            searchFilter(0);
         });
         function searchFilter(page_num) {
             page_num = page_num ? page_num : 0;
+            var url = '<?= base_url(); ?>/admin/getBookPagination/'+page_num;
             $.ajax({
-                type: 'POST',
-                url: 'getBookPagination/'+page_num,
+                type: 'GET',
+                url: url,
                 data:'page='+page_num+'&data='+search,
                 beforeSend: function () {
                     loadin();
                 },
                 success: function (html) {
-                    $('#list_buku').html(html);
+                    html = JSON.parse(html);
+                    $('#list_buku').html(html[0]);
+                    $('.pagination .main').html(html[1]);
                     loadout();
                 }
             });

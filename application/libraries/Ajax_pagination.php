@@ -39,7 +39,7 @@ class Ajax_pagination{
     var $target          = '';
     var $anchor_class    = '';
     var $show_count      = true;
-    var $link_func       = 'getData';
+    var $link_func       = 'searchFilter';
     var $loading         = '.load-wrapper';
 
     /**
@@ -197,24 +197,6 @@ class Ajax_pagination{
 
         // Add the wrapper HTML if exists
         $output = $this->full_tag_open.$output.$this->full_tag_close;
-        ?>
-        <script>
-        function getData(page){
-            $.ajax({
-                method: "POST",
-                url: "<?php echo $this->base_url; ?>"+page,
-                data: { page: page },
-                beforeSend: function(){
-                    loadin()
-                },
-                success: function(data){
-                    loadout()
-                    $('<?php echo $this->target; ?>').html(data);
-                }
-            });
-        }
-        </script>
-        <?php
         return $output;
     }
 
